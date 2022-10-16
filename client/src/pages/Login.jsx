@@ -14,7 +14,7 @@ import Copyright from "../components/Copyright";
 
 const theme = createTheme();
 
-export default function Signin() {
+export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -26,7 +26,7 @@ export default function Signin() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" className="box--shadow">
         <CssBaseline />
         <Box
           sx={{

@@ -28,7 +28,7 @@ export default function Signup() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" className="box--shadow">
         <CssBaseline />
         <Box
           sx={{
@@ -104,7 +104,7 @@ export default function Signup() {
             </Button>
             <Grid container justifyContent="flex-start">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>

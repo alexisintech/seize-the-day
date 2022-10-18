@@ -14,7 +14,19 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Copyright from "../components/Copyright";
 
-const theme = createTheme();
+const { palette } = createTheme();
+const { augmentColor } = palette;
+const createColor = (mainColor) => augmentColor({ color: { main: mainColor } });
+const theme = createTheme({
+  palette: {
+    primary: createColor("#FA347B"),
+    secondary: createColor("#8A4EFC"),
+    light: createColor("#EEE"),
+    lightAlt: createColor("#61759b"),
+    dark: createColor("#131A26"),
+    darkAlt: createColor("#202B3E"),
+  },
+});
 
 export default function Signup() {
   const handleSubmit = (event) => {

@@ -17,7 +17,7 @@ module.exports = {
   getTodos: async (req, res) => {
     try {
       const todos = await Todo.find()
-      
+      console.log(todos);
       res.json(todos);
     } catch (err) {
       console.log(err);

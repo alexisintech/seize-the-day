@@ -11,14 +11,14 @@ export default function Profile() {
   }, []);
 
   const getTodos = () => {
-    fetch(api_base + "/todos")
+    fetch(api_base + "/profile")
       .then((res) => res.json())
       .then((data) => setTodos(data))
       .catch((err) => console.error("Error: ", err));
   };
 
   const completeTodo = async (id) => {
-    const data = await fetch(api_base + "/todos/complete/" + id, {
+    const data = await fetch(api_base + "/profile/complete/" + id, {
       method: "PUT",
     }).then((res) => res.json());
 
@@ -34,7 +34,7 @@ export default function Profile() {
   };
 
   const createTodo = async () => {
-    const data = await fetch(api_base + "/todos/createTodo", {
+    const data = await fetch(api_base + "/profile/createTodo", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -53,7 +53,7 @@ export default function Profile() {
   };
 
   const deleteTodo = async (id) => {
-    const data = await fetch(api_base + "/todos/delete/" + id, {
+    const data = await fetch(api_base + "/profile/delete/" + id, {
       method: "DELETE",
     }).then((res) => res.json());
 
@@ -91,7 +91,7 @@ export default function Profile() {
               </div>
             ))
         ) : (
-          <p class="no-tasks">You currently have no tasks</p>
+          <p className="no-tasks">You currently have no tasks</p>
         )}
       </div>
 

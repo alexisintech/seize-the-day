@@ -3,7 +3,7 @@ const router = express.Router();
 const profileController = require("../controllers/profile");
 
 // /todo Routes
-// treat each path as: /profile/createTodo  /profile/delete/:id  /profile/complete/:id
+// treat each path as: /profile  /profile/createTodo  /profile/delete/:id  /profile/complete/:id
 
 router.get("/", profileController.getTodos)
 

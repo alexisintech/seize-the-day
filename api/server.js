@@ -54,10 +54,6 @@ app.use(flash());
 // Setup routes for which the server is listening
 app.use("/", mainRoutes);
 app.use("/profile", ensureAuth, profileRoutes);
-//The 404 Route (ALWAYS Keep this as the last route)
-app.get('*', function(req, res){
-  res.render("404.ejs");
-});
 
 // Server Running
 app.listen(process.env.PORT, () => {

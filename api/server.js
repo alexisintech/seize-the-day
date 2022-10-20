@@ -53,7 +53,7 @@ app.use(flash());
 
 // Setup routes for which the server is listening
 app.use("/", mainRoutes);
-app.use("/profile", ensureAuth, profileRoutes);
+app.use("/profile", profileRoutes);
 
 // Server Running
 app.listen(process.env.PORT, () => {

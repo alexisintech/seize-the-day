@@ -1,7 +1,9 @@
 module.exports = {
-  getIndex: (_, res) => {
+  getIndex: async (req, res) => {
     try {
-      res.json("yo i'm alive");
+      const todos = await Todo.find()
+      
+      res.json(todos);
     } catch (err) {
       console.log(err);
     }

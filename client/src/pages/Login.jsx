@@ -2,8 +2,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -17,32 +15,53 @@ const { augmentColor } = palette;
 const createColor = (mainColor) => augmentColor({ color: { main: mainColor } });
 const theme = createTheme({
   palette: {
-    primary: createColor("#FA347B"),
-    secondary: createColor("#8A4EFC"),
+    primary: createColor("#03015d"),
+    secondary: createColor("#1b1799"),
     light: createColor("#EEE"),
-    lightAlt: createColor("#61759b"),
-    dark: createColor("#131A26"),
-    darkAlt: createColor("#202B3E"),
   },
 });
 
+const api_base =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:2222"
+    : "replace with railway URL";
+
 export default function Login() {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    try {
+      await fetch(api_base + "/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        body: JSON.stringify(data),
+      });
+    } catch (err) {
+      console.log(err);
+    }
+    // console.log({
+    //   email: data.get("email"),
+    //   password: data.get("password"),
+    // });
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs" className="box--shadow">
+      <Container
+        component="main"
+        maxWidth="xs"
+        className="box--shadow"
+        sx={{
+          paddingTop: 2,
+          paddingBottom: 2,
+          marginTop: 8,
+        }}
+      >
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -62,22 +81,22 @@ export default function Login() {
           >
             <TextField
               margin="normal"
+              autoFocus
               required
               fullWidth
               id="email"
               label="Email Address"
               name="email"
               autoComplete="email"
-              autoFocus
             />
             <TextField
               margin="normal"
               required
               fullWidth
-              name="password"
-              label="Password"
-              type="password"
               id="password"
+              label="Password"
+              name="password"
+              type="password"
               autoComplete="current-password"
             />
             <Button
@@ -93,7 +112,7 @@ export default function Login() {
             </Link>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
+        <Copyright sx={{ mt: 5 }} />
       </Container>
     </ThemeProvider>
   );

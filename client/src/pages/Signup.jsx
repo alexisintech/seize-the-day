@@ -19,12 +19,9 @@ const { augmentColor } = palette;
 const createColor = (mainColor) => augmentColor({ color: { main: mainColor } });
 const theme = createTheme({
   palette: {
-    primary: createColor("#FA347B"),
-    secondary: createColor("#8A4EFC"),
+    primary: createColor("#030154"),
+    secondary: createColor("#1b1799"),
     light: createColor("#EEE"),
-    lightAlt: createColor("#61759b"),
-    dark: createColor("#131A26"),
-    darkAlt: createColor("#202B3E"),
   },
 });
 
@@ -40,11 +37,20 @@ export default function Signup() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs" className="box--shadow">
+      <Container
+        component="main"
+        maxWidth="xs"
+        className="box--shadow"
+        sx={{
+          paddingTop: 2,
+          paddingBottom: 2,
+          marginTop: 8,
+        }}
+      >
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 0,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -63,25 +69,15 @@ export default function Signup() {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
-                  autoComplete="given-name"
-                  name="firstName"
+                  autoFocus
                   required
                   fullWidth
                   id="firstName"
                   label="First Name"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
+                  name="firstName"
+                  autoComplete="given-name"
                 />
               </Grid>
               <Grid item xs={12}>
@@ -98,10 +94,10 @@ export default function Signup() {
                 <TextField
                   required
                   fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
                   id="password"
+                  label="Password"
+                  name="password"
+                  type="password"
                   autoComplete="new-password"
                 />
               </Grid>

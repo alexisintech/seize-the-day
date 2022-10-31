@@ -62,35 +62,42 @@ body{
 }
 
 :root {
-	--primary: #FA347B;
-	--secondary: #8A4EFC;
+	--primary: #050448;
+	--secondary: #1b1799;
 	--light: #EEE;
-	--light-alt: #61759b;
-	--dark: #131A26;
-	--dark-alt: #202B3E;
 }
 
 body {
-	background-color: var(--dark-alt);
-	color: var(--light);
+	background-color: var(--primary);
+	color: #3e3e3e;
 }
 
 .App {
 	padding: 32px;
 }
 
+.main--container{
+	background-color: #fff;
+}
+
 h1 {
 	font-size: 40px;
 	font-weight: 700;
-	margin-bottom: 32px;
 }
 
 h2 {
 	font-size: 18px;
-	color: var(--light-alt);
+	color: var(--primary);
 	text-transform: uppercase;
 	font-weight: 400;
 	margin-bottom: 16px;
+}
+
+.todos{
+	background-color: #eee;
+	border-radius:10px;
+	padding:2rem;
+	margin-top:0.5rem;
 }
 
 .todo-container{
@@ -98,38 +105,47 @@ h2 {
 	display:flex;
 	flex-direction:row;
 	align-items:center;
-	margin-bottom: 16px;
 	gap:0.5rem;
 }
 
 .todo {
-	width:97%;
-	background-color: var(--dark);
-	padding: 16px;
-	border-radius: 16px;
+	width:100%;
+	background-color: #fff;
+	padding: 1.5rem 1rem;
+	border-radius: 5px;
 	display: flex;
 	align-items: center;
-	transition: 0.5s;
-	cursor: pointer;
+	transition: 0.3s;
+	/* cursor: pointer; */
+	justify-content: space-between;
 }
 
 .todo:hover {
-	opacity: 0.8;
+	box-shadow: 3px 3px 5px 2px rgb(62, 62, 62, 0.4);
 }
 
 .todo .checkbox {
-	width: 20px;
-	height: 20px;
-	margin-right: 16px;
-	border-radius: 50%;
-	background-color: var(--dark-alt);
-	background-image: linear-gradient(to bottom, transparent, transparent);
+	width: 30px;
+	height: 30px;
+	border-radius: 3px;
+	background-color: #dedfe1;
+	margin-right: 0.8rem;
 	transition: 0.4s;
 }
 
+.todo .checkbox:hover {
+	background-color: var(--secondary);
+}
+
 .todo.is-complete .checkbox {
-	background-color: var(--primary);
-	background-image: linear-gradient(to bottom, var(--primary), var(--secondary));
+	background-color: var(--secondary);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.todo.is-complete .checkbox:hover{
+	background-color: #dedfe1;
 }
 
 .todo .text {
@@ -141,9 +157,8 @@ h2 {
 }
 
 .no-tasks {
-	margin-bottom: 16px;
 	font-style: italic;
-	color: rgba(255, 255, 255, 0.555);
+	color: rgb(62, 62, 62, 0.5);
 }
 
 .fade-in {
@@ -151,43 +166,37 @@ h2 {
 	        animation: fade-in 0.7s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
 
-.delete-container{
-	display:flex;
-	justify-content:center;
-	align-items:center;
-}
-
 .delete-todo {
-	color: var(--light);
+	color: #585858;
 	cursor:pointer;
-	width: 35px;
-	height: 35px;
-	border-radius: 50%;
-	background-color: #AF1E2D;
+	width: 30px;
+	height: 30px;
+	border-radius: 3px;
+	background-color: #dedfe1;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-weight: 700;
-	padding:12px;
+	padding:1rem;
+	transition:0.4s;
+}
+
+.delete-todo:hover{
+	background-color: red;
+	color:white;
 }
 
 .addPopup {
-	position: fixed;
-	bottom: 32px;
-	right: 32px;
 	display: flex;
-	align-items: center;
-	justify-content: center;
-
-	width: 64px;
-	height: 64px;
-	border-radius: 999px;
-	font-size: 28px;
-	font-weight: 900;
-	color: var(--light);
-	background-color: var(--primary);
-	background-image: linear-gradient(to bottom right, var(--primary), var(--secondary));
-	cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  height: 4rem;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--light);
+  background-color: var(--primary);
+  cursor: pointer;
+  padding: 0rem 2.7rem;
 }
 
 .popup {
@@ -195,13 +204,13 @@ h2 {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-
 	width: 100%;
 	max-width: 400px;
 	background-color: var(--light);
 	padding: 32px;
 	border-radius: 16px;
-	box-shadow: 0px 4px 32px var(--dark);
+	box-shadow: 0px 4px 32px #5e5e5e;
+	z-index:9999;
 }
 
 .closePopup {
@@ -211,12 +220,12 @@ h2 {
 	width: 20px;
 	height: 20px;
 	font-size: 20px;
-	color: var(--dark);
+	color: #3e3e3e;
 	cursor: pointer;
 }
 
 .popup h3 {
-	color: var(--dark);
+	color: var(--primary);
 	margin-bottom: 16px;
 	font-weight: 400;
 	text-transform: uppercase;
@@ -228,15 +237,16 @@ h2 {
 	border: none;
 	background-color: #FFF;
 	padding: 16px;
-	border-radius: 16px;
+	border-radius: 10px;
 	width: 100%;
 	box-shadow: 0px 2px 24px rgba(0, 0, 0, 0.2);
 	font-size: 20px;
 }
 
 .button {
+	color: #fff;
 	padding: 16px 32px;
-	border-radius: 999px;
+	border-radius: 10px;
 	background-image: linear-gradient(to right, var(--primary), var(--secondary));
 	display: inline-block;
 	font-weight: 700;

@@ -1,9 +1,7 @@
 module.exports = {
   getIndex: async (req, res) => {
     try {
-      const todos = await Todo.find()
-      
-      res.json(todos);
+      res.status(200).json( message: 'getIndex at route: "/" was successful');
     } catch (err) {
       console.log(err);
     }

@@ -2,25 +2,29 @@ const passport = require("passport");
 const validator = require("validator");
 const User = require("../models/User");
 
-exports.getLogin = (req, res) => {
-  if (req.user) {
-    return res.redirect("/profile");
-  }
-  res.render("login", {
-    title: "Login",
-  });
-};
-
 exports.postLogin = (req, res, next) => {
   const validationErrors = [];
-  if (!validator.isEmail(req.body.email))
-    validationErrors.push({ msg: "Please enter a valid email address." });
-  if (validator.isEmpty(req.body.password))
-    validationErrors.push({ msg: "Password cannot be blank." });
+  if (!validator.isEmail(req.body.email)) {
+    res.status(400);
+    res.json({
+      status: 400,
+      message: "Please enter a valid email address",
+    });
+  }
+  if (validator.isEmpty(req.body.password)) {
+    res.status(400);
+    res.json({
+      status: 400,
+      message: "Password cannot be blank",
+    });
+  }
 
   if (validationErrors.length) {
-    req.flash("errors", validationErrors);
-    return res.redirect("/login");
+    res.status(400);
+    res.json({
+      status: 400,
+      message: "Log in failed validation ):",
+    });
   }
   req.body.email = validator.normalizeEmail(req.body.email, {
     gmail_remove_dots: false,
@@ -31,20 +35,27 @@ exports.postLogin = (req, res, next) => {
       return next(err);
     }
     if (!user) {
-      req.flash("errors", info);
-      return res.redirect("/login");
+      res.status(400);
+      res.json({
+        status: 400,
+        message: "User does not exist",
+      });
     }
     req.logIn(user, (err) => {
       if (err) {
         return next(err);
       }
-      req.flash("success", { msg: "Success! You are logged in." });
-      res.redirect(req.session.returnTo || "/profile");
+      res.status(200);
+      res.json({
+        status: 200,
+        message: "User logged in :)",
+        body: JSON.stringify(user),
+      });
     });
   })(req, res, next);
 };
 
-exports.logout = (req, res) => {
+exports.postLogout = (req, res) => {
   req.logout(() => {
     console.log("User has logged out.");
   });
@@ -56,29 +67,41 @@ exports.logout = (req, res) => {
   });
 };
 
-exports.getSignup = (req, res) => {
-  if (req.user) {
-    return res.redirect("/profile");
-  }
-  res.render("signup", {
-    title: "Create Account",
-  });
-};
-
 exports.postSignup = (req, res, next) => {
   const validationErrors = [];
-  if (!validator.isEmail(req.body.email))
-    validationErrors.push({ msg: "Please enter a valid email address." });
-  if (!validator.isLength(req.body.password, { min: 8 }))
-    validationErrors.push({
-      msg: "Password must be at least 8 characters long",
+
+  // Add validator for username
+
+  if (!validator.isEmail(req.body.email)) {
+    res.status(400);
+    res.json({
+      status: 400,
+      message: "Please enter a valid email address.",
     });
-  if (req.body.password !== req.body.confirmPassword)
-    validationErrors.push({ msg: "Passwords do not match" });
+  }
+  if (!validator.isLength(req.body.password, { min: 8 })) {
+    res.status(400);
+    res.json({
+      status: 400,
+      message: "Password must be atleast 8 characters long.",
+    });
+  }
+  if (req.body.password !== req.body.confirmPassword) {
+    res.status(400);
+    res.json({
+      status: 400,
+      message: "Passwords do not match.",
+    });
+  }
 
   if (validationErrors.length) {
     req.flash("errors", validationErrors);
-    return res.redirect("../signup");
+    console.log(validationErrors);
+    res.status(400);
+    res.json({
+      status: 400,
+      message: "Sign up failed validation ):",
+    });
   }
   req.body.email = validator.normalizeEmail(req.body.email, {
     gmail_remove_dots: false,
@@ -100,19 +123,40 @@ exports.postSignup = (req, res, next) => {
         req.flash("errors", {
           msg: "Account with that email address or username already exists.",
         });
-        return res.redirect("../signup");
+        res.status(200);
+        res.json({
+          status: 200,
+          message: "User already exists!",
+          body: existingUser,
+        });
       }
       user.save((err) => {
         if (err) {
           return next(err);
         }
-        req.logIn(user, (err) => {
-          if (err) {
-            return next(err);
-          }
-          res.redirect("/profile");
+        res.status(201);
+        res.json({
+          status: 201,
+          message: "User created :)",
+          body: JSON.stringify(user),
         });
       });
     }
   );
+  passport.authenticate("local", (err, user, info) => {
+    if (err) {
+      return next(err);
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      res.status(200);
+      res.json({
+        status: 200,
+        message: "User logged in :)",
+        body: JSON.stringify(user),
+      });
+    });
+  })(req, res, next);
 };

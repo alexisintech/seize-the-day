@@ -6,10 +6,8 @@ const mainController = require("../controllers/main");
 // main Routes
 
 router.get("/", mainController.getIndex);
-router.get("/login", authController.getLogin);
 router.post("/login", authController.postLogin);
-router.get("/logout", authController.logout);
-router.get("/signup", authController.getSignup);
+router.post("/logout", authController.postLogout);
 router.post("/signup", authController.postSignup);
 
 module.exports = router;

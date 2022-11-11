@@ -5,7 +5,7 @@ const profileController = require("../controllers/profile");
 // /todo Routes
 // treat each path as: /profile  /profile/createTodo  /profile/delete/:id  /profile/complete/:id
 
-router.get("/", profileController.getTodos)
+router.get("/", profileController.getTodos);
 
 router.post("/createTodo", profileController.createTodo);
 

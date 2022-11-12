@@ -36,9 +36,13 @@ app.use(methodOverride("_method"));
 // Setup Sessions - stored in MongoDB
 app.use(
   session({
-    secret: "keyboard cat",
+    secret: "hehehe meow",
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      maxAge: 3600000,
+    },
     //storing the session in our DB
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })

@@ -29,22 +29,23 @@ const api_base =
 export default function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+    const data = new FormData(event.target);
+
     try {
-      await fetch(api_base + "/login", {
+      const req = await fetch(api_base + "/login", {
         method: "POST",
         headers: {
-          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          email: data.get("email"),
+          password: data.get("password"),
+        }),
       });
+      const res = await req.json();
     } catch (err) {
       console.log(err);
     }
-    // console.log({
-    //   email: data.get("email"),
-    //   password: data.get("password"),
-    // });
   };
 
   return (

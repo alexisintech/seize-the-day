@@ -18,7 +18,7 @@ const currentTime = `${addZero(date.getHours())}:${addZero(date.getMinutes())}`;
 module.exports = {
   getTodos: async (req, res) => {
     try {
-      const todos = await Todo.find();
+      const todos = await Todo.find({ user: req.user.id });
 
       res.json(todos);
     } catch (err) {

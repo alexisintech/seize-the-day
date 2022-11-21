@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -29,6 +30,8 @@ const api_base =
     : "replace with railway URL";
 
 export default function Signup() {
+  const navigate = useNavigate();
+
   const [doesUserExist, setDoesUserExist] = useState(false);
 
   const handleSubmit = async (event) => {
@@ -48,11 +51,16 @@ export default function Signup() {
           confirmPassword: data.get("confirmPassword"),
         }),
       });
+
       const res = await req.json();
-      console.log(res);
+
       if (res.message === "User already exists!") {
         setDoesUserExist(true);
       }
+
+      localStorage.setItem("auth", res.token);
+
+      navigate("/profile");
     } catch (err) {
       console.log(err);
     }

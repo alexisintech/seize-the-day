@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -27,6 +28,8 @@ const api_base =
     : "replace with railway URL";
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
@@ -38,11 +41,15 @@ export default function Login() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email: data.get("email"),
+          userName: data.get("userName"),
           password: data.get("password"),
         }),
       });
       const res = await req.json();
+
+      localStorage.setItem("auth", res.token);
+
+      navigate("/profile");
     } catch (err) {
       console.log(err);
     }
@@ -72,7 +79,7 @@ export default function Login() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Login
           </Typography>
           <Box
             component="form"
@@ -85,9 +92,9 @@ export default function Login() {
               autoFocus
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
+              id="userName"
+              label="Username"
+              name="userName"
               autoComplete="email"
             />
             <TextField
@@ -106,7 +113,7 @@ export default function Login() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Login
             </Button>
             <Link href="/signup" variant="body2">
               {"Don't have an account? Sign Up"}

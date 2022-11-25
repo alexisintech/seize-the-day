@@ -6,6 +6,8 @@ import SideNav from "../components/SideNav";
 import { Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CheckIcon from "@mui/icons-material/Check";
+import { useNavigate } from "react-router-dom";
+import { getUser } from "../../../api/controllers/auth";
 
 const api_base =
   process.env.NODE_ENV === "development"
@@ -20,13 +22,31 @@ const monthAsString = new Intl.DateTimeFormat("en-US", options).format(date);
 const currentDate = `${monthAsString} ${day}, ${year}`;
 
 export default function Profile() {
+  const [user, setUser] = useState("");
   const [todos, setTodos] = useState([]);
   const [popupActive, setPopupActive] = useState(false);
   const [newTodo, setNewTodo] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
+    getUser();
     getTodos();
   }, []);
+
+  const getUser = () => {
+    const token = localStorage.getItem("auth");
+    fetch(api_base + "/getUser", {
+      headers: { authorization: `bearer ${token}` },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data.message.userName) {
+          navigate("/login");
+        }
+        setUser(data.message.userName);
+      })
+      .catch((err) => console.error("Error: ", err));
+  };
 
   const getTodos = () => {
     fetch(api_base + "/profile")

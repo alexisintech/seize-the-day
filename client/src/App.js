@@ -10,12 +10,12 @@ function App() {
 		getTodos();
 	}, []);
 
-	const getTodos = () => {
-		fetch(api_base + '/todos')
-			.then(res => res.json())
-			.then(data => setTodos(data))
-			.catch((err) => console.error("Error: ", err));
-	}
+  const getTodos = () => {
+  	fetch(api_base + '/todos')
+  		.then(res => res.json())
+  		.then(data => setTodos(data))
+  		.catch((err) => console.error("Error: ", err));
+  }
 
   const completeTodo = async id => {
 		const data = await fetch(api_base + '/todos/complete/' + id, { method: "PUT" }) 

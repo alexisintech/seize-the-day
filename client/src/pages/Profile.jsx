@@ -49,7 +49,10 @@ export default function Profile() {
   };
 
   const getTodos = () => {
-    fetch(api_base + "/profile")
+    const token = localStorage.getItem("auth");
+    fetch(api_base + "/profile", {
+      headers: { authorization: `bearer ${token}` },
+    })
       .then((res) => res.json())
       .then((data) => setTodos(data))
       .catch((err) => console.error("Error: ", err));

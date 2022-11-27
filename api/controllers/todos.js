@@ -5,7 +5,8 @@ const dd = String(date.getDate()).padStart(2, '0');
 const mm = String(date.getMonth() + 1).padStart(2, '0'); // January is 0!
 const yyyy = date.getFullYear();
 const todaysDate = mm + '/' + dd + '/' + yyyy;
-// example: 10:7 will become 10:07 (rightfully so)
+// prefix integers below 10 with 0's 
+// example: 10:7 will become 10:07
 function addZero(i) {
   if (i < 10) {i = "0" + i}
   return i;

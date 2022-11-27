@@ -28,7 +28,6 @@ function App() {
 
 			return todo;
 		}));
-		
 	}
 
 	const createTodo = async () => {
@@ -61,8 +60,8 @@ function App() {
   return (
     <div className="App">
       <h1>Welcome Alexis!</h1>
-      <h4>Your tasks</h4>
-
+      
+			<h4>What I will try to accomplish today:</h4>
 			<div className="todos">
 				{todos.length > 0 ? todos.map(todo => (
 					<div className={

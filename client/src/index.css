@@ -38,8 +38,17 @@ h4 {
 	margin-bottom: 16px;
 }
 
+.todo-container{
+	width:100%;
+	display:flex;
+	flex-direction:row;
+	align-items:center;
+	margin-bottom: 16px;
+	gap:0.5rem;
+}
+
 .todo {
-	position: relative;
+	width:97%;
 	background-color: var(--dark);
 	padding: 16px;
 	border-radius: 16px;
@@ -47,7 +56,6 @@ h4 {
 	align-items: center;
 	transition: 0.5s;
 	cursor: pointer;
-	margin-bottom: 16px;
 }
 
 .todo:hover {
@@ -77,20 +85,24 @@ h4 {
 	text-decoration: line-through;
 }
 
-.todo .delete-todo {
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	right: 16px;
+.delete-container{
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+.delete-todo {
 	color: var(--light);
-	width: 24px;
-	height: 24px;
+	cursor:pointer;
+	width: 35px;
+	height: 35px;
 	border-radius: 50%;
 	background-color: #AF1E2D;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	font-weight: 700;
+	padding:12px;
 }
 
 .addPopup {

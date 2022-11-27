@@ -59,19 +59,22 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Welcome Alexis!</h1>
+      <h1>Welcome!</h1>
       
 			<h4>What I will try to accomplish today:</h4>
 			<div className="todos">
 				{todos.length > 0 ? todos.map(todo => (
-					<div className={
-						"todo" + (todo.complete ? " is-complete" : "")
-					} key={todo._id} onClick={() => completeTodo(todo._id)}>
-						<div className="checkbox"></div>
+					<div className="todo-container">
+						<div className={
+							"todo" + (todo.complete ? " is-complete" : "")
+						} key={todo._id} onClick={() => completeTodo(todo._id)}>
+							<div className="checkbox"></div>
 
-						<div className="text">{todo.text}</div>
-
-						<div className="delete-todo" onClick={() => deleteTodo(todo._id)}>x</div>
+							<div className="text">{todo.text}</div>
+						</div>
+						<div className="delete-container">
+							<div className="delete-todo" onClick={() => deleteTodo(todo._id)}>x</div>
+						</div>
 					</div>
 				)) : (
 					<p>You currently have no tasks</p>

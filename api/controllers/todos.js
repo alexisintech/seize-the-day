@@ -41,7 +41,7 @@ module.exports = {
     try {
       const result = await Todo.findByIdAndDelete(req.params.id);
 
-      res.json(result);
+	    res.json({result});
     } catch (err) {
       console.log(err);
     }

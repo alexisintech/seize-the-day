@@ -3,7 +3,7 @@ const router = express.Router();
 const todosController = require("../controllers/todos");
 
 // /todo Routes
-// treat each path as: /post/createTodo  /post/delete/:id  /post/complete/:id
+// treat each path as: /todos/createTodo  /todos/delete/:id  /todos/complete/:id
 
 router.post("/createTodo", todosController.createTodo);
 

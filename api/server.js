@@ -10,6 +10,7 @@ const logger = require("morgan");
 const connectDB = require("./config/database");
 
 // Routes
+const mainRoutes = require("./routes/main");
 const todoRoutes = require("./routes/todos");
 
 // Telling express to use our environment variables - use .env file in config folder
@@ -45,6 +46,7 @@ app.use(
 app.use(flash());
 
 // Setup routes for which the server is listening
+app.use("/", mainRoutes)
 app.use("/todos", todoRoutes);
 
 // Server Running

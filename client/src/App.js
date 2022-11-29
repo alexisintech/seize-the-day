@@ -63,11 +63,35 @@ function App() {
       
 			<h4>What I will try to accomplish today:</h4>
 			<div className="todos">
-				{todos.length > 0 ? todos.map(todo => (
+				{todos.length > 0 ? todos.filter(todo => !todo.complete).map(todo => (
 					<div className="todo-container">
-						<div className={
-							"todo" + (todo.complete ? " is-complete" : "")
-						} key={todo._id} onClick={() => completeTodo(todo._id)}>
+						<div 
+							className={"todo"} 
+							key={todo._id} 
+							onClick={() => completeTodo(todo._id)}
+						>
+							<div className="checkbox"></div>
+
+							<div className="text">{todo.text}</div>
+						</div>
+						<div className="delete-container">
+							<div className="delete-todo" onClick={() => deleteTodo(todo._id)}>x</div>
+						</div>
+					</div>
+				)) : (
+					<p>You currently have no tasks</p>
+				)}
+			</div>
+
+			<h4>What I have accomplished today:</h4>
+			<div className="todos">
+				{todos.length > 0 ? todos.filter(todo => todo.complete).map(todo => (
+					<div className="todo-container">
+						<div 
+							className={"todo is-complete fade-in"} 
+							key={todo._id} 
+							onClick={() => completeTodo(todo._id)}
+						>
 							<div className="checkbox"></div>
 
 							<div className="text">{todo.text}</div>

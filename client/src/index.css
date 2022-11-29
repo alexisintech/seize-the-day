@@ -85,6 +85,11 @@ h4 {
 	text-decoration: line-through;
 }
 
+.fade-in {
+	-webkit-animation: fade-in 0.7s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: fade-in 0.7s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
 .delete-container{
 	display:flex;
 	justify-content:center;
@@ -179,4 +184,30 @@ h4 {
 	margin-top: 16px;
 	text-align: center;
 	cursor: pointer;
+}
+
+/******************************************************************************************************/
+/* KEYFRAMES */
+/*******************************************************************************************************/
+
+/**
+ * ----------------------------------------
+ * animation fade-in
+ * ----------------------------------------
+ */
+ @-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

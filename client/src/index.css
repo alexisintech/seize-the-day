@@ -85,6 +85,12 @@ h4 {
 	text-decoration: line-through;
 }
 
+.no-tasks {
+	margin-bottom: 16px;
+	font-style: italic;
+	color: rgba(255, 255, 255, 0.555);
+}
+
 .fade-in {
 	-webkit-animation: fade-in 0.7s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 	        animation: fade-in 0.7s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;

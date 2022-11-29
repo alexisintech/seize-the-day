@@ -79,13 +79,13 @@ function App() {
 						</div>
 					</div>
 				)) : (
-					<p>You currently have no tasks</p>
+					<p class="no-tasks">You currently have no tasks</p>
 				)}
 			</div>
 
 			<h4>What I have accomplished today:</h4>
 			<div className="todos">
-				{todos.length > 0 ? todos.filter(todo => todo.complete).map(todo => (
+				{todos.filter(todo => todo.complete).map(todo => (
 					<div className="todo-container">
 						<div 
 							className={"todo is-complete fade-in"} 
@@ -100,9 +100,7 @@ function App() {
 							<div className="delete-todo" onClick={() => deleteTodo(todo._id)}>x</div>
 						</div>
 					</div>
-				)) : (
-					<p>You currently have no tasks</p>
-				)}
+				))}
 			</div>
 
 			<div className="addPopup" onClick={() => setPopupActive(true)}>+</div>

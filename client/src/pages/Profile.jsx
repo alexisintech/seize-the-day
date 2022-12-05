@@ -59,8 +59,13 @@ export default function Profile() {
   };
 
   const completeTodo = async (id) => {
+    const token = localStorage.getItem("auth");
     const data = await fetch(api_base + "/profile/complete/" + id, {
       method: "PUT",
+      headers: {
+        "content-type": "application/json",
+        authorization: `bearer ${token}`,
+      },
     }).then((res) => res.json());
 
     setTodos((todos) =>

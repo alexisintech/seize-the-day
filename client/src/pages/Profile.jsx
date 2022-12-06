@@ -80,10 +80,12 @@ export default function Profile() {
   };
 
   const createTodo = async () => {
+    const token = localStorage.getItem("auth");
     const data = await fetch(api_base + "/profile/createTodo", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "content-type": "application/json",
+        authorization: `bearer ${token}`,
       },
       body: JSON.stringify({
         text: newTodo,

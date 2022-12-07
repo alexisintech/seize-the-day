@@ -101,8 +101,10 @@ export default function Profile() {
   };
 
   const deleteTodo = async (id) => {
+    const token = localStorage.getItem("auth");
     const data = await fetch(api_base + "/profile/delete/" + id, {
       method: "DELETE",
+      headers: { authorization: `bearer ${token}` },
     }).then((res) => res.json());
 
     setTodos((todos) => todos.filter((todo) => todo._id !== data.result._id));

@@ -7,7 +7,6 @@ import { Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CheckIcon from "@mui/icons-material/Check";
 import { useNavigate } from "react-router-dom";
-import { getUser } from "../../../api/controllers/auth";
 
 const api_base =
   process.env.NODE_ENV === "development"
@@ -43,6 +42,7 @@ export default function Profile() {
         if (!data.message.userName) {
           navigate("/login");
         }
+
         setUser(data.message.userName);
       })
       .catch((err) => console.error("Error: ", err));
@@ -59,6 +59,7 @@ export default function Profile() {
   };
 
   const completeTodo = async (id) => {
+    // NOTE: Make sure to set the local storage key before trying to get it.
     const token = localStorage.getItem("auth");
     const data = await fetch(api_base + "/profile/complete/" + id, {
       method: "PUT",
@@ -130,8 +131,9 @@ export default function Profile() {
 
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography component="h2" variant="h2" sx={{ fontWeight: 700 }}>
-            Welcome, user!
+            Welcome, {user}!
           </Typography>
+
           <div className="addPopup" onClick={() => setPopupActive(true)}>
             + New Task
           </div>

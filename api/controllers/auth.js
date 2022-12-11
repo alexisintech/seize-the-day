@@ -33,14 +33,13 @@ const postLogin = (req, res, done) => {
       return next(err);
     }
 
-    // if user does not exist, return 404
+    // if user does not exist
     if (!existingUser)
       return res.status(404).json({ message: "User does not exist." });
 
     // if user exists, check if password is correct
     const passwordValid = comparePassword(password, existingUser.password);
 
-    // if password that user entered does not match the password of the user, return 404
     if (!passwordValid)
       return res.status(400).json({ message: "Password was incorrect." });
 

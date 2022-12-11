@@ -25,7 +25,7 @@ const theme = createTheme({
 const api_base =
   process.env.NODE_ENV === "development"
     ? "http://localhost:2222"
-    : "replace with railway URL";
+    : "https://seize-the-day-api.up.railway.app/";
 
 export default function Login() {
   const navigate = useNavigate();

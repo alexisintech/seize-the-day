@@ -1,6 +1,6 @@
-# To-Do App
+# Seize The Day
 
-> To-Do full-stack CRUD application built with MongoDB, Express, Nodejs, and React.
+> A to-do app with your mental health in mind.
 
 <img src="todogif.gif" width="100%" />
 

@@ -1,7 +1,7 @@
 {
-  "name": "to-do",
+  "name": "seize-the-day",
   "version": "1.0.0",
-  "description": "simple full stack to-do list app",
+  "description": "A to-do app with your mental health in mind.",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",

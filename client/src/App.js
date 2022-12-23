@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-const api_base = 'http://localhost:2222';
+const api_base = 'https://seize-the-day.up.railway.app/';
 
 function App() {
   const [todos, setTodos] = useState([]);

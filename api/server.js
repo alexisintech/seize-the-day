@@ -50,6 +50,6 @@ app.use("/", mainRoutes)
 app.use("/todos", todoRoutes);
 
 // Server Running
-app.listen(PORT, () => {
+app.listen(process.env.PORT, () => {
   console.log("server is running 🤪💅💋👛👏🏻💄✨❤️‍🔥");
 });

@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Appbar from "../components/Appbar";
 import SideNav from "../components/SideNav";
+import ResponsiveDrawer from "../components/ResponsiveDrawer";
 import { Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CheckIcon from "@mui/icons-material/Check";
@@ -13,12 +14,16 @@ const api_base =
     ? "http://localhost:2222"
     : "https://seize-the-day-api.up.railway.app";
 
-const date = new Date();
-const day = date.getDate();
-const options = { month: "long" };
-const year = date.getFullYear();
-const monthAsString = new Intl.DateTimeFormat("en-US", options).format(date);
-const currentDate = `${monthAsString} ${day}, ${year}`;
+const drawerWidth = 300;
+
+function getDate() {
+  const date = new Date();
+  const day = date.getDate();
+  const options = { month: "long" };
+  const year = date.getFullYear();
+  const monthAsString = new Intl.DateTimeFormat("en-US", options).format(date);
+  return `${monthAsString} ${day}, ${year}`;
+}
 
 export default function Profile() {
   const [user, setUser] = useState("");
@@ -113,20 +118,20 @@ export default function Profile() {
 
   return (
     <Box sx={{ display: "flex", height: "100vh" }}>
-      <Appbar />
-      <SideNav />
+      {/* <Appbar /> */}
+      {/* <SideNav /> */}
+      <ResponsiveDrawer />
 
       <Box
         component="main"
         sx={{
           flexGrow: 1,
           height: "100vh",
+          width: { sm: `calc(100% - ${drawerWidth}px)` },
           overflow: "auto",
           backgroundColor: "#f5f5f5",
-          paddingTop: 10,
-          paddingBottom: 10,
-          paddingLeft: 8,
-          paddingRight: 5,
+          py: 10,
+          px: 5,
         }}
         className="main--container"
       >
@@ -165,7 +170,7 @@ export default function Profile() {
         </Box>
 
         <Typography variant="h6" sx={{ fontStyle: "italic" }}>
-          {currentDate}
+          {getDate()}
         </Typography>
 
         <Typography></Typography>

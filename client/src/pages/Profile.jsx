@@ -8,6 +8,7 @@ import { Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CheckIcon from "@mui/icons-material/Check";
 import { useNavigate } from "react-router-dom";
+import { quotes } from "../quotes";
 
 const api_base =
   process.env.NODE_ENV === "development"
@@ -16,18 +17,26 @@ const api_base =
 
 const drawerWidth = 300;
 
-function getDate() {
+function todaysDate() {
   const date = new Date();
   const day = date.getDate();
+  const month = date.getMonth(); // don't forget, January is 0!
   const options = { month: "long" };
   const year = date.getFullYear();
   const monthAsString = new Intl.DateTimeFormat("en-US", options).format(date);
-  return `${monthAsString} ${day}, ${year}`;
+  return {
+    day,
+    month,
+    year,
+    dateWithString: `${monthAsString} ${day}, ${year}`,
+  };
 }
 
 export default function Profile() {
+  const [day, setDay] = useState("");
   const [user, setUser] = useState("");
   const [todos, setTodos] = useState([]);
+  const [quote, setQuote] = useState("");
   const [popupActive, setPopupActive] = useState(false);
   const [newTodo, setNewTodo] = useState("");
   const navigate = useNavigate();
@@ -35,7 +44,13 @@ export default function Profile() {
   useEffect(() => {
     getUser();
     getTodos();
+    setDay(todaysDate().day);
   }, []);
+
+  useEffect(() => {
+    setQuote(quotes[Math.floor(Math.random() * quotes.length)]);
+    console.log(day);
+  }, [day]);
 
   const getUser = () => {
     const token = localStorage.getItem("auth");
@@ -170,10 +185,10 @@ export default function Profile() {
         </Box>
 
         <Typography variant="h6" sx={{ fontStyle: "italic" }}>
-          {getDate()}
+          {todaysDate().dateWithString}
         </Typography>
 
-        <Typography></Typography>
+        <Typography>"{quote}"</Typography>
 
         <Typography component="h3" variant="h5" sx={{ marginTop: "3rem" }}>
           What I will try to accomplish today:

@@ -115,7 +115,7 @@ export default function Login() {
             >
               Login
             </Button>
-            <Link href="/signup" variant="body2">
+            <Link to="/signup" variant="body2">
               {"Don't have an account? Sign Up"}
             </Link>
           </Box>

@@ -49,7 +49,6 @@ export default function Profile() {
 
   useEffect(() => {
     setQuote(quotes[Math.floor(Math.random() * quotes.length)]);
-    console.log(day);
   }, [day]);
 
   const getUser = () => {

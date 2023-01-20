@@ -23,7 +23,16 @@ export default function Listitem(props) {
             <LabelIcon sx={{ height: "2.5rem", width: "2.5rem" }} />
           )}
         </ListItemIcon>
-        <ListItemText primary={props.text} sx={{ color: "#050448" }} />
+        <ListItemText
+          primary={props.text}
+          sx={{
+            color: "#050448",
+            textTransform: "uppercase",
+            "& .MuiTypography-root": {
+              fontWeight: 700,
+            },
+          }}
+        />
       </ListItemButton>
     </ListItem>
   );

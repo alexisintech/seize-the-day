@@ -44,10 +44,10 @@ export default function Profile() {
   useEffect(() => {
     getUser();
     getTodos();
-    setDay(todaysDate().day);
   }, []);
 
   useEffect(() => {
+    setDay(todaysDate().day);
     setQuote(quotes[Math.floor(Math.random() * quotes.length)]);
   }, [day]);
 

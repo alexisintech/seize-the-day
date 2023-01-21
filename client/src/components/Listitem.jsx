@@ -5,6 +5,7 @@ import ListItemText from "@mui/material/ListItemText";
 import HomeIcon from "@mui/icons-material/Home";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import LabelIcon from "@mui/icons-material/Label";
+import Typography from "@mui/material/Typography";
 
 export default function Listitem(props) {
   return (
@@ -33,6 +34,28 @@ export default function Listitem(props) {
             },
           }}
         />
+        {props.text === "Lists" && (
+          <Typography
+            sx={{
+              color: "rgb(62, 62, 62, 0.5)",
+              fontSize: "0.9rem",
+              fontStyle: "italic",
+            }}
+          >
+            Coming soon...
+          </Typography>
+        )}
+        {props.text === "Tags" && (
+          <Typography
+            sx={{
+              color: "rgb(62, 62, 62, 0.5)",
+              fontSize: "0.9rem",
+              fontStyle: "italic",
+            }}
+          >
+            Coming soon...
+          </Typography>
+        )}
       </ListItemButton>
     </ListItem>
   );

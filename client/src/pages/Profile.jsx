@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Appbar from "../components/Appbar";
@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { quotes } from "../quotes";
 import ControlPoint from "@mui/icons-material/ControlPoint";
 import AddTask from "@mui/icons-material/AddTask";
+import { AppContext } from "../App";
 
 const api_base =
   process.env.NODE_ENV === "development"
@@ -38,6 +39,8 @@ function todaysDate() {
 }
 
 export default function Profile() {
+  const [state, dispatch] = useContext(AppContext);
+  console.log(state);
   const [day, setDay] = useState("");
   const [user, setUser] = useState("");
   const [todos, setTodos] = useState([]);
@@ -80,13 +83,9 @@ export default function Profile() {
   };
 
   const getTodos = () => {
-    const token = localStorage.getItem("auth");
-    fetch(api_base + "/profile", {
-      headers: { authorization: `bearer ${token}` },
-    })
-      .then((res) => res.json())
-      .then((data) => setTodos(data))
-      .catch((err) => console.error("Error: ", err));
+    dispatch({
+      type: "GET_TODOS",
+    });
   };
 
   const completeTodo = async (id) => {
@@ -111,37 +110,13 @@ export default function Profile() {
     );
   };
 
-  const createTodo = async () => {
-    const token = localStorage.getItem("auth");
-    const data = await fetch(api_base + "/profile/createTodo", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `bearer ${token}`,
+  const deleteTodo = (id) => {
+    dispatch({
+      type: "DELETE_TODO",
+      payload: {
+        id,
       },
-      body: JSON.stringify({
-        title: newTodo.title,
-        subTasks: newTodo.subtasks,
-        tags: [],
-      }),
-    }).then((res) => res.json());
-
-    console.log(data);
-
-    setTodos([...todos, data]);
-
-    setPopupActive(false);
-    setNewTodo({ title: "", subTasks: [], tags: [] });
-  };
-
-  const deleteTodo = async (id) => {
-    const token = localStorage.getItem("auth");
-    const data = await fetch(api_base + "/profile/delete/" + id, {
-      method: "DELETE",
-      headers: { authorization: `bearer ${token}` },
-    }).then((res) => res.json());
-
-    setTodos((todos) => todos.filter((todo) => todo._id !== data.result._id));
+    });
   };
 
   const updateSubtasks = () => {
@@ -265,8 +240,8 @@ export default function Profile() {
         </Typography>
         <Box>
           <div className="todos">
-            {todos.length > 0 ? (
-              todos
+            {state.tasks.length > 0 ? (
+              state.tasks
                 .filter((todo) => !todo.complete)
                 .map((todo) => (
                   <div className="todo-container">
@@ -305,7 +280,7 @@ export default function Profile() {
         </Typography>
         <Box>
           <div className="todos">
-            {todos
+            {state.tasks
               .filter((todo) => todo.complete)
               .map((todo) => (
                 <div className="todo-container">

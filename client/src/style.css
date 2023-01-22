@@ -148,7 +148,7 @@ h2 {
 	background-color: #dedfe1;
 }
 
-.todo .text {
+.todo .title {
 	font-size: 20px;
 }
 
@@ -229,6 +229,38 @@ h2 {
 	margin-bottom: 16px;
 	font-weight: 400;
 	text-transform: uppercase;
+}
+
+.todo-name-input, .todo-task-input, .todo-tags-input{
+	background-color:transparent;
+	border:none;
+	padding:1rem;
+	font-size:1.5rem;
+	width:100%;
+}
+
+.todo-task-input{
+	padding:0.5rem;
+	border-bottom: 1px solid gray;
+}
+
+.todo-task-input, .todo-tags-input{
+	font-size:1rem;
+	color:black;
+}
+
+.todo-name-input::placeholder{
+	font-style:italic;
+}
+
+.todo-name-input:focus, .todo-task-input:focus, .todo-tags-input:focus{
+	outline:none;
+	border-radius:5px;
+	font-style:italic;
+}
+
+.todo-task-input:focus{
+	border-radius:0;
 }
 
 .add-todo-input {

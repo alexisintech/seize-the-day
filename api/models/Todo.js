@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const TodoSchema = new mongoose.Schema({
-  text: {
+  title: {
     type: String,
     required: true,
   },
@@ -12,6 +12,12 @@ const TodoSchema = new mongoose.Schema({
   timestamp: {
     type: String,
     default: Date.now(),
+  },
+  subTasks: {
+    type: Array,
+  },
+  tags: {
+    type: Array,
   },
 });
 

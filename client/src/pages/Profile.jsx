@@ -4,11 +4,16 @@ import Toolbar from "@mui/material/Toolbar";
 import Appbar from "../components/Appbar";
 import SideNav from "../components/SideNav";
 import ResponsiveDrawer from "../components/ResponsiveDrawer";
-import { Typography } from "@mui/material";
+import List from "@mui/material/List";
+import { ListItem, Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CheckIcon from "@mui/icons-material/Check";
+import ControlPointIcon from "@mui/icons-material/ControlPoint";
+import AddTaskIcon from "@mui/icons-material/AddTask";
 import { useNavigate } from "react-router-dom";
 import { quotes } from "../quotes";
+import ControlPoint from "@mui/icons-material/ControlPoint";
+import AddTask from "@mui/icons-material/AddTask";
 
 const api_base =
   process.env.NODE_ENV === "development"
@@ -38,7 +43,14 @@ export default function Profile() {
   const [todos, setTodos] = useState([]);
   const [quote, setQuote] = useState("");
   const [popupActive, setPopupActive] = useState(false);
-  const [newTodo, setNewTodo] = useState("");
+  // when creating a todo (on the "add task" popup), newTodo is for updating the state on the popup
+  const [newTodo, setNewTodo] = useState({
+    title: "",
+    subTasks: [],
+    tags: [],
+  });
+  const [newSubtask, setNewSubtask] = useState("");
+  const [emptyAlert, setEmptyAlert] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -108,7 +120,9 @@ export default function Profile() {
         authorization: `bearer ${token}`,
       },
       body: JSON.stringify({
-        text: newTodo,
+        title: newTodo.title,
+        subTasks: newTodo.subtasks,
+        tags: [],
       }),
     }).then((res) => res.json());
 
@@ -117,7 +131,7 @@ export default function Profile() {
     setTodos([...todos, data]);
 
     setPopupActive(false);
-    setNewTodo("");
+    setNewTodo({ title: "", subTasks: [], tags: [] });
   };
 
   const deleteTodo = async (id) => {
@@ -128,6 +142,19 @@ export default function Profile() {
     }).then((res) => res.json());
 
     setTodos((todos) => todos.filter((todo) => todo._id !== data.result._id));
+  };
+
+  const updateSubtasks = () => {
+    if (newSubtask === "") {
+      setEmptyAlert(true);
+      return;
+    }
+
+    setNewTodo((prevState) => ({
+      ...prevState,
+      subTasks: [...newTodo.subTasks, newSubtask],
+    }));
+    setNewSubtask("");
   };
 
   return (
@@ -166,13 +193,57 @@ export default function Profile() {
                 X
               </div>
               <div className="content">
-                <h3>Add Task</h3>
+                <h3>New task</h3>
                 <input
                   type="text"
-                  className="add-todo-input"
-                  onChange={(e) => setNewTodo(e.target.value)}
-                  value={newTodo}
+                  className="todo-name-input"
+                  placeholder="Title of task..."
+                  onChange={(e) =>
+                    setNewTodo((todo) => ({ ...todo, title: e.target.value }))
+                  }
+                  value={newTodo.title}
                 />
+                <Typography
+                  sx={{
+                    textTransform: "uppercase",
+                    fontWeight: 700,
+                  }}
+                >
+                  Subtasks
+                </Typography>
+                {newTodo.subTasks.length > 0 && (
+                  <Box>
+                    <List>
+                      {newTodo.subTasks.map((subtask) => (
+                        <ListItem>{subtask}</ListItem>
+                      ))}
+                    </List>
+                  </Box>
+                )}
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <input
+                    type="text"
+                    className="todo-task-input"
+                    placeholder="New subtasks"
+                    onChange={(e) => {
+                      setNewSubtask(e.target.value);
+                      setEmptyAlert(false);
+                    }}
+                    value={newSubtask}
+                  />
+                  <AddTaskIcon
+                    sx={{ cursor: "pointer" }}
+                    onClick={updateSubtasks}
+                  ></AddTaskIcon>
+                </Box>
+                {emptyAlert && (
+                  <Typography sx={{ color: "red" }}>
+                    This field cannot be empty!
+                  </Typography>
+                )}
+
+                <Typography>Tags</Typography>
+
                 <div className="button" onClick={createTodo}>
                   Create Task
                 </div>
@@ -211,7 +282,7 @@ export default function Profile() {
                       >
                         <div className="checkbox"></div>
 
-                        <div className="text">{todo.text}</div>
+                        <div className="title">{todo.title}</div>
                       </Box>
 
                       <div
@@ -252,7 +323,7 @@ export default function Profile() {
                         <CheckIcon sx={{ color: "#fff" }}></CheckIcon>
                       </div>
 
-                      <div className="text">{todo.text}</div>
+                      <div className="title">{todo.title}</div>
                     </Box>
                     <div
                       className="delete-todo"

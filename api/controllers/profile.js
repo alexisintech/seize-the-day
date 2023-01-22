@@ -28,7 +28,9 @@ module.exports = {
   createTodo: async (req, res) => {
     try {
       const todo = await Todo.create({
-        text: req.body.text,
+        title: req.body.title,
+        subTasks: req.body.subTasks,
+        tags: req.body.tags,
       });
       console.log("New todo was created!");
 

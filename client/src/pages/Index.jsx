@@ -19,8 +19,22 @@ export default function Index() {
   return (
     <ThemeProvider theme={theme}>
       <Box className="hero">
-        <Box sx={{ paddingTop: 30, paddingLeft: 35 }}>
-          <Grid container spacing={2}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", sm: "row" },
+            pl: { md: 4 },
+          }}
+        >
+          <Grid
+            container
+            spacing={2}
+            sx={{
+              justifyContent: { xs: "center", sm: "flex-start" },
+              textAlign: { xs: "center", sm: "left" },
+              width: { xs: "100%", sm: "50%" },
+            }}
+          >
             <Grid item xs={12} sx={{ marginBottom: 2, color: "#fff" }}>
               <h1>Seize The Day</h1>
             </Grid>
@@ -42,6 +56,23 @@ export default function Index() {
               </Link>
             </Grid>
           </Grid>
+          <Box
+            sx={{
+              display: "flex",
+              position: { xs: "static", sm: "absolute" },
+              left: { sm: "50%", lg: "40%" },
+              bottom: { sm: "35%", lg: "30%" },
+              justifyContent: "center",
+              mt: { xs: 4, sm: 0 },
+              width: { xs: "100%", sm: "50%" },
+            }}
+          >
+            <img
+              src="../public/imgs/undraw-reminder-illustration.svg"
+              className="hero--image"
+              alt=""
+            />
+          </Box>
         </Box>
       </Box>
     </ThemeProvider>

@@ -76,6 +76,29 @@ body {
 	padding: 32px;
 }
 
+.hero{
+	height:100vh;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	background-image: url(../public/imgs/index-bg.svg);
+	background-repeat:no-repeat;
+	background-position:bottom;
+}
+
+.hero--image{
+	width:55%;
+}
+@media all and (min-width:768px){
+	.hero--image{width:60%;}
+}
+@media all and (min-width:1023px){
+	.hero--image{width:50%;}
+}
+@media all and (min-width:1279px){
+	.hero--image{width:40%;}
+}
+
 .main--container{
 	background-color: #fff;
 }

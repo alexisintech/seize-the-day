@@ -151,14 +151,37 @@ export default function Profile() {
       >
         <Toolbar />
 
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography component="h2" variant="h2" sx={{ fontWeight: 700 }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", sm: "row" },
+            justifyContent: { xs: "center", sm: "space-between" },
+            alignItems: "center",
+          }}
+        >
+          <Typography
+            component="h2"
+            variant="h2"
+            sx={{ fontWeight: 700, fontSize: { xs: "2rem", sm: "2.5rem" } }}
+          >
             Welcome, {user}!
           </Typography>
 
-          <div className="addPopup" onClick={() => setPopupActive(true)}>
+          <Box sx={{ display: { sm: "none" } }}>
+            <div
+              className="mobile addPopup"
+              onClick={() => setPopupActive(true)}
+            >
+              +
+            </div>
+          </Box>
+          <Box
+            className="addPopup"
+            sx={{ display: { xs: "none", sm: "inherit" } }}
+            onClick={() => setPopupActive(true)}
+          >
             + New Task
-          </div>
+          </Box>
 
           {popupActive ? (
             <div className="popup">
@@ -183,13 +206,22 @@ export default function Profile() {
           )}
         </Box>
 
-        <Typography variant="h6" sx={{ fontStyle: "italic" }}>
+        <Typography
+          variant="h6"
+          sx={{ fontStyle: "italic", textAlign: { xs: "center", sm: "left" } }}
+        >
           {todaysDate().dateWithString}
         </Typography>
 
-        <Typography>"{quote}"</Typography>
+        <Typography sx={{ textAlign: { xs: "center", sm: "left" }, mt: 1 }}>
+          "{quote}"
+        </Typography>
 
-        <Typography component="h3" variant="h5" sx={{ marginTop: "3rem" }}>
+        <Typography
+          component="h3"
+          variant="h5"
+          sx={{ marginTop: "3rem", fontSize: { xs: "1.2rem", sm: "1.5rem" } }}
+        >
           What I will try to accomplish today:
         </Typography>
         <Box>
@@ -229,7 +261,11 @@ export default function Profile() {
           </div>
         </Box>
 
-        <Typography component="h3" variant="h5" sx={{ marginTop: "2rem" }}>
+        <Typography
+          component="h3"
+          variant="h5"
+          sx={{ marginTop: "2rem", fontSize: { xs: "1.2rem", sm: "1.5rem" } }}
+        >
           What I have accomplished today:
         </Typography>
         <Box>

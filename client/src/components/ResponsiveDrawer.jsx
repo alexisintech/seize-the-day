@@ -96,8 +96,8 @@ export default function ResponsiveDrawer(props) {
                   display: "flex",
                   mr: 1,
                   color: "#03015d",
-                  height: "2.5rem",
-                  width: "2.5rem",
+                  height: { xs: "2rem", sm: "2.5rem" },
+                  width: { xs: "2rem", sm: "2.5rem" },
                 }}
               />
               <Typography
@@ -109,7 +109,7 @@ export default function ResponsiveDrawer(props) {
                   mr: 2,
                   display: "flex",
                   fontWeight: 700,
-                  fontSize: "1.5rem",
+                  fontSize: { xs: "1.2rem", sm: "1.5rem" },
                   color: "#03015d",
                   textDecoration: "none",
                 }}
@@ -126,8 +126,8 @@ export default function ResponsiveDrawer(props) {
                     alt="The letter T serving as a default avatar image"
                     sx={{
                       backgroundColor: "#03015d",
-                      width: "3rem",
-                      height: "3rem",
+                      width: { xs: "2rem", sm: "3rem" },
+                      height: { xs: "2rem", sm: "3rem" },
                     }}
                   />
                 </IconButton>

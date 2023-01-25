@@ -68,7 +68,7 @@ export default function Index() {
             }}
           >
             <img
-              src="../public/imgs/undraw-reminder-illustration.svg"
+              src="/imgs/undraw-reminder-illustration.svg"
               className="hero--image"
               alt=""
             />

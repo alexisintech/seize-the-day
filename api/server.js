@@ -39,6 +39,10 @@ app.use(
     secret: "hehehe meow",
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      maxAge: 3600000,
+    },
     //storing the session in our DB
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
   })

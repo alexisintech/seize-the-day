@@ -81,7 +81,7 @@ export default function Profile() {
   return (
     <Box sx={{ display: "flex", height: "100vh" }}>
       <Appbar />
-      <SideNav />
+      {/* <SideNav /> */}
 
       <Box
         component="main"

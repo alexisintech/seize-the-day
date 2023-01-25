@@ -35,15 +35,22 @@ exports.postLogin = (req, res, next) => {
       return next(err);
     }
     if (!user) {
-      req.flash("errors", info);
-      return res.redirect("/login");
+      res.status(400);
+      res.json({
+        status: 400,
+        message: "User does not exist",
+      });
     }
     req.logIn(user, (err) => {
       if (err) {
         return next(err);
       }
-      req.flash("success", { msg: "Success! You are logged in." });
-      res.redirect(req.session.returnTo || "/profile");
+      res.status(200);
+      res.json({
+        status: 200,
+        message: "User logged in :)",
+        body: JSON.stringify(user),
+      });
     });
   })(req, res, next);
 };
@@ -133,13 +140,23 @@ exports.postSignup = (req, res, next) => {
           message: "User created :)",
           body: JSON.stringify(user),
         });
-        // req.logIn(user, (err) => {
-        //   if (err) {
-        //     return next(err);
-        //   }
-
-        // });
       });
     }
   );
+  passport.authenticate("local", (err, user, info) => {
+    if (err) {
+      return next(err);
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      res.status(200);
+      res.json({
+        status: 200,
+        message: "User logged in :)",
+        body: JSON.stringify(user),
+      });
+    });
+  })(req, res, next);
 };

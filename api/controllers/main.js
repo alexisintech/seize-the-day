@@ -1,9 +1,9 @@
 module.exports = {
-  getIndex: async (req, res) => {
+  getIndex: (req, res) => {
     try {
-      res.json(todos);
+      res.status(200).json({ message: "success" });
     } catch (err) {
       console.log(err);
     }
   },
-}
+};

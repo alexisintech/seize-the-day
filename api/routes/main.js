@@ -7,7 +7,7 @@ const mainController = require("../controllers/main");
 
 router.get("/", mainController.getIndex);
 router.post("/login", authController.postLogin);
-router.post("/logout", authController.postLogout);
+// router.post("/logout", authController.postLogout);
 router.post("/signup", authController.postSignup);
 
 module.exports = router;

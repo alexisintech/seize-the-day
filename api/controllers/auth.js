@@ -1,149 +1,109 @@
-// const passport = require("passport");
-// const validator = require("validator");
+const validator = require("validator");
+const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const { comparePassword } = require("../utils/auth");
 
-// exports.postLogin = (req, res, next) => {
-//   const validationErrors = [];
-//   if (!validator.isEmail(req.body.email)) {
-//     res.status(400);
-//     res.json({
-//       status: 400,
-//       message: "Please enter a valid email address",
-//     });
-//   }
-//   if (validator.isEmpty(req.body.password)) {
-//     res.status(400);
-//     res.json({
-//       status: 400,
-//       message: "Password cannot be blank",
-//     });
-//   }
+const SECRET = process.env.JWT_SECRET;
 
-//   if (validationErrors.length) {
-//     res.status(400);
-//     res.json({
-//       status: 400,
-//       message: "Log in failed validation ):",
-//     });
-//   }
-//   req.body.email = validator.normalizeEmail(req.body.email, {
-//     gmail_remove_dots: false,
-//   });
+const generateToken = (username) => {
+  return jwt.sign({ username }, SECRET, { expiresIn: 1800 });
+};
 
-//   // Authenticate the user using the credentials provided
-//   passport.authenticate("local", { session: true }, function (err, user) {
-//     if (err) {
-//       return errorResponse(res, "Invalid credentials");
-//     }
-//     if (!user) {
-//       res.status(200);
-//       res.json({
-//         status: 200,
-//         message: "User does not exist.",
-//       });
-//     }
-//     req.logIn(user, (err) => {
-//       if (err) {
-//         return next(err);
-//       }
+const postLogin = (req, res, done) => {
+  // get fields from form on frontend
+  const { userName, password } = req.body;
 
-//       res.json({ success: true, user });
-//     });
-//   })(req, res, next);
-// };
+  // check if the user is in the database
+  User.findOne({ $or: [{ userName }] }, (err, existingUser) => {
+    if (err) {
+      return next(err);
+    }
 
-// exports.postLogout = (req, res) => {
-//   req.logout(() => {
-//     console.log("User has logged out.");
-//   });
-//   req.session.destroy((err) => {
-//     if (err)
-//       console.log("Error : Failed to destroy the session during logout.", err);
-//     req.user = null;
-//     //this redirect needs to be removed
-//     res.redirect("/");
-//   });
-// };
+    // if user does not exist, return 404
+    if (!existingUser) {
+      return res.status(404).json({
+        message: "User does not exist.",
+      });
+    }
 
-// exports.postSignup = (req, res, next) => {
-//   const validationErrors = [];
+    // if user exists, generate token with username
+    const token = generateToken(userName);
 
-//   // Add validator for username
+    // after token is signed, we want to return the request with a success
+    return res.status(200).json({ message: "success", token });
+  });
+};
 
-//   if (!validator.isEmail(req.body.email)) {
-//     res.status(400);
-//     res.json({
-//       status: 400,
-//       message: "Please enter a valid email address.",
-//     });
-//   }
-//   if (!validator.isLength(req.body.password, { min: 8 })) {
-//     res.status(400);
-//     res.json({
-//       status: 400,
-//       message: "Password must be atleast 8 characters long.",
-//     });
-//   }
-//   if (req.body.password !== req.body.confirmPassword) {
-//     res.status(400);
-//     res.json({
-//       status: 400,
-//       message: "Passwords do not match.",
-//     });
-//   }
+const postSignup = (req, res) => {
+  // get fields from signup form
+  const { userName, email, password, confirmPassword } = req.body;
 
-//   if (validationErrors.length) {
-//     req.flash("errors", validationErrors);
-//     console.log(validationErrors);
-//     res.status(400);
-//     res.json({
-//       status: 400,
-//       message: "Sign up failed validation ):",
-//     });
-//   }
-//   req.body.email = validator.normalizeEmail(req.body.email, {
-//     gmail_remove_dots: false,
-//   });
+  const validationErrors = [];
 
-//   const user = new User({
-//     userName: req.body.userName,
-//     email: req.body.email,
-//     password: req.body.password,
-//   });
+  // Add validator for username
 
-//   User.findOne(
-//     { $or: [{ email: req.body.email }, { userName: req.body.userName }] },
-//     (err, existingUser) => {
-//       if (err) {
-//         return next(err);
-//       }
-//       if (existingUser) {
-//         req.flash("errors", {
-//           msg: "Account with that email address or username already exists.",
-//         });
-//         res.status(200);
-//         res.json({
-//           status: 200,
-//           message: "User already exists!",
-//           body: existingUser,
-//         });
-//       }
-//       user.save((err) => {
-//         if (err) {
-//           return next(err);
-//         }
-//         req.logIn(user, (err) => {
-//           if (err) {
-//             return next(err);
-//           }
-//           res.status(201);
-//           res.json({
-//             status: 201,
-//             message: "User created :)",
-//             body: user,
-//           });
-//         });
-//       });
-//     }
-//   );
-// };
+  if (!validator.isEmail(email)) {
+    return res.status(400).json({
+      message: "Please enter a valid email address.",
+    });
+  }
+  if (!validator.isLength(password, { min: 8 })) {
+    return res.status(400).json({
+      message: "Password must be atleast 8 characters long.",
+    });
+  }
+  if (password !== confirmPassword) {
+    return res.status(400).json({
+      message: "Passwords do not match",
+    });
+  }
+
+  if (validationErrors.length) {
+    return res.status(400).json({
+      message: "Sign up failed validation ):",
+      errors: validationErrors,
+    });
+  }
+  email = validator.normalizeEmail(req.body.email, {
+    gmail_remove_dots: false,
+  });
+
+  const user = new User({
+    userName,
+    email,
+    password,
+  });
+
+  User.findOne({ $or: [{ email }, { userName }] }, (err, existingUser) => {
+    if (err) {
+      return next(err);
+    }
+    if (existingUser) {
+      res.status(400);
+      res.json({
+        status: 400,
+        message: "User already exists!",
+        body: existingUser,
+      });
+    }
+    user.save((err) => {
+      if (err) {
+        return next(err);
+      }
+
+      const token = generateToken(userName);
+
+      return res.status(201).json({
+        status: 201,
+        message: "User created :)",
+        body: user,
+        token,
+      });
+    });
+  });
+};
+
+module.exports = {
+  postLogin,
+  postSignup,
+};

@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const passport = require("passport");
+// const passport = require("passport");
 const cors = require("cors");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
@@ -9,7 +9,7 @@ const methodOverride = require("method-override");
 const flash = require("express-flash");
 const logger = require("morgan");
 const connectDB = require("./config/database");
-const { ensureAuth } = require("./middleware/auth");
+// const { ensureAuth } = require("./middleware/auth");
 
 // Routes
 const mainRoutes = require("./routes/main");
@@ -33,24 +33,22 @@ app.use(logger("dev"));
 // Use forms for put / delete
 app.use(methodOverride("_method"));
 
-// Setup Sessions - stored in MongoDB
-app.use(
-  session({
-    secret: "hehehe meow",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      httpOnly: true,
-      maxAge: 3600000,
-    },
-    //storing the session in our DB
-    store: new MongoStore({ mongooseConnection: mongoose.connection }),
-  })
-);
+// // Setup Sessions - stored in MongoDB
+// app.use(
+//   session({
+//     secret: "hehehe meow",
+//     resave: false,
+//     saveUninitialized: false,
+//     maxAge: 3600000,
+//     //storing the session in our DB
+//     store: new MongoStore({ mongooseConnection: mongoose.connection }),
+//   })
+// );
 
-// Passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
+// // Passport middleware
+// app.use(passport.initialize());
+// app.use(passport.session());
+// require("./config/passport")(passport);
 
 // Use flash messages for errors, info, ect...
 app.use(flash());

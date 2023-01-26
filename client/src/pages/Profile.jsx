@@ -6,6 +6,7 @@ import SideNav from "../components/SideNav";
 import { Typography } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CheckIcon from "@mui/icons-material/Check";
+import { useNavigate } from "react-router-dom";
 
 const api_base =
   process.env.NODE_ENV === "development"
@@ -20,24 +21,52 @@ const monthAsString = new Intl.DateTimeFormat("en-US", options).format(date);
 const currentDate = `${monthAsString} ${day}, ${year}`;
 
 export default function Profile() {
+  const [user, setUser] = useState("");
   const [todos, setTodos] = useState([]);
   const [popupActive, setPopupActive] = useState(false);
   const [newTodo, setNewTodo] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
+    getUser();
     getTodos();
   }, []);
 
+  const getUser = () => {
+    const token = localStorage.getItem("auth");
+    fetch(api_base + "/getUser", {
+      headers: { authorization: `bearer ${token}` },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data.message.userName) {
+          navigate("/login");
+        }
+
+        setUser(data.message.userName);
+      })
+      .catch((err) => console.error("Error: ", err));
+  };
+
   const getTodos = () => {
-    fetch(api_base + "/profile")
+    const token = localStorage.getItem("auth");
+    fetch(api_base + "/profile", {
+      headers: { authorization: `bearer ${token}` },
+    })
       .then((res) => res.json())
       .then((data) => setTodos(data))
       .catch((err) => console.error("Error: ", err));
   };
 
   const completeTodo = async (id) => {
+    // NOTE: Make sure to set the local storage key before trying to get it.
+    const token = localStorage.getItem("auth");
     const data = await fetch(api_base + "/profile/complete/" + id, {
       method: "PUT",
+      headers: {
+        "content-type": "application/json",
+        authorization: `bearer ${token}`,
+      },
     }).then((res) => res.json());
 
     setTodos((todos) =>
@@ -52,10 +81,12 @@ export default function Profile() {
   };
 
   const createTodo = async () => {
+    const token = localStorage.getItem("auth");
     const data = await fetch(api_base + "/profile/createTodo", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "content-type": "application/json",
+        authorization: `bearer ${token}`,
       },
       body: JSON.stringify({
         text: newTodo,
@@ -71,8 +102,10 @@ export default function Profile() {
   };
 
   const deleteTodo = async (id) => {
+    const token = localStorage.getItem("auth");
     const data = await fetch(api_base + "/profile/delete/" + id, {
       method: "DELETE",
+      headers: { authorization: `bearer ${token}` },
     }).then((res) => res.json());
 
     setTodos((todos) => todos.filter((todo) => todo._id !== data.result._id));
@@ -98,8 +131,9 @@ export default function Profile() {
 
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography component="h2" variant="h2" sx={{ fontWeight: 700 }}>
-            Welcome, user!
+            Welcome, {user}!
           </Typography>
+
           <div className="addPopup" onClick={() => setPopupActive(true)}>
             + New Task
           </div>

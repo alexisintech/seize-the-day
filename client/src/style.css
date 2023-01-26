@@ -81,7 +81,7 @@ body {
 	display:flex;
 	justify-content:center;
 	align-items:center;
-	background-image: url(../public/imgs/index-bg.svg);
+	background-image: url(/imgs/index-bg.svg);
 	background-repeat:no-repeat;
 	background-position:bottom;
 }

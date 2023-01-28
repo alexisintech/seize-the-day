@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const { palette } = createTheme();
 const { augmentColor } = palette;
@@ -28,23 +28,18 @@ export default function Index() {
               Organize your day, mindfully.
             </Grid>
             <Grid item>
-              <Link to="/login">
+              <Link to="/login" sx={{ textDecoration: "none" }}>
                 <Button variant="outlined" type="button" color="light">
                   Login
                 </Button>
               </Link>
-              <form action="/login" method="get">
-                <Button variant="outlined" type="submit" color="light">
-                  Login
-                </Button>
-              </form>
             </Grid>
             <Grid item>
-              <form action="/signup" method="get">
-                <Button variant="contained" type="submit" color="secondary">
+              <Link to="/signup">
+                <Button variant="contained" type="button" color="secondary">
                   Signup
                 </Button>
-              </form>
+              </Link>
             </Grid>
           </Grid>
         </Box>

@@ -22,6 +22,6 @@ app.use(methodOverride("_method"));
 app.use("/", mainRoutes);
 app.use("/profile", authenticateToken, profileRoutes);
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || "2222", () => {
   console.log("server is running 🤪💅💋👛👏🏻💄✨❤️‍🔥");
 });

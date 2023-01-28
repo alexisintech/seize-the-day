@@ -28,14 +28,14 @@ export default function Index() {
               Organize your day, mindfully.
             </Grid>
             <Grid item>
-              <Link to="/login" sx={{ textDecoration: "none" }}>
+              <Link to="/login" style={{ textDecoration: "none" }}>
                 <Button variant="outlined" type="button" color="light">
                   Login
                 </Button>
               </Link>
             </Grid>
             <Grid item>
-              <Link to="/signup">
+              <Link to="/signup" style={{ textDecoration: "none" }}>
                 <Button variant="contained" type="button" color="secondary">
                   Signup
                 </Button>

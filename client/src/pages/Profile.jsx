@@ -120,6 +120,9 @@ export default function Profile() {
         component="main"
         sx={{
           flexGrow: 1,
+          height: "100vh",
+          overflow: "auto",
+          backgroundColor: "#f5f5f5",
           paddingTop: 10,
           paddingBottom: 10,
           paddingLeft: 8,

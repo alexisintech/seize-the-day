@@ -9,11 +9,13 @@ import Container from "@mui/material/Container";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import MenuIcon from "@mui/icons-material/Menu";
 import CreateIcon from "@mui/icons-material/Create";
 import { useNavigate } from "react-router-dom";
 
 export default function Appbar() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [mobileOpen, setMobileOpen] = React.useState(false);
   const navigate = useNavigate();
 
   const handleOpenUserMenu = (event) => {
@@ -22,6 +24,10 @@ export default function Appbar() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
   };
 
   const logout = () => {
@@ -40,33 +46,51 @@ export default function Appbar() {
       }}
     >
       <Container maxWidth="2000px" sx={{ margin: 0 }}>
-        <Toolbar disableGutters>
-          <CreateIcon
-            sx={{
-              display: "flex",
-              mr: 1,
-              color: "#03015d",
-              height: "2.5rem",
-              width: "2.5rem",
-            }}
-          />
-          <Typography
-            variant="h1"
-            noWrap
-            component="a"
-            href=""
+        <Toolbar
+          disableGutters
+          sx={{ justifyContent: { xs: "space-between", sm: "none" } }}
+        >
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
             sx={{
               mr: 2,
-              display: "flex",
-              flexGrow: 1,
-              fontWeight: 700,
-              fontSize: "1.5rem",
-              color: "#03015d",
-              textDecoration: "none",
+              display: { sm: "none" },
             }}
           >
-            SEIZE THE DAY
-          </Typography>
+            <MenuIcon
+              sx={{ color: "#03015d", height: "2.5rem", width: "2.5rem" }}
+            />
+          </IconButton>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <CreateIcon
+              sx={{
+                display: "flex",
+                mr: 1,
+                color: "#03015d",
+                height: "2.5rem",
+                width: "2.5rem",
+              }}
+            />
+            <Typography
+              variant="h1"
+              noWrap
+              component="a"
+              href=""
+              sx={{
+                mr: 2,
+                display: "flex",
+                fontWeight: 700,
+                fontSize: "1.5rem",
+                color: "#03015d",
+                textDecoration: "none",
+              }}
+            >
+              SEIZE THE DAY
+            </Typography>
+          </Box>
 
           <Box sx={{ flexGrow: 0, display: "flex" }}>
             <Tooltip title="Open settings">

@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 const api_base =
   process.env.NODE_ENV === "development"
     ? "http://localhost:2222"
-    : "https://seize-the-day-api.up.railway.app/";
+    : "https://seize-the-day-api.up.railway.app";
 
 const date = new Date();
 const day = date.getDate();

@@ -27,7 +27,7 @@ const theme = createTheme({
 const api_base =
   process.env.NODE_ENV === "development"
     ? "http://localhost:2222"
-    : "https://seize-the-day-api.up.railway.app/";
+    : "https://seize-the-day-api.up.railway.app";
 
 export default function Signup() {
   const navigate = useNavigate();

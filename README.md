@@ -69,7 +69,7 @@ In a second terminal:
     ```
  
 ### Start the app
-Concurrently is a package that allows you run multiple commands in a single terminal 
+Concurrently is a package that allows you run multiple commands in a single terminal <br />
 To run the application in a development server,
 1. Navigate to the client folder
 2. In the client folder, the package.json should have a "script" that looks like this:

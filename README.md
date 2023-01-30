@@ -29,50 +29,50 @@
 ## Get your own copy running!
 ### Backend
 In one terminal:
-1. Change the directory to the config folder and create a new file
-  ```sh 
-  cd api/config
-  touch .env
-  ```
+1. Change the directory to the config folder and create a new file 
+    ```sh 
+    cd api/config
+    touch .env
+    ```
 2. Create .env variables PORT and DB_STRING
-  ```sh
-  PORT = 2222 // port 2222 is used as the api_base in App.js on the client side
-  DB_STRING = "<Replace everything in quotes with MongoDB Connection String>"
-  ```
+    ```sh
+    PORT = 2222 // port 2222 is used as the api_base in App.js on the client side
+    DB_STRING = "<Replace everything in quotes with MongoDB Connection String>"
+    ```
 3. Navigate back to the api
-  ```sh
-  cd ...
-  ```
+    ```sh
+    cd ..
+    ```
 4. Install packages and dependencies
-  ```sh
-  npm i
-  ```
+    ```sh
+    npm i
+    ```
  
 *The server will be running on localhost:2222*
 
 ### Frontend
 In a second terminal:
 1. Navigate to the client folder
-  ```sh
-  cd client
-  ```
+    ```sh
+    cd client
+    ```
 2. Install packages and dependencies
-  ```sh
-  npm i
-  ```
+    ```sh
+    npm i
+    ```
  
 ### Start the app
 Concurrently is a package that allows you run multiple commands in a single terminal
 To run the application in a development server,
 1. Navigate to the client folder
 2. In the client folder, the package.json should have a "script" that looks like this:
-  ```sh
-  "api": "cd ../api && npm start",
-  ```
+    ```sh
+    "api": "cd ../api && npm start",
+    ```
 3. While still in the client folder, run the application using this command:
-  ```sh
-  concurrently "npm:api" "npm:dev"
-  ```
+    ```sh
+    concurrently "npm:api" "npm:dev"
+    ```
 
 *The client side application will render on localhost:4444* <br />
 *The page will reload if you make edits.*<br />

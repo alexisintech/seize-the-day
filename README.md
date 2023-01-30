@@ -2,7 +2,7 @@
 
 > A to-do app with your mental health in mind. 
 
-<!-- <img src="https://github.com/alexisintech/seize-the-day/blob/main/client/public/imgs/seize-the-day.gif" width="100%" /> -->
+<img src="https://github.com/alexisintech/seize-the-day/blob/main/client/public/imgs/seize-the-day.gif" width="100%" />
 
 <!-- FEATURES -->
 ## ⭐ Features

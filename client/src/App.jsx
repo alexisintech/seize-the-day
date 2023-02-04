@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import { createTodo, getTodos } from "./utils/index";
 import { completeTodo } from "./utils/index";
 import { deleteTodo } from "./utils/index";
+import { convertLength } from "@mui/material/styles/cssUtils";
 
 const defaultState = {
   tasks: [],
@@ -29,6 +30,7 @@ const appReducer = (state, { type, payload }) => {
       getTodos().then((data) => {
         updateState = { ...state, data };
       });
+      console.log(updateState);
       return updateState;
     case ACTIONS.CREATE_TODO:
       let updatedState = [];

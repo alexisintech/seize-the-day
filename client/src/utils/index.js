@@ -47,9 +47,7 @@ export const getTodos = async () => {
   try {
     const data = await fetch(api_base + "/profile", {
       headers: { authorization: `bearer ${token}` },
-    });
-    console.log(await data.json());
-    return await data.json();
+    }).then((res) => res.json());
   } catch (err) {
     console.log(err);
   }

@@ -186,15 +186,7 @@ export default function Profile() {
                 >
                   Subtasks
                 </Typography>
-                {newTodo.subTasks.length > 0 && (
-                  <Box>
-                    <List>
-                      {newTodo.subTasks.map((subtask) => (
-                        <ListItem>{subtask}</ListItem>
-                      ))}
-                    </List>
-                  </Box>
-                )}
+
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                   <input
                     type="text"

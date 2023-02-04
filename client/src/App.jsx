@@ -10,11 +10,11 @@ import { completeTodo } from "./utils/index";
 import { deleteTodo } from "./utils/index";
 import { convertLength } from "@mui/material/styles/cssUtils";
 
-const defaultState = {
+export const initialState = {
   tasks: [],
 };
 
-export const AppContext = React.createContext(defaultState);
+export const AppContext = React.createContext(initialState);
 
 const ACTIONS = {
   CREATE_TODO: "CREATE_TODO",
@@ -32,23 +32,23 @@ const appReducer = (state, { type, payload }) => {
       });
       console.log(updateState);
       return updateState;
-    case ACTIONS.CREATE_TODO:
-      let updatedState = [];
-      createTodo(payload).then(() => {
-        updatedState = [
-          ...state,
-          // Instead of:
-          // {
-          //   title: payload.title,
-          //   subTasks: payload.subTasks,
-          //   tags: payload.tags,
-          // },
-          payload,
-        ];
-      });
-    case ACTIONS.DELETE_TODO:
-      deleteTodo(payload);
-      return updatedState;
+    // case ACTIONS.CREATE_TODO:
+    //   let updatedState = [];
+    //   createTodo(payload).then(() => {
+    //     updatedState = [
+    //       ...state,
+    //       // Instead of:
+    //       // {
+    //       //   title: payload.title,
+    //       //   subTasks: payload.subTasks,
+    //       //   tags: payload.tags,
+    //       // },
+    //       payload,
+    //     ];
+    //   });
+    // case ACTIONS.DELETE_TODO:
+    //   deleteTodo(payload);
+    //   return updatedState;
     default:
       return state;
   }
@@ -78,7 +78,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  const [state, dispatch] = useReducer(appReducer, defaultState);
+  const [state, dispatch] = useReducer(appReducer, initialState);
 
   return (
     <AppContext.Provider value={[state, dispatch]}>

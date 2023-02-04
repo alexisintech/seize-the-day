@@ -90,9 +90,11 @@ To run the application in a development server,
 
 - [X] Mobile-first design; responsiveness using CSS Flexbox and Grid (but needs to be redesigned for an improved UI/UX)
 - [X] Utilize Material UI for consistent, reusable components
+- [ ] Use useReducer and Context API for passing data around components (IN PROGRESS)
 - [ ] A task can become a list when subtasks are added
   - For example, a task with the title "Grocery Shopping" can become a list if subtasks, such as grocery items, are added
 - [ ] Organize tasks using tags, such as important or critical, or users can create custom tag names
+- [ ] More modern UI, most likely with dark mode or dark UI
 
 See the [open issues](https://github.com/alexisintech/seize-the-day/issues) for a full list of proposed features (and known issues).
 

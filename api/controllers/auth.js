@@ -1,6 +1,7 @@
 const validator = require("validator");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const bcrypt = require("bcrypt");
 const { comparePassword } = require("../utils/auth");
 require("dotenv").config({ path: "./config/.env" });
 
@@ -38,16 +39,19 @@ const postLogin = (req, res, done) => {
       return res.status(404).json({ message: "User does not exist." });
 
     // if user exists, check if password is correct
-    const passwordValid = comparePassword(password, existingUser.password);
+    bcrypt.compare(password, existingUser.password, (err, data) => {
+      if (err) throw err;
 
-    if (!passwordValid)
-      return res.status(400).json({ message: "Password was incorrect." });
+      if (data) {
+        // if user exists, and password is correct, generate token with username
+        const token = generateToken(existingUser);
 
-    // if user exists, and password is correct, generate token with username
-    const token = generateToken(existingUser);
-
-    // after token is signed, we want to return the request with a success
-    return res.status(200).json({ message: "User logged in :)", token });
+        // after token is signed, we want to return the request with a success
+        return res.status(200).json({ message: "User logged in :)", token });
+      } else {
+        return res.status(400).json({ message: "Password was incorrect." });
+      }
+    });
   });
 };
 

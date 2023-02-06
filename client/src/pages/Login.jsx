@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -29,6 +30,7 @@ const api_base =
 
 export default function Login() {
   const navigate = useNavigate();
+  const [passwordIncorrect, setPasswordIncorrect] = useState();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -47,9 +49,16 @@ export default function Login() {
       });
       const res = await req.json();
 
-      localStorage.setItem("auth", res.token);
+      console.log(res, "This is the res from client side");
 
-      navigate("/profile");
+      if (res.message === "Password was incorrect.") {
+        setPasswordIncorrect(true);
+      }
+      if (res.message === "User logged in :)") {
+        localStorage.setItem("auth", res.token);
+
+        navigate("/profile");
+      }
     } catch (err) {
       console.log(err);
     }
@@ -97,6 +106,7 @@ export default function Login() {
               name="userName"
               autoComplete="email"
             />
+
             <TextField
               margin="normal"
               required
@@ -107,6 +117,13 @@ export default function Login() {
               type="password"
               autoComplete="current-password"
             />
+
+            {passwordIncorrect && (
+              <Typography sx={{ color: "red", mt: 2, fontSize: "0.9rem" }}>
+                Password was incorrect.
+              </Typography>
+            )}
+
             <Button
               type="submit"
               fullWidth
@@ -115,6 +132,7 @@ export default function Login() {
             >
               Login
             </Button>
+
             <Link to="/signup" variant="body2">
               {"Don't have an account? Sign Up"}
             </Link>

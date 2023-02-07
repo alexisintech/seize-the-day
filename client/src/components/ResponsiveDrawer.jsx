@@ -122,8 +122,7 @@ export default function ResponsiveDrawer(props) {
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar
-                    // the first letter of the alt tag will be the letter in the avatar
-                    alt="The letter T serving as a default avatar image"
+                    alt="person icon"
                     sx={{
                       backgroundColor: "#03015d",
                       width: { xs: "2rem", sm: "3rem" },

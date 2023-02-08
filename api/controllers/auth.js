@@ -2,7 +2,6 @@ const validator = require("validator");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
-const { comparePassword } = require("../utils/auth");
 require("dotenv").config({ path: "./config/.env" });
 
 const SECRET = process.env.JWT_SECRET;

@@ -1,80 +1,94 @@
-import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Link, NavLink } from "react-router-dom";
+import {
+  Grid,
+  Box,
+  Button,
+  IconButton,
+  Typography,
+  useTheme,
+} from "@mui/material";
+import { useContext } from "react";
+import { ColorModeContext, tokens } from "../theme";
+import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
+import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import { Link } from "react-router-dom";
 
-const { palette } = createTheme();
-const { augmentColor } = palette;
-const createColor = (mainColor) => augmentColor({ color: { main: mainColor } });
-const theme = createTheme({
-  palette: {
-    primary: createColor("#03015d"),
-    secondary: createColor("#1b1799"),
-    light: createColor("#EEE"),
-  },
-});
+const Index = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  const colorMode = useContext(ColorModeContext);
 
-export default function Index() {
   return (
-    <ThemeProvider theme={theme}>
-      <Box className="hero">
-        <Box
+    <Box
+      display="flex"
+      height="100vh"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: { xs: "column", sm: "row" },
+        }}
+      >
+        <Grid
+          container
+          spacing={2}
           sx={{
-            display: "flex",
-            flexDirection: { xs: "column", sm: "row" },
-            pl: { md: 4 },
+            justifyContent: { xs: "center", sm: "flex-start" },
+            textAlign: { xs: "center", sm: "left" },
+            width: { xs: "100%", sm: "40%" },
           }}
         >
-          <Grid
-            container
-            spacing={2}
-            sx={{
-              justifyContent: { xs: "center", sm: "flex-start" },
-              textAlign: { xs: "center", sm: "left" },
-              width: { xs: "100%", sm: "50%" },
-            }}
-          >
-            <Grid item xs={12} sx={{ marginBottom: 2, color: "#fff" }}>
-              <h1>Seize The Day</h1>
+          <Grid item xs={6} my="auto">
+            <Grid item xs={12} sx={{ marginBottom: 2 }}>
+              <IconButton
+                onClick={colorMode.toggleColorMode}
+                sx={{ p: 0, mb: 1 }}
+              >
+                {theme.palette.mode === "dark" ? (
+                  <DarkModeOutlinedIcon />
+                ) : (
+                  <LightModeOutlinedIcon />
+                )}
+              </IconButton>
+              <Typography variant="h1">Seize The Day</Typography>
             </Grid>
-            <Grid item xs={12} sx={{ marginBottom: 1, color: "#fff" }}>
-              Organize your day, mindfully.
+            <Grid item xs={12} sx={{ marginBottom: 1 }}>
+              <Typography variant="h4">
+                Organize your day, mindfully.
+              </Typography>
             </Grid>
-            <Grid item>
-              <Link to="/login" style={{ textDecoration: "none" }}>
-                <Button variant="outlined" type="button" color="light">
-                  Login
-                </Button>
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link to="/signup" style={{ textDecoration: "none" }}>
-                <Button variant="contained" type="button" color="secondary">
-                  Signup
-                </Button>
-              </Link>
+            <Grid display="flex" gap={2} mt={2}>
+              <Grid item>
+                <Link to="/login" style={{ textDecoration: "none" }}>
+                  <Button variant="outlined" type="button" color="secondary">
+                    Login
+                  </Button>
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link to="/signup" style={{ textDecoration: "none" }}>
+                  <Button variant="contained" type="button" color="secondary">
+                    Signup
+                  </Button>
+                </Link>
+              </Grid>
             </Grid>
           </Grid>
-          <Box
-            sx={{
-              display: "flex",
-              position: { xs: "static", sm: "absolute" },
-              left: { sm: "50%", lg: "40%" },
-              bottom: { sm: "35%", lg: "30%" },
-              justifyContent: "center",
-              mt: { xs: 4, sm: 0 },
-              width: { xs: "100%", sm: "50%" },
-            }}
-          >
-            <img
-              src="/imgs/undraw-reminder-illustration.svg"
-              className="hero--image"
+          <Grid item xs={6}>
+            <Box
+              component="img"
+              maxHeight="500px"
+              src="../../public/imgs/undraw-reminder-illustration.svg"
               alt=""
             />
-          </Box>
-        </Box>
+          </Grid>
+        </Grid>
       </Box>
-    </ThemeProvider>
+    </Box>
   );
-}
+};
+
+export default Index;

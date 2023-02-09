@@ -1,28 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
+import {
+  Avatar,
+  Box,
+  Button,
+  CssBaseline,
+  Container,
+  Grid,
+  Link,
+  TextField,
+  Typography,
+  useTheme,
+} from "@mui/material";
+import { tokens } from "../theme";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Copyright from "../components/Copyright";
-
-const { palette } = createTheme();
-const { augmentColor } = palette;
-const createColor = (mainColor) => augmentColor({ color: { main: mainColor } });
-const theme = createTheme({
-  palette: {
-    primary: createColor("#030154"),
-    secondary: createColor("#1b1799"),
-    light: createColor("#EEE"),
-  },
-});
+import GuestAppbar from "../components/GuestAppbar";
 
 const api_base =
   process.env.NODE_ENV === "development"
@@ -30,8 +23,9 @@ const api_base =
     : "https://seize-the-day-api.up.railway.app";
 
 export default function Signup() {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const navigate = useNavigate();
-
   const [doesUserExist, setDoesUserExist] = useState(false);
 
   const handleSubmit = async (event) => {
@@ -67,108 +61,121 @@ export default function Signup() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container
-        component="main"
-        maxWidth="xs"
-        className="box--shadow"
-        sx={{
-          paddingTop: 2,
-          paddingBottom: 2,
-          marginTop: 8,
-        }}
+    <Box>
+      <GuestAppbar />
+      <Box
+        height="85vh"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        px="0.8rem"
       >
-        <CssBaseline />
-        <Box
+        <Container
+          component="main"
+          maxWidth="xs"
           sx={{
-            marginTop: 0,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            paddingTop: 2,
+            paddingBottom: 2,
+            boxShadow: "2px 2px 8px 0px rgba(0,0,0,0.3)",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign up
-          </Typography>
+          <CssBaseline />
           <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
+            sx={{
+              marginTop: 0,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
           >
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  autoFocus
-                  required
-                  fullWidth
-                  id="userName"
-                  label="Username"
-                  name="userName"
-                  autoComplete="given-name"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="password"
-                  label="Password"
-                  name="password"
-                  type="password"
-                  autoComplete="new-password"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="confirmPassword"
-                  label="Confirm Password"
-                  name="confirmPassword"
-                  type="password"
-                />
-              </Grid>
-            </Grid>
-
-            {doesUserExist && (
-              <Typography sx={{ color: "red", mt: 2, fontSize: "0.9rem" }}>
-                Account with that email address or username already exists.
-              </Typography>
-            )}
-
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 2, mb: 2 }}
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography variant="h3">Sign up</Typography>
+            <Box
+              component="form"
+              noValidate
+              onSubmit={handleSubmit}
+              sx={{ mt: 3 }}
             >
-              Sign Up
-            </Button>
-            <Grid container justifyContent="flex-start">
-              <Grid item>
-                <Link to="/login" variant="body2">
-                  Already have an account? Sign in
-                </Link>
+              <Grid container spacing={2}>
+                <Grid item xs={12}>
+                  <TextField
+                    autoFocus
+                    required
+                    fullWidth
+                    id="userName"
+                    label="Username"
+                    name="userName"
+                    autoComplete="given-name"
+                    variant="filled"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email Address"
+                    name="email"
+                    autoComplete="email"
+                    variant="filled"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="password"
+                    label="Password"
+                    name="password"
+                    type="password"
+                    autoComplete="new-password"
+                    variant="filled"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="confirmPassword"
+                    label="Confirm Password"
+                    name="confirmPassword"
+                    type="password"
+                    variant="filled"
+                  />
+                </Grid>
               </Grid>
-            </Grid>
+
+              {doesUserExist && (
+                <Typography sx={{ color: "red", mt: 2, fontSize: "0.9rem" }}>
+                  Account with that email address or username already exists.
+                </Typography>
+              )}
+
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="secondary"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Sign Up
+              </Button>
+              <Grid container justifyContent="flex-start">
+                <Grid item>
+                  <Link to="/login" sx={{ color: colors.grey[100] }}>
+                    <Typography variant="h6">
+                      Already have an account? Sign in
+                    </Typography>
+                  </Link>
+                </Grid>
+              </Grid>
+            </Box>
           </Box>
-        </Box>
-        <Copyright sx={{ mt: 5 }} />
-      </Container>
-    </ThemeProvider>
+          <Copyright sx={{ mt: 5 }} />
+        </Container>
+      </Box>
+    </Box>
   );
 }

@@ -84,6 +84,7 @@ export default function ResponsiveDrawer(props) {
           backgroundColor: colors.primary[400],
           zIndex: (theme) => theme.zIndex.drawer + 1,
           padding: { xs: "0.3rem", sm: "0.5rem 1.5rem" },
+          backgroundImage: "none",
         }}
       >
         <Container maxWidth="2000px" sx={{ margin: 0 }}>

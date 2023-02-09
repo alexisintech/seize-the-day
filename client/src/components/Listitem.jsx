@@ -20,25 +20,19 @@ export default function Listitem(props) {
       <ListItemButton>
         <ListItemIcon sx={{ color: colors.grey[100] }}>
           {props.text === "Home" && (
-            <HomeIcon sx={{ height: "2.5rem", width: "2.5rem" }} />
+            <HomeIcon sx={{ height: "2rem", width: "2rem" }} />
           )}
           {props.text === "Lists" && (
-            <FormatListBulletedIcon
-              sx={{ height: "2.5rem", width: "2.5rem" }}
-            />
+            <FormatListBulletedIcon sx={{ height: "2rem", width: "2rem" }} />
           )}
           {props.text === "Tags" && (
-            <LabelIcon sx={{ height: "2.5rem", width: "2.5rem" }} />
+            <LabelIcon sx={{ height: "2rem", width: "2rem" }} />
           )}
         </ListItemIcon>
         <ListItemText
           primary={props.text}
           sx={{
             color: colors.grey[100],
-            textTransform: "uppercase",
-            "& .MuiTypography-root": {
-              fontWeight: 700,
-            },
           }}
         />
         {props.text === "Lists" && (

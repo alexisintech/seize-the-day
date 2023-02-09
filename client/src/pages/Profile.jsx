@@ -16,25 +16,9 @@ const api_base =
 
 const drawerWidth = 300;
 
-function todaysDate() {
-  const date = new Date();
-  const day = date.getDate();
-  const month = date.getMonth(); // don't forget, January is 0!
-  const options = { month: "long" };
-  const year = date.getFullYear();
-  const monthAsString = new Intl.DateTimeFormat("en-US", options).format(date);
-  return {
-    day,
-    month,
-    year,
-    dateWithString: `${monthAsString} ${day}, ${year}`,
-  };
-}
-
 export default function Profile() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [day, setDay] = useState("");
   const [user, setUser] = useState("");
   const [quote, setQuote] = useState("");
   const navigate = useNavigate();
@@ -44,12 +28,8 @@ export default function Profile() {
   useEffect(() => {
     // getUser();
     getWeather();
-  }, []);
-
-  useEffect(() => {
-    setDay(todaysDate().day);
     setQuote(quotes[Math.floor(Math.random() * quotes.length)]);
-  }, [day]);
+  }, []);
 
   // const getUser = () => {
   //   const token = localStorage.getItem("auth");
@@ -111,7 +91,12 @@ export default function Profile() {
               alignItems="center"
               justifyContent="center"
             >
-              Quote
+              <Typography
+                variant="h4"
+                sx={{ fontWeight: 300, fontStyle: "italic" }}
+              >
+                {quote}
+              </Typography>
             </Box>
 
             {/* ROW 2 */}

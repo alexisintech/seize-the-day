@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useContext } from "react";
+import { ColorModeContext, tokens } from "../theme";
 import { Box, Typography, useTheme } from "@mui/material";
-import { tokens } from "../theme";
 
 const Clock = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const colorMode = useContext(ColorModeContext);
   const [time, setTime] = useState({});
 
   var set_clock = setInterval(function clock() {
@@ -26,31 +28,37 @@ const Clock = () => {
 
   set_clock;
 
+  const styles = {
+    hand: {
+      backgroundColor: colors.purpleAccent[500],
+    },
+    clock: {
+      border:
+        theme.palette.mode === "dark"
+          ? "2px solid rgba(255,255,255,0.1)"
+          : "2px solid rgba(219, 217, 217, 0.5)",
+    },
+  };
+
   return (
-    <Box className="clock">
-      <Box
-        component="img"
-        src="/imgs/clock.svg"
-        alt="clock"
-        sx={{
-          // backgroundColor: `${colors.purpleAccent[400]}`,
-          fill: `${colors.purpleAccent[400]}`,
-        }}
-      />
+    <Box className="clock" style={{ ...styles.clock }}>
       <Box
         className="hour hand"
         id="hour"
-        style={{ transform: "rotate(" + time.hour + "deg)" }}
+        style={{
+          transform: "rotate(" + time.hour + "deg)",
+          ...styles.hand,
+        }}
       ></Box>
       <Box
         className="minute hand"
         id="minute"
-        style={{ transform: "rotate(" + time.min + "deg)" }}
+        style={{ transform: "rotate(" + time.min + "deg)", ...styles.hand }}
       ></Box>
       <Box
         className="seconds hand"
         id="seconds"
-        style={{ transform: "rotate(" + time.sec + "deg)" }}
+        style={{ transform: "rotate(" + time.sec + "deg)", ...styles.hand }}
       ></Box>
     </Box>
   );

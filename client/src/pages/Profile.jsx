@@ -5,6 +5,7 @@ import { tokens } from "../theme";
 import { quotes } from "../quotes";
 import Header from "../components/Header";
 import ResponsiveDrawer from "../components/ResponsiveDrawer";
+import Weather from "../components/Weather";
 
 const api_base =
   process.env.NODE_ENV === "development"
@@ -33,15 +34,11 @@ export default function Profile() {
   const colors = tokens(theme.palette.mode);
   const [day, setDay] = useState("");
   const [user, setUser] = useState("");
-  const [todos, setTodos] = useState([]);
   const [quote, setQuote] = useState("");
-  const [popupActive, setPopupActive] = useState(false);
-  const [newTodo, setNewTodo] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     getUser();
-    getTodos();
   }, []);
 
   useEffect(() => {
@@ -65,69 +62,6 @@ export default function Profile() {
       .catch((err) => console.error("Error: ", err));
   };
 
-  const getTodos = () => {
-    const token = localStorage.getItem("auth");
-    fetch(api_base + "/profile", {
-      headers: { authorization: `bearer ${token}` },
-    })
-      .then((res) => res.json())
-      .then((data) => setTodos(data))
-      .catch((err) => console.error("Error: ", err));
-  };
-
-  const completeTodo = async (id) => {
-    // NOTE: Make sure to set the local storage key before trying to get it.
-    const token = localStorage.getItem("auth");
-    const data = await fetch(api_base + "/profile/complete/" + id, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-        authorization: `bearer ${token}`,
-      },
-    }).then((res) => res.json());
-
-    setTodos((todos) =>
-      todos.map((todo) => {
-        if (todo._id === data._id) {
-          todo.complete = data.complete;
-        }
-
-        return todo;
-      })
-    );
-  };
-
-  const createTodo = async () => {
-    const token = localStorage.getItem("auth");
-    const data = await fetch(api_base + "/profile/createTodo", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `bearer ${token}`,
-      },
-      body: JSON.stringify({
-        text: newTodo,
-      }),
-    }).then((res) => res.json());
-
-    console.log(data);
-
-    setTodos([...todos, data]);
-
-    setPopupActive(false);
-    setNewTodo("");
-  };
-
-  const deleteTodo = async (id) => {
-    const token = localStorage.getItem("auth");
-    const data = await fetch(api_base + "/profile/delete/" + id, {
-      method: "DELETE",
-      headers: { authorization: `bearer ${token}` },
-    }).then((res) => res.json());
-
-    setTodos((todos) => todos.filter((todo) => todo._id !== data.result._id));
-  };
-
   return (
     <Box
       sx={{
@@ -145,7 +79,65 @@ export default function Profile() {
             justifyContent="space-between"
             alignItems="center"
           >
-            <Header title="PROFILE" subtitle="Welcome!" />
+            <Header title="PROFILE" subtitle={`Welcome ${user}!`} />
+          </Box>
+
+          {/* GRID & CHARTS */}
+          <Box
+            display="grid"
+            gridTemplateColumns="repeat(12, 1fr)"
+            gridAutoRows="140px"
+            gap="20px"
+          >
+            {/* ROW 1 */}
+            <Box
+              gridColumn="span 12"
+              backgroundColor={colors.primary[400]}
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+            >
+              Quote
+            </Box>
+
+            {/* ROW 2 */}
+            <Box
+              gridColumn="span 4"
+              gridRow="span 2"
+              backgroundColor={colors.primary[400]}
+              p="30px"
+            >
+              <Box
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                mt="25px"
+              >
+                PIE CHART
+                <Typography
+                  variant="h5"
+                  color={colors.greenAccent[500]}
+                  sx={{ mt: "15px" }}
+                >
+                  X Tasks Completed
+                </Typography>
+              </Box>
+            </Box>
+            <Box
+              gridColumn="span 4"
+              gridRow="span 2"
+              backgroundColor={colors.primary[400]}
+            >
+              Calendar
+            </Box>
+            <Box
+              gridColumn="span 4"
+              gridRow="span 2"
+              backgroundColor={colors.primary[400]}
+              padding="30px"
+            >
+              <Weather />
+            </Box>
           </Box>
         </Box>
       </main>

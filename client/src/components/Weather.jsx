@@ -1,9 +1,55 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { useState, useEffect } from "react";
+import {
+  Button,
+  Box,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  TextField,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { tokens } from "../theme";
 
-const Weather = ({ data }) => {
+const Weather = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [open, setOpen] = useState(false);
+  const [weatherData, setWeatherData] = useState({});
+  const [location, setLocation] = useState("miami");
+  const [newLocation, setNewLocation] = useState("");
+
+  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=03cf018b6db2b45645c9dd6504c3ded3&units=metric`;
+
+  useEffect(() => {
+    getWeather();
+  }, []);
+
+  const getWeather = () => {
+    fetch(weatherUrl)
+      .then((res) => res.json())
+      .then((data) => setWeatherData(data))
+      .catch((err) => console.log("Error: ", err));
+  };
+
+  console.log(weatherData);
+
+  const handleClickOpen = () => {
+    setNewLocation("");
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const updateLocation = (event) => {
+    setLocation(newLocation);
+    console.log("This is location, now updated", location);
+    setOpen(false);
+  };
 
   // const celsiusToFahrenheit = () => {
   //   const currentTemp = ((data.main.temp - 273.15) * 9) / 5 + 32;
@@ -24,7 +70,7 @@ const Weather = ({ data }) => {
         width: "100%",
       }}
     >
-      {Object.entries(data).length > 0 ? (
+      {Object.entries(weatherData).length > 0 ? (
         <Box
           sx={{
             display: "flex",
@@ -39,7 +85,9 @@ const Weather = ({ data }) => {
               justifyContent: "center",
             }}
           >
-            <Typography variant="h3">{data.name}</Typography>
+            <Typography variant="h3" onClick={handleClickOpen}>
+              {weatherData.name}
+            </Typography>
             <Typography
               variant="h1"
               sx={{
@@ -47,14 +95,14 @@ const Weather = ({ data }) => {
                 fontWeight: 200,
               }}
             >
-              {Math.round(data.main.temp)}°C
+              {Math.round(weatherData.main.temp)}°C
             </Typography>
             <Box sx={{ display: "flex", gap: "0.25rem" }}>
               <Typography variant="h4" color={colors.purpleAccent[500]}>
                 Humidity:
               </Typography>
               <Typography variant="h4" sx={{ fontWeight: 300 }}>
-                {Math.round(data.main.humidity)}°C
+                {Math.round(weatherData.main.humidity)}°C
               </Typography>
             </Box>
           </Box>
@@ -78,7 +126,7 @@ const Weather = ({ data }) => {
                 right: "10%",
               }}
             >
-              {data.weather[0].description}
+              {weatherData.weather[0].description}
             </Typography>
           </Box>
         </Box>
@@ -87,6 +135,35 @@ const Weather = ({ data }) => {
           Loading...
         </Typography>
       )}
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        sx={{
+          "& .MuiPaper-root": {
+            backgroundColor: `${colors.primary[400]} !important`,
+          },
+        }}
+      >
+        <DialogContent sx={{ width: "400px" }}>
+          <DialogContentText>Change your location</DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Type your location..."
+            type="text"
+            fullWidth
+            variant="standard"
+            onChange={(e) => setNewLocation(e.target.value)}
+            value={newLocation}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={updateLocation} sx={{ color: colors.grey[100] }}>
+            Update
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };

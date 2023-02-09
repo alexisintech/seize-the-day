@@ -41,9 +41,11 @@ module.exports = {
   },
   deleteTodo: async (req, res) => {
     try {
-      const result = await Todo.findByIdAndDelete(req.params.id);
+      await Todo.findByIdAndDelete(req.params.id);
 
-      res.json({ result });
+      const todos = await Todo.find({ user: req.user.id });
+
+      res.json(todos);
     } catch (err) {
       console.log(err);
     }

@@ -22,12 +22,13 @@ export default function Profile() {
   const [user, setUser] = useState("");
   const [quote, setQuote] = useState("");
   const navigate = useNavigate();
-  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=miami&appid=03cf018b6db2b45645c9dd6504c3ded3&units=metric`;
-  const [weatherData, setWeatherData] = useState({});
+  // const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=03cf018b6db2b45645c9dd6504c3ded3&units=metric`;
+  // const [weatherData, setWeatherData] = useState({});
+  // const [location, setLocation] = useState("miami");
 
   useEffect(() => {
     // getUser();
-    getWeather();
+    // getWeather();
     setQuote(quotes[Math.floor(Math.random() * quotes.length)]);
   }, []);
 
@@ -47,14 +48,14 @@ export default function Profile() {
   //     .catch((err) => console.error("Error: ", err));
   // };
 
-  const getWeather = () => {
-    fetch(weatherUrl)
-      .then((res) => res.json())
-      .then((data) => setWeatherData(data))
-      .catch((err) => console.log("Error: ", err));
-  };
+  // const getWeather = () => {
+  //   fetch(weatherUrl)
+  //     .then((res) => res.json())
+  //     .then((data) => setWeatherData(data))
+  //     .catch((err) => console.log("Error: ", err));
+  // };
 
-  console.log(weatherData);
+  // console.log(weatherData);
 
   return (
     <Box
@@ -130,7 +131,7 @@ export default function Profile() {
               backgroundColor={colors.primary[400]}
               padding="15px"
             >
-              <Weather data={weatherData} />
+              <Weather />
             </Box>
           </Box>
         </Box>

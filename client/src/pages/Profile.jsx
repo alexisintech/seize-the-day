@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Box, Button, Toolbar, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import { tokens } from "../theme";
 import { quotes } from "../quotes";
 import Header from "../components/Header";
@@ -9,53 +8,14 @@ import Weather from "../components/Weather";
 import Calendar from "../components/Calendar";
 import Clock from "../components/Clock";
 
-const api_base =
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:2222"
-    : "https://seize-the-day-api.up.railway.app";
-
-const drawerWidth = 300;
-
 export default function Profile() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [user, setUser] = useState("");
   const [quote, setQuote] = useState("");
-  const navigate = useNavigate();
-  // const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=03cf018b6db2b45645c9dd6504c3ded3&units=metric`;
-  // const [weatherData, setWeatherData] = useState({});
-  // const [location, setLocation] = useState("miami");
 
   useEffect(() => {
-    // getUser();
-    // getWeather();
     setQuote(quotes[Math.floor(Math.random() * quotes.length)]);
   }, []);
-
-  // const getUser = () => {
-  //   const token = localStorage.getItem("auth");
-  //   fetch(api_base + "/getUser", {
-  //     headers: { authorization: `bearer ${token}` },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       if (!data.message.userName) {
-  //         navigate("/login");
-  //       }
-
-  //       setUser(data.message.userName);
-  //     })
-  //     .catch((err) => console.error("Error: ", err));
-  // };
-
-  // const getWeather = () => {
-  //   fetch(weatherUrl)
-  //     .then((res) => res.json())
-  //     .then((data) => setWeatherData(data))
-  //     .catch((err) => console.log("Error: ", err));
-  // };
-
-  // console.log(weatherData);
 
   return (
     <Box
@@ -74,7 +34,7 @@ export default function Profile() {
             justifyContent="space-between"
             alignItems="center"
           >
-            <Header title="PROFILE" subtitle={`Welcome ${user}!`} />
+            <Header title="PROFILE" subtitle={`Welcome (user)!`} />
           </Box>
 
           {/* GRID & CHARTS */}

@@ -6,6 +6,8 @@ import { quotes } from "../quotes";
 import Header from "../components/Header";
 import ResponsiveDrawer from "../components/ResponsiveDrawer";
 import Weather from "../components/Weather";
+import Calendar from "../components/Calendar";
+import Clock from "../components/Clock";
 
 const api_base =
   process.env.NODE_ENV === "development"
@@ -65,7 +67,7 @@ export default function Profile() {
   //     .catch((err) => console.error("Error: ", err));
   // };
 
-  const getWeather = async () => {
+  const getWeather = () => {
     fetch(weatherUrl)
       .then((res) => res.json())
       .then((data) => setWeatherData(data))
@@ -123,16 +125,11 @@ export default function Profile() {
                 display="flex"
                 flexDirection="column"
                 alignItems="center"
-                mt="25px"
+                justifyContent="center"
+                height="100%"
+                width="100%"
               >
-                PIE CHART
-                <Typography
-                  variant="h5"
-                  color={colors.greenAccent[500]}
-                  sx={{ mt: "15px" }}
-                >
-                  X Tasks Completed
-                </Typography>
+                <Clock />
               </Box>
             </Box>
             <Box
@@ -140,7 +137,7 @@ export default function Profile() {
               gridRow="span 2"
               backgroundColor={colors.primary[400]}
             >
-              Calendar
+              <Calendar />
             </Box>
             <Box
               gridColumn="span 4"

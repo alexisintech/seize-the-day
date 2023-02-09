@@ -81,7 +81,7 @@ const Index = () => {
             <Box
               component="img"
               maxHeight="500px"
-              src="../../public/imgs/undraw-reminder-illustration.svg"
+              src="/imgs/undraw-reminder-illustration.svg"
               alt="an illustration of woman leaning against a phone; the phone has a bulleted list on the screen"
             />
           </Grid>

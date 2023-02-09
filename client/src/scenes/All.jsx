@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Box, Button, Toolbar, Typography, useTheme } from "@mui/material";
 import { tokens } from "../theme";
-import Header from "../components/Header";
 import ResponsiveDrawer from "../components/ResponsiveDrawer";
+import Header from "../components/Header";
+import CreateTaskButton from "../components/CreateTaskButton";
 
 const All = () => {
   const theme = useTheme();
@@ -29,6 +30,7 @@ const All = () => {
               title="ALL TASKS"
               subtitle={`(user) has (tasks.length) tasks to accomplish today!`}
             />
+            <CreateTaskButton />
           </Box>
         </Box>
       </main>

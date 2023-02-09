@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { Box, Button, Toolbar, Typography, useTheme } from "@mui/material";
 import { tokens } from "../theme";
-import Header from "../components/Header";
 import ResponsiveDrawer from "../components/ResponsiveDrawer";
+import Header from "../components/Header";
+import CreateTaskButton from "../components/CreateTaskButton";
 
 const All = () => {
   const theme = useTheme();
@@ -26,6 +27,7 @@ const All = () => {
             alignItems="center"
           >
             <Header title="TAGS" subtitle={`Tasks organized by tag category`} />
+            <CreateTaskButton />
           </Box>
         </Box>
       </main>

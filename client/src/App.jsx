@@ -10,6 +10,7 @@ import Completed from "./scenes/Completed";
 import InProgress from "./scenes/InProgress";
 import Lists from "./scenes/Lists";
 import Tags from "./scenes/Tags";
+import { AppProvider } from "./AppContext";
 
 const router = createBrowserRouter([
   { path: "/", element: <Index /> },
@@ -33,7 +34,9 @@ function App() {
         <CssBaseline />
         <div className="app">
           <main className="content">
-            <RouterProvider router={router} />
+            <AppProvider>
+              <RouterProvider router={router} />
+            </AppProvider>
           </main>
         </div>
       </ThemeProvider>

@@ -54,7 +54,12 @@ export default function Profile() {
             >
               <Typography
                 variant="h4"
-                sx={{ fontWeight: 300, fontStyle: "italic" }}
+                sx={{
+                  textAlign: "center",
+                  fontWeight: 300,
+                  fontStyle: "italic",
+                  px: 10,
+                }}
               >
                 "{quote}"
               </Typography>

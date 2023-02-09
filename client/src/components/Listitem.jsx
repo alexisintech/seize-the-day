@@ -6,9 +6,9 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import HomeIcon from "@mui/icons-material/Home";
-import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
-import LabelIcon from "@mui/icons-material/Label";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
+import LabelOutlinedIcon from "@mui/icons-material/LabelOutlined";
 import { tokens } from "../theme";
 
 export default function Listitem(props) {
@@ -20,13 +20,13 @@ export default function Listitem(props) {
       <ListItemButton>
         <ListItemIcon sx={{ color: colors.grey[100] }}>
           {props.text === "Home" && (
-            <HomeIcon sx={{ height: "2rem", width: "2rem" }} />
+            <HomeOutlinedIcon sx={{ height: "1.5rem", width: "1.5rem" }} />
           )}
           {props.text === "Lists" && (
-            <FormatListBulletedIcon sx={{ height: "2rem", width: "2rem" }} />
+            <ListOutlinedIcon sx={{ height: "1.5rem", width: "1.5rem" }} />
           )}
           {props.text === "Tags" && (
-            <LabelIcon sx={{ height: "2rem", width: "2rem" }} />
+            <LabelOutlinedIcon sx={{ height: "1.5rem", width: "1.5rem" }} />
           )}
         </ListItemIcon>
         <ListItemText

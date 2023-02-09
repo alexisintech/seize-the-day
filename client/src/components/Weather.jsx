@@ -6,94 +6,74 @@ const Weather = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const url = `https://api.openweathermap.org/data/2.5/weather?q=miami&appid=03cf018b6db2b45645c9dd6504c3ded3`;
-  const [weather, setWeather] = useState({});
+  const [weather, setWeather] = useState();
 
-  // useEffect(() => {
-  //   getWeather();
-  // }, []);
+  useEffect(() => {
+    getWeather();
+  }, []);
 
-  // const getWeather = () => {
-  //   fetch(url)
-  //     .then((res) => res.json())
-  //     .then((result) => {
-  //       setWeather(result);
-  //       console.log(result);
-  //     });
+  const getWeather = async () => {
+    const req = await fetch(url);
+    const res = await req.json();
+    console.log("this is the res", res);
+    await setWeather(res);
+    console.log("this is weather state", weather);
+  };
+
+  // const kelvinToFahrenheit = () => {
+  //   const currentTemp = ((weather.main.temp - 273.15) * 9) / 5 + 32;
+  //   console.log(currentTemp);
+  //   // return currentTemp;
   // };
 
-  const dateBuilder = (d) => {
-    let months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-    let days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
-
-    let day = days[d.getDay()];
-    let date = d.getDate();
-    let month = months[d.getMonth()];
-    let year = d.getFullYear();
-
-    return `${day}, ${date} ${month} ${year}`;
-  };
+  // kelvinToFahrenheit();
 
   return (
     <Box
-      display="flex"
-      minHeight="225px"
-      justifyContent="center"
-      alignItems="center"
+      sx={{
+        textAlign: "center",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100%",
+        width: "100%",
+      }}
     >
-      <Box>
-        <Box sx={{ textAlign: "center" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Typography
+          variant="h3"
+          sx={{ textShadow: "1px 1px rgba(50, 50, 70, 0.5)" }}
+        >
+          {weather.name}
+        </Typography>
+        <Box>
           <Typography
-            variant="h3"
-            sx={{ textShadow: "1px 1px rgba(50, 50, 70, 0.5)" }}
-          >
-            Miami, FL
-          </Typography>
-          <Typography
-            variant="h4"
+            variant="h1"
             sx={{
-              fontStyle: "italic",
-              textShadow: "1px 1px rgba(50, 50, 70, 0.5)",
+              fontSize: "3rem",
+              fontWeight: 200,
+              textShadow: "2px 2.2px rgba(50, 50, 70, 0.5)",
             }}
           >
-            {dateBuilder(new Date())}
-          </Typography>
-          <Box>
-            <Typography
-              variant="h1"
-              sx={{
-                fontSize: "3rem",
-                textShadow: "2px 2.2px rgba(50, 50, 70, 0.5)",
-              }}
-            >
-              80°C
-            </Typography>
-          </Box>
-          <Typography variant="h2" sx={{ fontWeight: 600 }}>
-            Sunny
+            {/* {weather.main.temp}°C */}
           </Typography>
         </Box>
+        <Typography variant="h2" sx={{ fontWeight: 600 }}>
+          {/* {weather.weather[0].main} */}
+        </Typography>
       </Box>
+      <Box
+        component="img"
+        maxHeight="200px"
+        src="../../public/imgs/sunny.svg"
+      />
     </Box>
   );
 };

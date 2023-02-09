@@ -134,7 +134,7 @@ export default function Profile() {
               gridColumn="span 4"
               gridRow="span 2"
               backgroundColor={colors.primary[400]}
-              padding="30px"
+              padding="15px"
             >
               <Weather />
             </Box>

@@ -82,7 +82,7 @@ const Index = () => {
               component="img"
               maxHeight="500px"
               src="../../public/imgs/undraw-reminder-illustration.svg"
-              alt=""
+              alt="an illustration of woman leaning against a phone; the phone has a bulleted list on the screen"
             />
           </Grid>
         </Grid>

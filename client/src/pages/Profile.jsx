@@ -36,9 +36,12 @@ export default function Profile() {
   const [user, setUser] = useState("");
   const [quote, setQuote] = useState("");
   const navigate = useNavigate();
+  const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=miami&appid=03cf018b6db2b45645c9dd6504c3ded3&units=metric`;
+  const [weatherData, setWeatherData] = useState({});
 
   useEffect(() => {
-    getUser();
+    // getUser();
+    getWeather();
   }, []);
 
   useEffect(() => {
@@ -46,21 +49,30 @@ export default function Profile() {
     setQuote(quotes[Math.floor(Math.random() * quotes.length)]);
   }, [day]);
 
-  const getUser = () => {
-    const token = localStorage.getItem("auth");
-    fetch(api_base + "/getUser", {
-      headers: { authorization: `bearer ${token}` },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (!data.message.userName) {
-          navigate("/login");
-        }
+  // const getUser = () => {
+  //   const token = localStorage.getItem("auth");
+  //   fetch(api_base + "/getUser", {
+  //     headers: { authorization: `bearer ${token}` },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       if (!data.message.userName) {
+  //         navigate("/login");
+  //       }
 
-        setUser(data.message.userName);
-      })
-      .catch((err) => console.error("Error: ", err));
+  //       setUser(data.message.userName);
+  //     })
+  //     .catch((err) => console.error("Error: ", err));
+  // };
+
+  const getWeather = async () => {
+    fetch(weatherUrl)
+      .then((res) => res.json())
+      .then((data) => setWeatherData(data))
+      .catch((err) => console.log("Error: ", err));
   };
+
+  console.log(weatherData);
 
   return (
     <Box
@@ -136,7 +148,7 @@ export default function Profile() {
               backgroundColor={colors.primary[400]}
               padding="15px"
             >
-              <Weather />
+              <Weather data={weatherData} />
             </Box>
           </Box>
         </Box>

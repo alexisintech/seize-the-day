@@ -1,13 +1,11 @@
-import { useState, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { ColorModeContext, tokens } from "../theme";
 import {
   AppBar,
-  Avatar,
   Box,
   CssBaseline,
   Container,
-  Divider,
   Drawer,
   IconButton,
   List,
@@ -16,6 +14,7 @@ import {
   Toolbar,
   Tooltip,
   Typography,
+  useMediaQuery,
   useTheme,
 } from "@mui/material";
 import Listitem from "./Listitem";
@@ -24,6 +23,12 @@ import CreateIcon from "@mui/icons-material/Create";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
+import LabelOutlinedIcon from "@mui/icons-material/LabelOutlined";
+import AppsIcon from "@mui/icons-material/Apps";
+import TaskOutlinedIcon from "@mui/icons-material/TaskOutlined";
+import CachedOutlinedIcon from "@mui/icons-material/CachedOutlined";
 
 const drawerWidth = 300;
 
@@ -32,9 +37,18 @@ export default function ResponsiveDrawer(props) {
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
   const [anchorElUser, setAnchorElUser] = useState(null);
+  const [mobile, setMobile] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const { window } = props;
   const navigate = useNavigate();
+
+  const mobileScreen = useMediaQuery("(max-width:600px)");
+
+  useEffect(() => {
+    if (mobileScreen) {
+      setMobile(true);
+    }
+  }, []);
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -60,14 +74,42 @@ export default function ResponsiveDrawer(props) {
       <Box
         sx={{
           overflow: "auto",
-          paddingTop: "3.5rem",
+          paddingTop: "2.5rem",
           paddingLeft: { xs: 0, sm: "1rem" },
         }}
       >
+        {/* SIDEBAR MENU ITEMS */}
         <List>
-          <Listitem text="Home" />
-          <Listitem text="Lists" />
-          <Listitem text="Tags" />
+          <Listitem text="Profile" to="/profile" icon={<HomeOutlinedIcon />} />
+
+          <Typography
+            variant="h6"
+            color={colors.grey[300]}
+            sx={{ m: "15px 0 5px 20px" }}
+          >
+            Tasks
+          </Typography>
+          <Listitem text="All" to="/all" icon={<AppsIcon />} />
+          <Listitem
+            text="Completed"
+            to="/completed"
+            icon={<TaskOutlinedIcon />}
+          />
+          <Listitem
+            text="InProgress"
+            to="/inprogress"
+            icon={<CachedOutlinedIcon />}
+          />
+
+          <Typography
+            variant="h6"
+            color={colors.grey[300]}
+            sx={{ m: "15px 0 5px 20px" }}
+          >
+            Organize
+          </Typography>
+          <Listitem text="Lists" to="/lists" icon={<ListOutlinedIcon />} />
+          <Listitem text="Tags" to="/tags" icon={<LabelOutlinedIcon />} />
         </List>
       </Box>
     </div>

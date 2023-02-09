@@ -6,9 +6,7 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
-import LabelOutlinedIcon from "@mui/icons-material/LabelOutlined";
+import { Link } from "react-router-dom";
 import { tokens } from "../theme";
 
 export default function Listitem(props) {
@@ -16,48 +14,22 @@ export default function Listitem(props) {
   const colors = tokens(theme.palette.mode);
 
   return (
-    <ListItem>
-      <ListItemButton>
-        <ListItemIcon sx={{ color: colors.grey[100] }}>
-          {props.text === "Home" && (
-            <HomeOutlinedIcon sx={{ height: "1.5rem", width: "1.5rem" }} />
-          )}
-          {props.text === "Lists" && (
-            <ListOutlinedIcon sx={{ height: "1.5rem", width: "1.5rem" }} />
-          )}
-          {props.text === "Tags" && (
-            <LabelOutlinedIcon sx={{ height: "1.5rem", width: "1.5rem" }} />
-          )}
-        </ListItemIcon>
-        <ListItemText
-          primary={props.text}
-          sx={{
-            color: colors.grey[100],
-          }}
-        />
-        {props.text === "Lists" && (
-          <Typography
-            sx={{
-              color: colors.grey[300],
-              fontSize: "0.9rem",
-              fontStyle: "italic",
-            }}
+    <Link to={props.to} style={{ textDecoration: "none" }}>
+      <ListItem>
+        <ListItemButton>
+          <ListItemIcon
+            sx={{ color: colors.grey[100], height: "1.5rem", width: "1.5rem" }}
           >
-            Coming soon...
-          </Typography>
-        )}
-        {props.text === "Tags" && (
-          <Typography
+            {props.icon}
+          </ListItemIcon>
+          <ListItemText
+            primary={props.text}
             sx={{
-              color: colors.grey[300],
-              fontSize: "0.9rem",
-              fontStyle: "italic",
+              color: colors.grey[100],
             }}
-          >
-            Coming soon...
-          </Typography>
-        )}
-      </ListItemButton>
-    </ListItem>
+          />
+        </ListItemButton>
+      </ListItem>
+    </Link>
   );
 }

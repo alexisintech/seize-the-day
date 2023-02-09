@@ -139,7 +139,7 @@ export default function Profile() {
     >
       <ResponsiveDrawer />
       <main className="content">
-        <Box m="100px 50px">
+        <Box m="135px 50px">
           <Box
             display="flex"
             justifyContent="space-between"

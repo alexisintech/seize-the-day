@@ -1,7 +1,10 @@
-import { Box, Typography, useTheme } from "@mui/material";
 import { useState, useEffect } from "react";
+import { Box, Typography, useTheme } from "@mui/material";
+import { tokens } from "../theme";
 
 const Calendar = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const [date, setDate] = useState({
     day: "",
     date: 0,
@@ -61,13 +64,33 @@ const Calendar = () => {
   }, []);
 
   return (
-    <>
-      <div>{date.time}</div>
-      <div>{date.day}</div>
-      <div>{date.month}</div>
-      <div>{date.date}</div>
-      <div>{date.year}</div>
-    </>
+    <Box
+      sx={{
+        textAlign: "center",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100%",
+        width: "100%",
+      }}
+    >
+      <Box sx={{ backgroundColor: "secondary" }}>
+        <Typography>{date.day}</Typography>
+        <Typography variant="h2">{date.month}</Typography>
+        <Typography
+          variant="h1"
+          color={colors.purpleAccent[500]}
+          sx={{
+            fontSize: "6rem",
+            fontWeight: 200,
+          }}
+        >
+          {date.date}
+        </Typography>
+        <Typography variant="h3">{date.year}</Typography>
+      </Box>
+    </Box>
   );
 };
 

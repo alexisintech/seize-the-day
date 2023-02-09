@@ -16,6 +16,10 @@ body,
   position: relative;
 }
 
+.MuiPaper-root {
+  background-image: none !important;
+}
+
 .blinking{
   animation: blink 2s ease-in-out infinite;
 }

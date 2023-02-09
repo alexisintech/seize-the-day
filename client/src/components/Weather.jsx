@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { Box, Typography, useTheme } from "@mui/material";
 import { tokens } from "../theme";
 
@@ -40,32 +39,24 @@ const Weather = ({ data }) => {
               justifyContent: "center",
             }}
           >
-            <Typography
-              variant="h3"
-              sx={{ textShadow: "1px 1px rgba(50, 50, 70, 0.5)" }}
-            >
-              {data.name}
-            </Typography>
+            <Typography variant="h3">{data.name}</Typography>
             <Typography
               variant="h1"
               sx={{
                 fontSize: "3rem",
                 fontWeight: 200,
-                textShadow: "2px 2.2px rgba(50, 50, 70, 0.5)",
               }}
             >
               {Math.round(data.main.temp)}°C
             </Typography>
-            <Typography
-              variant="h4"
-              sx={{
-                // fontSize: "3rem",
-                fontWeight: 300,
-                textShadow: "2px 2.2px rgba(50, 50, 70, 0.5)",
-              }}
-            >
-              Humidity: {Math.round(data.main.humidity)}°C
-            </Typography>
+            <Box sx={{ display: "flex", gap: "0.25rem" }}>
+              <Typography variant="h4" color={colors.purpleAccent[500]}>
+                Humidity:
+              </Typography>
+              <Typography variant="h4" sx={{ fontWeight: 300 }}>
+                {Math.round(data.main.humidity)}°C
+              </Typography>
+            </Box>
           </Box>
           <Box
             sx={{

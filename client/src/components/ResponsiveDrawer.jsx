@@ -260,7 +260,7 @@ export default function ResponsiveDrawer(props) {
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
-              backgroundColor: colors.primary[800],
+              backgroundColor: colors.primary[400],
             },
           }}
         >
@@ -274,6 +274,7 @@ export default function ResponsiveDrawer(props) {
               boxSizing: "border-box",
               width: drawerWidth,
               backgroundColor: colors.primary[400],
+              backgroundImage: "none",
             },
           }}
           open

@@ -95,7 +95,7 @@ export default function Profile() {
                 variant="h4"
                 sx={{ fontWeight: 300, fontStyle: "italic" }}
               >
-                {quote}
+                "{quote}"
               </Typography>
             </Box>
 

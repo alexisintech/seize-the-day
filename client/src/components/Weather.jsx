@@ -65,7 +65,7 @@ const Weather = () => {
         <Box sx={{ textAlign: "center" }}>
           <Typography
             variant="h3"
-            sx={{ textShadow: "3px 3px rgba(50, 50, 70, 0.5)" }}
+            sx={{ textShadow: "1px 1px rgba(50, 50, 70, 0.5)" }}
           >
             Miami, FL
           </Typography>
@@ -73,7 +73,7 @@ const Weather = () => {
             variant="h4"
             sx={{
               fontStyle: "italic",
-              textShadow: "2px 2px rgba(50, 50, 70, 0.5)",
+              textShadow: "1px 1px rgba(50, 50, 70, 0.5)",
             }}
           >
             {dateBuilder(new Date())}
@@ -83,13 +83,15 @@ const Weather = () => {
               variant="h1"
               sx={{
                 fontSize: "3rem",
-                textShadow: "3px 6px rgba(50, 50, 70, 0.5)",
+                textShadow: "2px 2.2px rgba(50, 50, 70, 0.5)",
               }}
             >
               80°C
             </Typography>
           </Box>
-          <Typography variant="h2">Sunny</Typography>
+          <Typography variant="h2" sx={{ fontWeight: 600 }}>
+            Sunny
+          </Typography>
         </Box>
       </Box>
     </Box>

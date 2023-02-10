@@ -23,7 +23,7 @@ const appReducer = (state, { type, payload }) => {
       };
     case ACTIONS.DELETE_TODO:
       return {
-        tasks: [payload],
+        tasks: [...payload],
       };
     default:
       return state;

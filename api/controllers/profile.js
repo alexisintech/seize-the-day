@@ -1,20 +1,5 @@
 const Todo = require("../models/Todo");
 
-const date = new Date();
-const dd = String(date.getDate()).padStart(2, "0");
-const mm = String(date.getMonth() + 1).padStart(2, "0"); // January is 0!
-const yyyy = date.getFullYear();
-const todaysDate = mm + "/" + dd + "/" + yyyy;
-// prefix integers below 10 with 0's
-// example: 10:7 will become 10:07
-function addZero(i) {
-  if (i < 10) {
-    i = "0" + i;
-  }
-  return i;
-}
-const currentTime = `${addZero(date.getHours())}:${addZero(date.getMinutes())}`;
-
 module.exports = {
   getTodos: async (req, res) => {
     try {
@@ -29,6 +14,7 @@ module.exports = {
     try {
       const todo = await Todo.create({
         text: req.body.text,
+        user: req.user.id,
       });
       console.log("New todo was created!");
 

@@ -4,6 +4,7 @@ import { tokens } from "../theme";
 import ResponsiveDrawer from "../components/ResponsiveDrawer";
 import Header from "../components/Header";
 import CreateTaskButton from "../components/CreateTaskButton";
+import Tasks from "../components/Tasks";
 import { AppContext } from "../AppContext";
 import { getTodos } from "../utils";
 
@@ -68,7 +69,7 @@ const All = () => {
             />
             <CreateTaskButton />
           </Box>
-          {state.tasks}
+          <Tasks tasks={state.tasks} />
         </Box>
       </main>
     </Box>

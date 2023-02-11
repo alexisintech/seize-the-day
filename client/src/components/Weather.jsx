@@ -135,6 +135,7 @@ const Weather = () => {
           Loading...
         </Typography>
       )}
+
       <Dialog
         open={open}
         onClose={handleClose}

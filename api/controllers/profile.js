@@ -15,7 +15,7 @@ module.exports = {
     try {
       const todo = await Todo.create({
         user: req.user.id,
-        text: req.body.text,
+        title: req.body.title,
       });
       console.log("New todo was created!");
 

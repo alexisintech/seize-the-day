@@ -31,6 +31,8 @@ export const createTodo = async ({ title, subTasks, tags }) => {
 
   const res = await req.json();
 
+  console.log("This is the res from createTodo on the API side", res);
+
   return res;
 };
 

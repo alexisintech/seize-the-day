@@ -5,7 +5,7 @@ import ResponsiveDrawer from "../components/ResponsiveDrawer";
 import Header from "../components/Header";
 import CreateTaskButton from "../components/CreateTaskButton";
 
-const All = () => {
+const Completed = ({ user }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -28,7 +28,7 @@ const All = () => {
           >
             <Header
               title="COMPLETED TASKS"
-              subtitle={`(user) has accomplished (tasks.completed.length) tasks!`}
+              subtitle={`${user} has accomplished (tasks.completed.length) tasks!`}
             />
             <CreateTaskButton />
           </Box>
@@ -38,4 +38,4 @@ const All = () => {
   );
 };
 
-export default All;
+export default Completed;

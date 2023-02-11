@@ -5,7 +5,7 @@ import ResponsiveDrawer from "../components/ResponsiveDrawer";
 import Header from "../components/Header";
 import CreateTaskButton from "../components/CreateTaskButton";
 
-const All = () => {
+const Tags = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -35,4 +35,4 @@ const All = () => {
   );
 };
 
-export default All;
+export default Tags;

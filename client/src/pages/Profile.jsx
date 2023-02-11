@@ -8,31 +8,37 @@ import Weather from "../components/Weather";
 import Calendar from "../components/Calendar";
 import Clock from "../components/Clock";
 
-export default function Profile({ user }) {
+const api_base =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:2222"
+    : "https://seize-the-day-api.up.railway.app";
+
+export default function Profile() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [quote, setQuote] = useState("");
+  const [user, setUser] = useState("");
 
   useEffect(() => {
     setQuote(quotes[Math.floor(Math.random() * quotes.length)]);
-    // getUser();
+    getUser();
   }, []);
 
-  // const getUser = () => {
-  //   const token = localStorage.getItem("auth");
-  //   fetch(api_base + "/getUser", {
-  //     headers: { authorization: `bearer ${token}` },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       if (!data.message.userName) {
-  //         navigate("/login");
-  //       }
+  const getUser = () => {
+    const token = localStorage.getItem("auth");
+    fetch(api_base + "/getUser", {
+      headers: { authorization: `bearer ${token}` },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data.message.userName) {
+          navigate("/login");
+        }
 
-  //       setUser(data.message.userName);
-  //     })
-  //     .catch((err) => console.error("Error: ", err));
-  // };
+        setUser(data.message.userName);
+      })
+      .catch((err) => console.error("Error: ", err));
+  };
 
   return (
     <Box
@@ -46,6 +52,7 @@ export default function Profile({ user }) {
       <ResponsiveDrawer />
       <main className="content">
         <Box m="135px 50px">
+          {/* HEADER */}
           <Box
             display="flex"
             justifyContent="space-between"
@@ -54,7 +61,7 @@ export default function Profile({ user }) {
             <Header title="PROFILE" subtitle={`Welcome ${user}!`} />
           </Box>
 
-          {/* GRID & CHARTS */}
+          {/* DASHBOARD */}
           <Box
             display="grid"
             gridTemplateColumns="repeat(12, 1fr)"

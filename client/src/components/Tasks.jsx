@@ -1,5 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import { Box, Checkbox, Typography } from "@mui/material";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { AppContext } from "../AppContext";
 import { getTodos, completeTodo, deleteTodo } from "../utils";
 
@@ -25,7 +26,7 @@ const Tasks = ({ isCompleted }) => {
     <Box>
       {isCompleted
         ? completedTasks.map((task) => (
-            <Box sx={{ display: "flex" }}>
+            <Box sx={{ display: "flex" }} key={task._id}>
               <Checkbox
                 color="secondary"
                 onClick={() =>
@@ -35,10 +36,17 @@ const Tasks = ({ isCompleted }) => {
                 }
               />
               <Typography key={task._id}>{task.title}</Typography>
+              <DeleteOutlineOutlinedIcon
+                onClick={() =>
+                  deleteTodo(task._id).then((res) => {
+                    dispatch({ type: "DELETE_TODO", payload: res });
+                  })
+                }
+              />
             </Box>
           ))
         : inProgressTasks.map((task) => (
-            <Box sx={{ display: "flex" }}>
+            <Box sx={{ display: "flex" }} key={task._id}>
               <Checkbox
                 defaultChecked
                 color="secondary"
@@ -49,6 +57,13 @@ const Tasks = ({ isCompleted }) => {
                 }
               />
               <Typography key={task._id}>{task.title}</Typography>
+              <DeleteOutlineOutlinedIcon
+                onClick={() =>
+                  deleteTodo(task._id).then((res) => {
+                    dispatch({ type: "DELETE_TODO", payload: res });
+                  })
+                }
+              />
             </Box>
           ))}
     </Box>

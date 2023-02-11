@@ -3,9 +3,11 @@ import { Box, Checkbox, Typography } from "@mui/material";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { AppContext } from "../AppContext";
 import { getTodos, completeTodo, deleteTodo } from "../utils";
+import Woops from "../pages/Woops";
 
 const Tasks = ({ isCompleted }) => {
   const [state, dispatch] = useContext(AppContext);
+  const [woops, setWoops] = useState(false);
   const tasks = state.tasks;
   let completedTasks = tasks.filter((task) => task.complete);
   let inProgressTasks = tasks.filter((task) => !task.complete);
@@ -14,7 +16,6 @@ const Tasks = ({ isCompleted }) => {
 
   useEffect(() => {
     getTodos().then((res) => {
-      console.log("This is the res from getTodos", res);
       dispatch({
         type: "GET_TODOS",
         payload: res,

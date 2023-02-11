@@ -25,7 +25,7 @@ const Completed = ({ user }) => {
       <main className="content">
         <Box className="content-container">
           <Header
-            title="COMPLETED TASKS"
+            title="ACCOMPLISHMENTS"
             subtitle={`${user} has accomplished ${completedTasks.length} tasks!`}
             profile={false}
           />

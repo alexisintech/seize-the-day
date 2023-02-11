@@ -25,7 +25,7 @@ const InProgress = () => {
       <main className="content">
         <Box className="content-container">
           <Header
-            title="IN PROGRESS"
+            title="WHAT I WILL ACCOMPLISH"
             subtitle={`(user) has ${inProgressTasks.length} tasks left to accomplish!`}
             profile={false}
           />

@@ -59,13 +59,13 @@ const All = () => {
           >
             <Box className="tasks-container">
               <Typography variant="h3" textAlign={{ xs: "center", sm: "left" }}>
-                In Progress:
+                What I will accomplish:
               </Typography>
               <Tasks isCompleted={false} />
             </Box>
             <Box className="tasks-container">
               <Typography variant="h3" textAlign={{ xs: "center", sm: "left" }}>
-                Completed:
+                What I have accomplished:
               </Typography>
               <Tasks isCompleted={true} />
             </Box>

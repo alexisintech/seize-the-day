@@ -85,6 +85,7 @@ const Weather = () => {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
+              order: { xs: 2, sm: 1 },
             }}
           >
             <Typography variant="h3" onClick={handleClickOpen}>
@@ -113,28 +114,19 @@ const Weather = () => {
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
+              justifyContent: "center",
               textAlign: "center",
               position: "relative",
-              mb: 3,
+              order: { xs: 1, sm: 2 },
             }}
           >
             <Box
               component="img"
               maxHeight="200px"
-              height={{ xs: "150px" }}
+              height={{ xs: "150px", sm: "200px" }}
               src="/imgs/sunny-2.svg"
+              sx={{ opacity: 1 }}
             />
-            <Typography
-              variant="h3"
-              sx={{
-                fontWeight: 600,
-                position: "absolute",
-                bottom: "1%",
-                right: "10%",
-              }}
-            >
-              {weatherData.weather[0].description}
-            </Typography>
           </Box>
         </Box>
       ) : (

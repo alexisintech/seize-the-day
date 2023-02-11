@@ -2,20 +2,30 @@
 
 > A to-do app with your mental health in mind. 
 
-<img src="https://github.com/alexisintech/seize-the-day/blob/main/client/public/imgs/seize-the-day.gif" width="100%" />
+<img src="https://github.com/alexisintech/seize-the-day/blob/main/client/public/imgs/old-seize-the-day.gif" width="100%" />
+<img src="https://github.com/alexisintech/seize-the-day/blob/main/client/public/imgs/new-seize-the-day.gif" width="100%" />
 
 <!-- FEATURES -->
 ## ⭐ Features
 
 ### Welcome page
 - User authentication supported using JSON Web Tokens and password encryption using Bcrypt password-hashing
+- Login and signup pages built with custom form validation (will be updated to use Formik/Yup)
 
-### Home page
+### Profile (Dashboard)
 - Custom greeting based on username
 - Randomly generated affirmations and reminders to help redirect thoughts and attitudes into positive directions 
-- Create items to add to your to-do list
-- Click on an item to mark it complete and it will move to your accomplishment list
-- Click on the 'X' to delete items
+- Dashboard widgets for tracking the time, date, and weather
+  - Weather widget utilizes Open Weather API. Update location feature is currently in progress of being added.
+
+### Explore the sidebar
+#### Tasks
+- All: users' tasks organized by in progress (what I will accomplish) vs. completed (what I have accomplished)
+- Completed
+- In Progress
+#### Organize
+- Lists (coming soon)
+- Tags (coming soon)
 
 <!-- BUILT WITH -->
 
@@ -25,6 +35,7 @@
 - Node.js, Express.js
 - JSON Web Tokens
 - React.js, Material UI, Vite
+- Formik/Yup
 - HTML5/CSS3, Javascript ES6
 - ESbuild, ESlint, Stylelint
 - VSCode
@@ -45,6 +56,7 @@ In one terminal:
     ```sh
     PORT = 2222 // port 2222 is used as the api_base in App.js on the client side
     DB_STRING = "<Replace everything in quotes with MongoDB Connection String>"
+    JWT_SECRET = "<Any string of your choice>"
     ```
 3. Navigate back to the api
     ```sh
@@ -90,11 +102,14 @@ To run the application in a development server,
 
 - [X] Mobile-first design; responsiveness using CSS Flexbox and Grid (but needs to be redesigned for an improved UI/UX)
 - [X] Utilize Material UI for consistent, reusable components
-- [ ] Use useReducer and Context API for passing data around components (IN PROGRESS)
+- [ ] User can update location on weather widget
+- [ ] User can choose between celsius vs. fahrenheit on weather widget
+- [ ] User hovers clock, will show analogous time
+- [X] Use useReducer and Context API for passing data around components
+- [X] Light/dark mode (implemented by updating MUI theme using useContext)
 - [ ] A task can become a list when subtasks are added
   - For example, a task with the title "Grocery Shopping" can become a list if subtasks, such as grocery items, are added
 - [ ] Organize tasks using tags, such as important or critical, or users can create custom tag names
-- [ ] More modern UI, most likely with dark mode or dark UI
 
 See the [open issues](https://github.com/alexisintech/seize-the-day/issues) for a full list of proposed features (and known issues).
 
@@ -104,3 +119,5 @@ See the [open issues](https://github.com/alexisintech/seize-the-day/issues) for 
 I created this project using Vite for optimization reasons (sorry CRA...ur slow). In contrast to my previous projects using EJS for views and Passport.js for authentication, I used React Router for client-side rendering, and realized quickly that Passport.js was not so friendly with this - so I removed all of Passport.js authentication and dived into implementing auth with JSON Web Tokens. First off, React Router was super easy to set up: friendly reminder to self, use <Link to=""> instead of typical href's for routing to different pages on the app :P Next, implementing JSON Web Tokens for the first time was... interesting. Stressful. Rewriting my entire auth.js file and coding my middleware from scratch was really good practice for me to learn how JWT works. Also had to write my own "comparePassword" function because Passport.js did this logic for you, but the logic for this was pretty simple using bcrypt documentation. 
 For the front end development of this project, I decided to use Material UI to streamline my design process and deliver a consistent UI. Plus, as is the reason I love React, I really nerd out over the reusability of the pre-made components. Learning MUI's V5 structure such as Themes with the ThemeProvider, and custom styling the components, was a bit difficult at first - luckily, MUI has great documentation. I also got more practice using Grid and I definitely want to continue and improve on using it because it's an incredibly powerful and customizable layout system.
 In a separate branch, I'm currently working on restructuring my code to use useReducer and the Context API. The way my project currently is, the Profile.jsx page is too cluttered with elements that can become components. And the data that is being fetched in the Profile.jsx *page* needs to be accessible by other components, which is the reason I'd like to use Context. I want my Fetch calls to be in a utils folder, and overall, want more readable, maintanable, organized, and dry code (which is why I'm choosing Context instead of prop drilling). Instead of trying to integrate these tools into my preexisting code, I'm realizing it might be easier for my learning if I rebuilt the front end from scratch using them.
+
+02/11/2023: I have finally implemented the Context API!! I used useContext and useMemo for updating the mode between light and dark and therefore, the corresponding MUI theme. I used useContext and useReducer to handle API calls and updating the user's global state for their tasks. This allowed me to entirely restructure my app. I decided to redesign the entire app as well while I was at it, giving it a more clean, sophisticated, and modern UI. I created a simple, but interesting dashboard for users so that data is not the first thing they encounter - it's supposed to be a mental health forward version of a to-do app. It was INCREDIBLY frustrating to learn how to use the context API and useReducer... how many console.log's were there? The limit does not exist. HOWEVER! I have learned SO much, and it is very rewarding to have the application finally functional and looking so much better than the last deployment.

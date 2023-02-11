@@ -108,7 +108,7 @@ export default function Profile() {
         authorization: `bearer ${token}`,
       },
       body: JSON.stringify({
-        text: newTodo,
+        title: newTodo,
       }),
     }).then((res) => res.json());
 
@@ -243,7 +243,7 @@ export default function Profile() {
                       >
                         <div className="checkbox"></div>
 
-                        <div className="text">{todo.text}</div>
+                        <div className="text">{todo.title}</div>
                       </Box>
 
                       <div
@@ -288,7 +288,7 @@ export default function Profile() {
                         <CheckIcon sx={{ color: "#fff" }}></CheckIcon>
                       </div>
 
-                      <div className="text">{todo.text}</div>
+                      <div className="text">{todo.title}</div>
                     </Box>
                     <div
                       className="delete-todo"

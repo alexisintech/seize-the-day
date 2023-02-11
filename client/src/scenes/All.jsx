@@ -1,12 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Box, Typography, useTheme } from "@mui/material";
 import { tokens } from "../theme";
 import ResponsiveDrawer from "../components/ResponsiveDrawer";
 import Header from "../components/Header";
 import CreateTaskButton from "../components/CreateTaskButton";
 import Tasks from "../components/Tasks";
+import { AppContext } from "../AppContext";
 
 const All = () => {
+  const [state, dispatch] = useContext(AppContext);
   const [user, setUser] = useState("");
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -50,14 +52,27 @@ const All = () => {
           >
             <Header
               title="ALL TASKS"
-              subtitle={`${user} has (tasks.length) tasks to accomplish today!`}
+              subtitle={`${user} has ${state.tasks.length} tasks to accomplish today!`}
             />
             <CreateTaskButton />
           </Box>
-          <Typography>Completed:</Typography>
-          <Tasks isCompleted={true} />
-          <Typography>In Progress:</Typography>
-          <Tasks isCompleted={false} />
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              width: "100%",
+              gap: 10,
+            }}
+          >
+            <Box className="tasks-container">
+              <Typography variant="h3">Completed:</Typography>
+              <Tasks isCompleted={true} />
+            </Box>
+            <Box className="tasks-container">
+              <Typography variant="h3">In Progress:</Typography>
+              <Tasks isCompleted={false} />
+            </Box>
+          </Box>
         </Box>
       </main>
     </Box>

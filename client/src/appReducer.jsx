@@ -1,5 +1,3 @@
-import { getTodos } from "./utils/index";
-
 export const initialState = {
   tasks: [],
 };

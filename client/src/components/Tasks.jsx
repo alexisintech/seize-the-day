@@ -1,18 +1,17 @@
 import { useState, useContext, useEffect } from "react";
-import { Box, Checkbox, Typography } from "@mui/material";
-import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import { Box, Checkbox, Typography, useTheme } from "@mui/material";
+import { tokens } from "../theme";
 import { AppContext } from "../AppContext";
-import { getTodos, completeTodo, deleteTodo } from "../utils";
-import Woops from "../pages/Woops";
+import { getTodos } from "../utils";
+import Task from "./Task";
 
 const Tasks = ({ isCompleted }) => {
   const [state, dispatch] = useContext(AppContext);
-  const [woops, setWoops] = useState(false);
   const tasks = state.tasks;
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   let completedTasks = tasks.filter((task) => task.complete);
   let inProgressTasks = tasks.filter((task) => !task.complete);
-  console.log(completedTasks);
-  console.log(inProgressTasks);
 
   useEffect(() => {
     getTodos().then((res) => {
@@ -24,49 +23,49 @@ const Tasks = ({ isCompleted }) => {
   }, []);
 
   return (
-    <Box>
-      {isCompleted
-        ? completedTasks.map((task) => (
-            <Box sx={{ display: "flex" }} key={task._id}>
-              <Checkbox
-                color="secondary"
-                onClick={() =>
-                  completeTodo(task._id).then((res) => {
-                    dispatch({ type: "COMPLETE_TODO", payload: res });
-                  })
-                }
-              />
-              <Typography key={task._id}>{task.title}</Typography>
-              <DeleteOutlineOutlinedIcon
-                onClick={() =>
-                  deleteTodo(task._id).then((res) => {
-                    dispatch({ type: "DELETE_TODO", payload: res });
-                  })
-                }
-              />
-            </Box>
-          ))
-        : inProgressTasks.map((task) => (
-            <Box sx={{ display: "flex" }} key={task._id}>
-              <Checkbox
-                defaultChecked
-                color="secondary"
-                onClick={() =>
-                  completeTodo(task._id).then((res) => {
-                    dispatch({ type: "COMPLETE_TODO", payload: res });
-                  })
-                }
-              />
-              <Typography key={task._id}>{task.title}</Typography>
-              <DeleteOutlineOutlinedIcon
-                onClick={() =>
-                  deleteTodo(task._id).then((res) => {
-                    dispatch({ type: "DELETE_TODO", payload: res });
-                  })
-                }
-              />
-            </Box>
-          ))}
+    <Box
+      sx={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        backgroundColor: colors.primary[400],
+        padding: "1.5rem",
+        borderRadius: "10px",
+        gap: 2,
+        marginTop: 2,
+      }}
+    >
+      {isCompleted ? (
+        completedTasks.length > 0 ? (
+          completedTasks.map((task) => <Task task={task} isCompleted={true} />)
+        ) : (
+          <Typography
+            sx={{
+              fontStyle: "italic",
+              color:
+                theme.palette.mode === "dark"
+                  ? colors.primary[200]
+                  : colors.primary[800],
+            }}
+          >
+            No finished tasks...yet!
+          </Typography>
+        )
+      ) : inProgressTasks.length > 0 ? (
+        inProgressTasks.map((task) => <Task task={task} isCompleted={false} />)
+      ) : (
+        <Typography
+          sx={{
+            fontStyle: "italic",
+            color:
+              theme.palette.mode === "dark"
+                ? colors.primary[200]
+                : colors.primary[800],
+          }}
+        >
+          You currently have no tasks in progress!
+        </Typography>
+      )}
     </Box>
   );
 };

@@ -1,14 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Box, Button, Toolbar, Typography, useTheme } from "@mui/material";
 import { tokens } from "../theme";
 import ResponsiveDrawer from "../components/ResponsiveDrawer";
 import Header from "../components/Header";
 import CreateTaskButton from "../components/CreateTaskButton";
 import Tasks from "../components/Tasks";
+import { AppContext } from "../AppContext";
 
 const Completed = ({ user }) => {
+  const [state, dispatch] = useContext(AppContext);
   const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
+  let completedTasks = state.tasks.filter((task) => task.complete);
 
   return (
     <Box
@@ -29,11 +31,10 @@ const Completed = ({ user }) => {
           >
             <Header
               title="COMPLETED TASKS"
-              subtitle={`${user} has accomplished (tasks.completed.length) tasks!`}
+              subtitle={`${user} has accomplished ${completedTasks.length} tasks!`}
             />
             <CreateTaskButton />
           </Box>
-          <Typography>Completed:</Typography>
           <Tasks isCompleted={true} />
         </Box>
       </main>

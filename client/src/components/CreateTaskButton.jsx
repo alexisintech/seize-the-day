@@ -49,7 +49,7 @@ const CreateTaskButton = () => {
     <>
       <Button
         sx={{
-          color: colors.grey[100],
+          color: "white",
           backgroundColor: colors.purpleAccent[500],
           padding: "0.5rem 1rem",
           cursor: "pointer",

@@ -1,33 +1,18 @@
-import { useState, useEffect, useContext } from "react";
-import { Box, Button, Toolbar, Typography, useTheme } from "@mui/material";
+import { useState, useEffect } from "react";
+import { Box, Typography, useTheme } from "@mui/material";
 import { tokens } from "../theme";
 import ResponsiveDrawer from "../components/ResponsiveDrawer";
 import Header from "../components/Header";
 import CreateTaskButton from "../components/CreateTaskButton";
 import Tasks from "../components/Tasks";
-import { AppContext } from "../AppContext";
-import { getTodos } from "../utils";
-
-const api_base =
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:2222"
-    : "https://seize-the-day-api.up.railway.app";
 
 const All = () => {
-  const [state, dispatch] = useContext(AppContext);
   const [user, setUser] = useState("");
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
   useEffect(() => {
     getUser();
-    getTodos().then((res) => {
-      console.log("This is the res from getTodos", res);
-      dispatch({
-        type: "GET_TODOS",
-        payload: res,
-      });
-    });
   }, []);
 
   const getUser = () => {
@@ -69,11 +54,19 @@ const All = () => {
             />
             <CreateTaskButton />
           </Box>
-          <Tasks tasks={state.tasks} />
+          <Typography>Completed:</Typography>
+          <Tasks isCompleted={true} />
+          <Typography>In Progress:</Typography>
+          <Tasks isCompleted={false} />
         </Box>
       </main>
     </Box>
   );
 };
+
+const api_base =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:2222"
+    : "https://seize-the-day-api.up.railway.app";
 
 export default All;

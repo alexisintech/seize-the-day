@@ -42,9 +42,11 @@ module.exports = {
       const todo = await Todo.findById(req.params.id);
 
       todo.complete = !todo.complete;
-      todo.save();
+      await todo.save();
 
-      res.json(todo);
+      const todos = await Todo.find({ user: req.user.id });
+
+      res.json(todos);
     } catch (err) {
       console.log(err);
     }

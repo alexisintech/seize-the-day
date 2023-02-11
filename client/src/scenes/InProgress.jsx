@@ -4,6 +4,7 @@ import { tokens } from "../theme";
 import ResponsiveDrawer from "../components/ResponsiveDrawer";
 import Header from "../components/Header";
 import CreateTaskButton from "../components/CreateTaskButton";
+import Tasks from "../components/Tasks";
 
 const InProgress = () => {
   const theme = useTheme();
@@ -32,6 +33,8 @@ const InProgress = () => {
             />
             <CreateTaskButton />
           </Box>
+          <Typography>In Progress:</Typography>
+          <Tasks isCompleted={false} />
         </Box>
       </main>
     </Box>

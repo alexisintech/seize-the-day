@@ -25,6 +25,10 @@ const appReducer = (state, { type, payload }) => {
       return {
         tasks: [...payload],
       };
+    case ACTIONS.COMPLETE_TODO:
+      return {
+        tasks: [...payload],
+      };
     default:
       return state;
   }

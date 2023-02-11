@@ -23,18 +23,12 @@ const InProgress = () => {
     >
       <ResponsiveDrawer />
       <main className="content">
-        <Box m="135px 50px">
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Header
-              title="IN PROGRESS"
-              subtitle={`(user) has ${inProgressTasks.length} tasks left to accomplish!`}
-            />
-            <CreateTaskButton />
-          </Box>
+        <Box className="content-container">
+          <Header
+            title="IN PROGRESS"
+            subtitle={`(user) has ${inProgressTasks.length} tasks left to accomplish!`}
+            profile={false}
+          />
           <Tasks isCompleted={false} />
         </Box>
       </main>

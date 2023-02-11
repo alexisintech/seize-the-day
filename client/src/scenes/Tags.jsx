@@ -20,15 +20,12 @@ const Tags = () => {
     >
       <ResponsiveDrawer />
       <main className="content">
-        <Box m="135px 50px">
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Header title="TAGS" subtitle={`Tasks organized by tag category`} />
-            <CreateTaskButton />
-          </Box>
+        <Box className="content-container">
+          <Header
+            title="TAGS"
+            subtitle={`Tasks organized by tag category`}
+            profile={false}
+          />
         </Box>
       </main>
     </Box>

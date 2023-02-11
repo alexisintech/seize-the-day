@@ -23,18 +23,12 @@ const Completed = ({ user }) => {
     >
       <ResponsiveDrawer />
       <main className="content">
-        <Box m="135px 50px">
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Header
-              title="COMPLETED TASKS"
-              subtitle={`${user} has accomplished ${completedTasks.length} tasks!`}
-            />
-            <CreateTaskButton />
-          </Box>
+        <Box className="content-container">
+          <Header
+            title="COMPLETED TASKS"
+            subtitle={`${user} has accomplished ${completedTasks.length} tasks!`}
+            profile={false}
+          />
           <Tasks isCompleted={true} />
         </Box>
       </main>

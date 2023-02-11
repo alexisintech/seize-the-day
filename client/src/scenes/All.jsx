@@ -3,7 +3,6 @@ import { Box, Typography, useTheme } from "@mui/material";
 import { tokens } from "../theme";
 import ResponsiveDrawer from "../components/ResponsiveDrawer";
 import Header from "../components/Header";
-import CreateTaskButton from "../components/CreateTaskButton";
 import Tasks from "../components/Tasks";
 import { AppContext } from "../AppContext";
 
@@ -44,33 +43,31 @@ const All = () => {
     >
       <ResponsiveDrawer />
       <main className="content">
-        <Box m="135px 50px">
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Header
-              title="ALL TASKS"
-              subtitle={`${user} has ${state.tasks.length} tasks to accomplish today!`}
-            />
-            <CreateTaskButton />
-          </Box>
+        <Box className="content-container">
+          <Header
+            title="ALL TASKS"
+            subtitle={`${user} has ${state.tasks.length} tasks to accomplish today!`}
+            profile={false}
+          />
           <Box
             sx={{
               display: "flex",
-              flexDirection: "row",
+              flexDirection: { xs: "column", sm: "row" },
               width: "100%",
-              gap: 10,
+              gap: { xs: 4, sm: 10 },
             }}
           >
             <Box className="tasks-container">
-              <Typography variant="h3">Completed:</Typography>
-              <Tasks isCompleted={true} />
+              <Typography variant="h3" textAlign={{ xs: "center", sm: "left" }}>
+                In Progress:
+              </Typography>
+              <Tasks isCompleted={false} />
             </Box>
             <Box className="tasks-container">
-              <Typography variant="h3">In Progress:</Typography>
-              <Tasks isCompleted={false} />
+              <Typography variant="h3" textAlign={{ xs: "center", sm: "left" }}>
+                Completed:
+              </Typography>
+              <Tasks isCompleted={true} />
             </Box>
           </Box>
         </Box>

@@ -74,7 +74,9 @@ const Weather = () => {
         <Box
           sx={{
             display: "flex",
-            gap: 3,
+            height: "100%",
+            flexDirection: { xs: "column", sm: "row" },
+            gap: { xs: 0, sm: 3 },
           }}
         >
           <Box
@@ -116,7 +118,12 @@ const Weather = () => {
               mb: 3,
             }}
           >
-            <Box component="img" maxHeight="200px" src="/imgs/sunny-2.svg" />
+            <Box
+              component="img"
+              maxHeight="200px"
+              height={{ xs: "150px" }}
+              src="/imgs/sunny-2.svg"
+            />
             <Typography
               variant="h3"
               sx={{

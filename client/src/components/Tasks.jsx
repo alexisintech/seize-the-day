@@ -37,7 +37,9 @@ const Tasks = ({ isCompleted }) => {
     >
       {isCompleted ? (
         completedTasks.length > 0 ? (
-          completedTasks.map((task) => <Task task={task} isCompleted={true} />)
+          completedTasks.map((task) => (
+            <Task task={task} key={task._id} isCompleted={true} />
+          ))
         ) : (
           <Typography
             sx={{
@@ -52,7 +54,9 @@ const Tasks = ({ isCompleted }) => {
           </Typography>
         )
       ) : inProgressTasks.length > 0 ? (
-        inProgressTasks.map((task) => <Task task={task} isCompleted={false} />)
+        inProgressTasks.map((task) => (
+          <Task task={task} key={task._id} isCompleted={false} />
+        ))
       ) : (
         <Typography
           sx={{

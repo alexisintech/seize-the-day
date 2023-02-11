@@ -16,6 +16,15 @@ body,
   position: relative;
 }
 
+.content-container {
+  margin: 135px 50px;
+}
+@media all and (max-width:600px){
+  .content-container{
+    margin: 130px 20px;
+  }
+}
+
 .MuiPaper-root {
   background-image: none !important;
 }

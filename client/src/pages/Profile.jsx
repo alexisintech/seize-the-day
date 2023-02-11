@@ -51,15 +51,13 @@ export default function Profile() {
     >
       <ResponsiveDrawer />
       <main className="content">
-        <Box m="135px 50px">
+        <Box className="content-container">
           {/* HEADER */}
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Header title="PROFILE" subtitle={`Welcome ${user}!`} />
-          </Box>
+          <Header
+            title="PROFILE"
+            subtitle={`Welcome ${user}!`}
+            profile={true}
+          />
 
           {/* DASHBOARD */}
           <Box
@@ -82,7 +80,7 @@ export default function Profile() {
                   textAlign: "center",
                   fontWeight: 300,
                   fontStyle: "italic",
-                  px: 10,
+                  px: { xs: 2, sm: 10 },
                 }}
               >
                 "{quote}"
@@ -91,7 +89,7 @@ export default function Profile() {
 
             {/* ROW 2 */}
             <Box
-              gridColumn="span 4"
+              gridColumn={{ xs: "span 12", sm: "span 4" }}
               gridRow="span 2"
               backgroundColor={colors.primary[400]}
               p="30px"
@@ -108,14 +106,14 @@ export default function Profile() {
               </Box>
             </Box>
             <Box
-              gridColumn="span 4"
+              gridColumn={{ xs: "span 12", sm: "span 4" }}
               gridRow="span 2"
               backgroundColor={colors.primary[400]}
             >
               <Calendar />
             </Box>
             <Box
-              gridColumn="span 4"
+              gridColumn={{ xs: "span 12", sm: "span 4" }}
               gridRow="span 2"
               backgroundColor={colors.primary[400]}
               padding="15px"

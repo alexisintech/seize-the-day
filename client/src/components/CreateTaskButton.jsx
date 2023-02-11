@@ -35,7 +35,7 @@ const CreateTaskButton = () => {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: 400,
+    width: { xs: "90%", sm: "500px" },
     bgcolor: `${colors.primary[400]}`,
     border:
       theme.palette.mode === "dark"
@@ -46,9 +46,12 @@ const CreateTaskButton = () => {
   };
 
   return (
-    <>
+    <Box>
       <Button
         sx={{
+          position: { xs: "fixed", sm: "static" },
+          bottom: "2.5%",
+          right: "5%",
           color: "white",
           backgroundColor: colors.purpleAccent[500],
           padding: "0.5rem 1rem",
@@ -152,7 +155,7 @@ const CreateTaskButton = () => {
           </Box>
         </Box>
       </Modal>
-    </>
+    </Box>
   );
 };
 

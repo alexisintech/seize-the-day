@@ -20,18 +20,12 @@ const Lists = () => {
     >
       <ResponsiveDrawer />
       <main className="content">
-        <Box m="135px 50px">
-          <Box
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Header
-              title="LISTS"
-              subtitle={`(user)'s lists of tasks with subtasks`}
-            />
-            <CreateTaskButton />
-          </Box>
+        <Box className="content-container">
+          <Header
+            title="LISTS"
+            subtitle={`(user)'s lists of tasks with subtasks`}
+            profile={false}
+          />
         </Box>
       </main>
     </Box>

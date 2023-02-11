@@ -1,27 +1,20 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import Link from "@mui/material/Link";
-import Box from "@mui/material/Box";
+import {
+  Avatar,
+  Box,
+  Button,
+  CssBaseline,
+  Container,
+  Link,
+  TextField,
+  Typography,
+  useTheme,
+} from "@mui/material";
+import { tokens } from "../theme";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Copyright from "../components/Copyright";
-
-const { palette } = createTheme();
-const { augmentColor } = palette;
-const createColor = (mainColor) => augmentColor({ color: { main: mainColor } });
-const theme = createTheme({
-  palette: {
-    primary: createColor("#03015d"),
-    secondary: createColor("#1b1799"),
-    light: createColor("#EEE"),
-  },
-});
+import GuestAppbar from "../components/GuestAppbar";
 
 const api_base =
   process.env.NODE_ENV === "development"
@@ -29,8 +22,11 @@ const api_base =
     : "https://seize-the-day-api.up.railway.app";
 
 export default function Login() {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const navigate = useNavigate();
-  const [passwordIncorrect, setPasswordIncorrect] = useState();
+  const [passwordIncorrect, setPasswordIncorrect] = useState(false);
+  const [userDoesntExist, setUserDoesntExist] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -54,6 +50,9 @@ export default function Login() {
       if (res.message === "Password was incorrect.") {
         setPasswordIncorrect(true);
       }
+      if (res.message === "User does not exist.") {
+        setUserDoesntExist(true);
+      }
       if (res.message === "User logged in :)") {
         localStorage.setItem("auth", res.token);
 
@@ -65,81 +64,97 @@ export default function Login() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container
-        component="main"
-        maxWidth="xs"
-        className="box--shadow"
-        sx={{
-          paddingTop: 2,
-          paddingBottom: 2,
-          marginTop: 8,
-        }}
+    <Box>
+      <GuestAppbar />
+      <Box
+        height="85vh"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        px="0.8rem"
       >
-        <CssBaseline />
-        <Box
+        <Container
+          component="main"
+          maxWidth="xs"
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            paddingTop: 2,
+            paddingBottom: 2,
+            boxShadow: "2px 2px 8px 0px rgba(0,0,0,0.3)",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Login
-          </Typography>
+          <CssBaseline />
           <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
           >
-            <TextField
-              margin="normal"
-              autoFocus
-              required
-              fullWidth
-              id="userName"
-              label="Username"
-              name="userName"
-              autoComplete="email"
-            />
-
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="password"
-              label="Password"
-              name="password"
-              type="password"
-              autoComplete="current-password"
-            />
-
-            {passwordIncorrect && (
-              <Typography sx={{ color: "red", mt: 2, fontSize: "0.9rem" }}>
-                Password was incorrect.
-              </Typography>
-            )}
-
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography variant="h3">Login</Typography>
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
+              sx={{ mt: 1 }}
             >
-              Login
-            </Button>
+              <TextField
+                margin="normal"
+                autoFocus
+                required
+                fullWidth
+                id="userName"
+                label="Username"
+                name="userName"
+                autoComplete="email"
+                variant="filled"
+              />
 
-            <Link to="/signup" variant="body2">
-              {"Don't have an account? Sign Up"}
-            </Link>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="password"
+                label="Password"
+                name="password"
+                type="password"
+                autoComplete="current-password"
+                variant="filled"
+              />
+
+              {passwordIncorrect && (
+                <Typography sx={{ color: "red", mt: 2, fontSize: "0.9rem" }}>
+                  Password was incorrect.
+                </Typography>
+              )}
+              {userDoesntExist && (
+                <Typography sx={{ color: "red", mt: 2, fontSize: "0.9rem" }}>
+                  Account with that username does not exist.
+                </Typography>
+              )}
+
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="secondary"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Login
+              </Button>
+
+              <Link to="/signup" sx={{ color: colors.grey[100] }}>
+                <Typography variant="h6">
+                  Don't have an account? Sign Up
+                </Typography>
+              </Link>
+            </Box>
           </Box>
-        </Box>
-        <Copyright sx={{ mt: 5 }} />
-      </Container>
-    </ThemeProvider>
+          <Copyright sx={{ mt: 5 }} />
+        </Container>
+      </Box>
+    </Box>
   );
 }

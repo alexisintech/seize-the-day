@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap');
+
+html,
+body,
+#root,
+.app,
+.content {
+  height: 100%;
+  width: 100%;
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 20px;
+}
+
+.app {
+  display: flex;
+  position: relative;
+}
+
+.index-shitty-grid{
+  width:40% !important;
+}
+  @media all and (max-width:1441px){
+    .index-shitty-grid{
+      width:50% !important;
+    }
+  }
+  @media all and (max-width:1281px){
+    .index-shitty-grid{
+      width:60% !important;
+    }
+  }
+  @media all and (max-width:767px){
+    .index-shitty-grid{
+      width:70% !important;
+    }
+  }
+  @media all and (max-width:600px){
+    .index-shitty-grid{
+      width:100% !important;
+    }
+  }
+
+.content-container {
+  margin: 135px 50px;
+}
+  @media all and (max-width:600px){
+    .content-container{
+      margin: 130px 20px;
+    }
+  }
+
+.MuiPaper-root {
+  background-image: none !important;
+}
+
+.blinking{
+  animation: blink 2s ease-in-out infinite;
+}
+
+@keyframes blink{
+  0%{opacity: 0;}
+  25%{opacity: .5;}
+  75%{opacity: 1;}
+  100%{opacity: .5}
+}
+
+.clock{
+  height: 200px;
+  width: 200px;
+  background-color: rgba(255,255,255,0.06);
+  backdrop-filter: blur(20px);
+  border-radius: 50%;
+  box-shadow: 10px 10px 35px rgba(0,0,0,0.25);
+}
+
+img{
+  opacity: 0.6;
+  width:100%;
+}
+
+.hand{
+  position: absolute;
+  backdrop-filter: blur(20px);
+  margin: auto;
+  left: 0;
+  right: 0;
+  border-radius: 5px;
+  transform-origin: bottom;
+}
+
+.hour{
+  height: 50px;
+  width: 6px;
+  top: 50px;
+}
+
+.minute{
+  height: 60px;
+  width: 5px;
+  top: 38px;
+}
+
+.seconds{
+  height: 70px;
+  width: 3px;
+  top: 30px;
+}
+
+.tasks-container {
+  width:100%;
+  display:flex;
+  flex-direction: column;
+}

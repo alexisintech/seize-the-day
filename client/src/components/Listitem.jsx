@@ -1,62 +1,35 @@
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import HomeIcon from "@mui/icons-material/Home";
-import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
-import LabelIcon from "@mui/icons-material/Label";
-import Typography from "@mui/material/Typography";
+import {
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+  useTheme,
+} from "@mui/material";
+import { Link } from "react-router-dom";
+import { tokens } from "../theme";
 
 export default function Listitem(props) {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
   return (
-    <ListItem>
-      <ListItemButton>
-        <ListItemIcon sx={{ color: "#050448" }}>
-          {props.text === "Home" && (
-            <HomeIcon sx={{ height: "2.5rem", width: "2.5rem" }} />
-          )}
-          {props.text === "Lists" && (
-            <FormatListBulletedIcon
-              sx={{ height: "2.5rem", width: "2.5rem" }}
-            />
-          )}
-          {props.text === "Tags" && (
-            <LabelIcon sx={{ height: "2.5rem", width: "2.5rem" }} />
-          )}
-        </ListItemIcon>
-        <ListItemText
-          primary={props.text}
-          sx={{
-            color: "#050448",
-            textTransform: "uppercase",
-            "& .MuiTypography-root": {
-              fontWeight: 700,
-            },
-          }}
-        />
-        {props.text === "Lists" && (
-          <Typography
-            sx={{
-              color: "rgb(62, 62, 62, 0.5)",
-              fontSize: "0.9rem",
-              fontStyle: "italic",
-            }}
+    <Link to={props.to} style={{ textDecoration: "none" }}>
+      <ListItem>
+        <ListItemButton>
+          <ListItemIcon
+            sx={{ color: colors.grey[100], height: "1.5rem", width: "1.5rem" }}
           >
-            Coming soon...
-          </Typography>
-        )}
-        {props.text === "Tags" && (
-          <Typography
+            {props.icon}
+          </ListItemIcon>
+          <ListItemText
+            primary={props.text}
             sx={{
-              color: "rgb(62, 62, 62, 0.5)",
-              fontSize: "0.9rem",
-              fontStyle: "italic",
+              color: colors.grey[100],
             }}
-          >
-            Coming soon...
-          </Typography>
-        )}
-      </ListItemButton>
-    </ListItem>
+          />
+        </ListItemButton>
+      </ListItem>
+    </Link>
   );
 }

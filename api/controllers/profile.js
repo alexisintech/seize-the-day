@@ -4,6 +4,7 @@ module.exports = {
   getTodos: async (req, res) => {
     try {
       const todos = await Todo.find({ user: req.user.id });
+      console.log("This is todos from the getTodos in the API", todos);
 
       res.json(todos);
     } catch (err) {
@@ -13,8 +14,8 @@ module.exports = {
   createTodo: async (req, res) => {
     try {
       const todo = await Todo.create({
-        title: req.body.title,
         user: req.user.id,
+        title: req.body.title,
       });
       console.log("New todo was created!");
 
@@ -27,9 +28,11 @@ module.exports = {
   },
   deleteTodo: async (req, res) => {
     try {
-      const result = await Todo.findByIdAndDelete(req.params.id);
+      await Todo.findByIdAndDelete(req.params.id);
 
-      res.json({ result });
+      const todos = await Todo.find({ user: req.user.id });
+
+      res.json(todos);
     } catch (err) {
       console.log(err);
     }
@@ -39,9 +42,11 @@ module.exports = {
       const todo = await Todo.findById(req.params.id);
 
       todo.complete = !todo.complete;
-      todo.save();
+      await todo.save();
 
-      res.json(todo);
+      const todos = await Todo.find({ user: req.user.id });
+
+      res.json(todos);
     } catch (err) {
       console.log(err);
     }

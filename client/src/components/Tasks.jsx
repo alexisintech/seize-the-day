@@ -1,5 +1,5 @@
-import { useState, useContext, useEffect } from "react";
-import { Box, Checkbox, Typography, useTheme } from "@mui/material";
+import { useContext, useEffect } from "react";
+import { Box, Typography, useTheme } from "@mui/material";
 import { tokens } from "../theme";
 import { AppContext } from "../AppContext";
 import { getTodos } from "../utils";

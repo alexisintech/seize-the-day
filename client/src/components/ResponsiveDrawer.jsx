@@ -32,7 +32,7 @@ import CachedOutlinedIcon from "@mui/icons-material/CachedOutlined";
 
 const drawerWidth = 300;
 
-export default function ResponsiveDrawer(props) {
+const ResponsiveDrawer = (props) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
@@ -284,4 +284,6 @@ export default function ResponsiveDrawer(props) {
       </Box>
     </Box>
   );
-}
+};
+
+export default ResponsiveDrawer;

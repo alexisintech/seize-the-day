@@ -1,5 +1,5 @@
-import { useState, useContext, useEffect } from "react";
-import { Box, Checkbox, Typography, useTheme } from "@mui/material";
+import { useContext } from "react";
+import { Box, Typography, useTheme } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CheckIcon from "@mui/icons-material/Check";
 import { AppContext } from "../AppContext";

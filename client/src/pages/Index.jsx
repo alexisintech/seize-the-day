@@ -81,6 +81,11 @@ const Index = () => {
                     sx={{
                       color: colors.blueAccent[100],
                       border: `1px solid ${colors.blueAccent[100]}`,
+                      "&:hover": {
+                        border: `1px solid ${colors.purpleAccent[500]}`,
+                        color: `${colors.purpleAccent[500]}`,
+                        backgroundColor: `${colors.primary[100]}`,
+                      },
                     }}
                   >
                     Login

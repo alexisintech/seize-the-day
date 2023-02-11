@@ -1,19 +1,14 @@
 import { useState, useEffect } from "react";
 import { Box, Typography, useTheme } from "@mui/material";
 import { tokens } from "../theme";
-import { quotes } from "../quotes";
+import { quotes } from "../utils/quotes";
 import Header from "../components/Header";
 import ResponsiveDrawer from "../components/ResponsiveDrawer";
 import Weather from "../components/Weather";
 import Calendar from "../components/Calendar";
 import Clock from "../components/Clock";
 
-const api_base =
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:2222"
-    : "https://seize-the-day-api.up.railway.app";
-
-export default function Profile() {
+const Profile = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [quote, setQuote] = useState("");
@@ -125,4 +120,11 @@ export default function Profile() {
       </main>
     </Box>
   );
-}
+};
+
+const api_base =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:2222"
+    : "https://seize-the-day-api.up.railway.app";
+
+export default Profile;

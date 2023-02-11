@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Avatar,
   Box,
   Button,
   CssBaseline,
   Container,
-  Link,
   TextField,
   Typography,
   useTheme,
@@ -16,12 +15,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Copyright from "../components/Copyright";
 import GuestAppbar from "../components/GuestAppbar";
 
-const api_base =
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:2222"
-    : "https://seize-the-day-api.up.railway.app";
-
-export default function Login() {
+const Login = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const navigate = useNavigate();
@@ -135,7 +129,10 @@ export default function Login() {
                 Login
               </Button>
 
-              <Link to="/signup" sx={{ color: colors.grey[100] }}>
+              <Link
+                to="/signup"
+                sx={{ cursor: "pointer", color: colors.grey[100] }}
+              >
                 <Typography variant="h6">
                   Don't have an account? Sign Up
                 </Typography>
@@ -147,4 +144,11 @@ export default function Login() {
       </Box>
     </Box>
   );
-}
+};
+
+const api_base =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:2222"
+    : "https://seize-the-day-api.up.railway.app";
+
+export default Login;

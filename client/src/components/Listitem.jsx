@@ -9,7 +9,7 @@ import {
 import { Link } from "react-router-dom";
 import { tokens } from "../theme";
 
-export default function Listitem(props) {
+const Listitem = (props) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -32,4 +32,6 @@ export default function Listitem(props) {
       </ListItem>
     </Link>
   );
-}
+};
+
+export default Listitem;

@@ -25,8 +25,7 @@ export default function Login() {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const navigate = useNavigate();
-  const [passwordIncorrect, setPasswordIncorrect] = useState(false);
-  const [userDoesntExist, setUserDoesntExist] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -47,16 +46,12 @@ export default function Login() {
 
       console.log(res, "This is the res from client side");
 
-      if (res.message === "Password was incorrect.") {
-        setPasswordIncorrect(true);
-      }
-      if (res.message === "User does not exist.") {
-        setUserDoesntExist(true);
-      }
       if (res.message === "User logged in :)") {
         localStorage.setItem("auth", res.token);
 
         navigate("/profile");
+      } else {
+        setError(res.message);
       }
     } catch (err) {
       console.log(err);
@@ -124,14 +119,9 @@ export default function Login() {
                 variant="filled"
               />
 
-              {passwordIncorrect && (
+              {error.length > 0 && (
                 <Typography sx={{ color: "red", mt: 2, fontSize: "0.9rem" }}>
-                  Password was incorrect.
-                </Typography>
-              )}
-              {userDoesntExist && (
-                <Typography sx={{ color: "red", mt: 2, fontSize: "0.9rem" }}>
-                  Account with that username does not exist.
+                  {error}
                 </Typography>
               )}
 

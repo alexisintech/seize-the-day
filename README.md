@@ -2,7 +2,10 @@
 
 > A to-do app with your mental health in mind. 
 
+### Old version
 <img src="https://github.com/alexisintech/seize-the-day/blob/main/client/public/imgs/old-seize-the-day.gif" width="100%" />
+
+### New version (As of 02/11/2023)
 <img src="https://github.com/alexisintech/seize-the-day/blob/main/client/public/imgs/new-seize-the-day.gif" width="100%" />
 
 <!-- FEATURES -->

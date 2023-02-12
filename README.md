@@ -109,6 +109,7 @@ To run the application in a development server,
 - [ ] User can choose between celsius vs. fahrenheit on weather widget
 - [ ] User hovers clock, will show analogous time
 - [X] Use useReducer and Context API for passing data around components
+  - [ ] Add getUser to the AppContext
 - [X] Light/dark mode (implemented by updating MUI theme using useContext)
 - [ ] A task can become a list when subtasks are added
   - For example, a task with the title "Grocery Shopping" can become a list if subtasks, such as grocery items, are added

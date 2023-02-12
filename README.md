@@ -1,6 +1,6 @@
 # 🪐 [Seize The Day](https://seize-the-day.netlify.app/)
 
-> A to-do app with your mental health in mind. 
+> Bring organization into your day by tracking your goals and accomplishments.
 
 ### Old version
 <img src="https://github.com/alexisintech/seize-the-day/blob/main/client/public/imgs/old-seize-the-day.gif" width="100%" />

@@ -11,9 +11,9 @@ const Header = ({ title, subtitle, profile }) => {
       sx={{
         display: "flex",
         alignItems: "center",
-        justifyContent: { xs: "center", sm: "space-between" },
-        mb: { xs: "50px", sm: "30px" },
-        textAlign: { xs: "center", sm: "left" },
+        justifyContent: { xs: "center", md: "space-between" },
+        mb: { xs: "50px", md: "30px" },
+        textAlign: { xs: "center", md: "left" },
       }}
     >
       <Box display="flex" flexDirection="column">

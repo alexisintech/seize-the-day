@@ -68,6 +68,7 @@ const Profile = () => {
               display="flex"
               alignItems="center"
               justifyContent="center"
+              gridRow={{ xs: "span 2", md: "span 1" }}
             >
               <Typography
                 variant="h4"
@@ -75,7 +76,7 @@ const Profile = () => {
                   textAlign: "center",
                   fontWeight: 300,
                   fontStyle: "italic",
-                  px: { xs: 2, sm: 10 },
+                  px: { xs: 5, md: 10 },
                 }}
               >
                 "{quote}"
@@ -84,7 +85,7 @@ const Profile = () => {
 
             {/* ROW 2 */}
             <Box
-              gridColumn={{ xs: "span 12", sm: "span 4" }}
+              gridColumn={{ xs: "span 12", md: "span 4" }}
               gridRow="span 2"
               backgroundColor={colors.primary[400]}
               p="30px"
@@ -101,14 +102,14 @@ const Profile = () => {
               </Box>
             </Box>
             <Box
-              gridColumn={{ xs: "span 12", sm: "span 4" }}
+              gridColumn={{ xs: "span 12", md: "span 4" }}
               gridRow="span 2"
               backgroundColor={colors.primary[400]}
             >
               <Calendar />
             </Box>
             <Box
-              gridColumn={{ xs: "span 12", sm: "span 4" }}
+              gridColumn={{ xs: "span 12", md: "span 4" }}
               gridRow="span 2"
               backgroundColor={colors.primary[400]}
               padding="15px"

@@ -42,7 +42,7 @@ const ResponsiveDrawer = (props) => {
   const { window } = props;
   const navigate = useNavigate();
 
-  const mobileScreen = useMediaQuery("(max-width:600px)");
+  const mobileScreen = useMediaQuery("(max-width:770px)");
 
   useEffect(() => {
     if (mobileScreen) {
@@ -75,7 +75,7 @@ const ResponsiveDrawer = (props) => {
         sx={{
           overflow: "auto",
           paddingTop: "2.5rem",
-          paddingLeft: { xs: 0, sm: "1rem" },
+          paddingLeft: { xs: 0, md: "1rem" },
         }}
       >
         {/* SIDEBAR MENU ITEMS */}
@@ -125,14 +125,14 @@ const ResponsiveDrawer = (props) => {
         sx={{
           backgroundColor: colors.primary[400],
           zIndex: (theme) => theme.zIndex.drawer + 1,
-          padding: { xs: "0.3rem", sm: "0.5rem 1.5rem" },
+          padding: { xs: "0.3rem", md: "0.5rem 1.5rem" },
           backgroundImage: "none",
         }}
       >
         <Container maxWidth="2000px" sx={{ margin: 0 }}>
           <Toolbar
             disableGutters
-            sx={{ justifyContent: { xs: "space-between", sm: "none" } }}
+            sx={{ justifyContent: { xs: "space-between", md: "none" } }}
           >
             <IconButton
               color="inherit"
@@ -142,13 +142,13 @@ const ResponsiveDrawer = (props) => {
               sx={{
                 mr: 2,
                 color: colors.grey[100],
-                display: { sm: "none" },
+                display: { md: "none" },
               }}
             >
               <MenuIcon
                 sx={{
-                  height: { xs: "1.5rem", sm: "2.5rem" },
-                  width: { xs: "1.5rem", sm: "2.5rem" },
+                  height: { xs: "1.5rem", md: "2.5rem" },
+                  width: { xs: "1.5rem", md: "2.5rem" },
                 }}
               />
             </IconButton>
@@ -156,10 +156,10 @@ const ResponsiveDrawer = (props) => {
               <CreateIcon
                 sx={{
                   display: "flex",
-                  mr: { xs: "0.3rem", sm: "0.5rem" },
+                  mr: { xs: "0.3rem", md: "0.5rem" },
                   color: colors.grey[100],
-                  height: { xs: "1.5rem", sm: "2rem" },
-                  width: { xs: "1.5rem", sm: "2rem" },
+                  height: { xs: "1.5rem", md: "2rem" },
+                  width: { xs: "1.5rem", md: "2rem" },
                 }}
               />
               <Typography
@@ -169,7 +169,7 @@ const ResponsiveDrawer = (props) => {
                   mr: 2,
                   display: "flex",
                   color: colors.grey[100],
-                  fontSize: { xs: "1rem", sm: "1.5rem" },
+                  fontSize: { xs: "1rem", md: "1.5rem" },
                   textDecoration: "none",
                 }}
               >
@@ -181,20 +181,20 @@ const ResponsiveDrawer = (props) => {
               <Tooltip title="Change mode">
                 <IconButton
                   onClick={colorMode.toggleColorMode}
-                  sx={{ px: { xs: 0, sm: 2 } }}
+                  sx={{ px: { xs: 0, md: 2 } }}
                 >
                   {theme.palette.mode === "dark" ? (
                     <DarkModeOutlinedIcon
                       sx={{
-                        height: { xs: "1.2rem", sm: "1.5rem" },
-                        width: { xs: "1.2rem", sm: "1.5rem" },
+                        height: { xs: "1.2rem", md: "1.5rem" },
+                        width: { xs: "1.2rem", md: "1.5rem" },
                       }}
                     />
                   ) : (
                     <LightModeOutlinedIcon
                       sx={{
-                        height: { xs: "1.2rem", sm: "1.5rem" },
-                        width: { xs: "1.2rem", sm: "1.5rem" },
+                        height: { xs: "1.2rem", md: "1.5rem" },
+                        width: { xs: "1.2rem", md: "1.5rem" },
                       }}
                     />
                   )}
@@ -204,8 +204,8 @@ const ResponsiveDrawer = (props) => {
                 <IconButton onClick={handleOpenUserMenu}>
                   <PersonOutlinedIcon
                     sx={{
-                      height: { xs: "1.2rem", sm: "1.5rem" },
-                      width: { xs: "1.2rem", sm: "1.5rem" },
+                      height: { xs: "1.2rem", md: "1.5rem" },
+                      width: { xs: "1.2rem", md: "1.5rem" },
                     }}
                   />
                 </IconButton>
@@ -243,10 +243,8 @@ const ResponsiveDrawer = (props) => {
 
       <Box
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
+        sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
       >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Drawer
           container={container}
           variant="temporary"
@@ -256,7 +254,7 @@ const ResponsiveDrawer = (props) => {
             keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
-            display: { xs: "block", sm: "none" },
+            display: { xs: "block", md: "none" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,
@@ -269,7 +267,7 @@ const ResponsiveDrawer = (props) => {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: "none", sm: "block" },
+            display: { xs: "none", md: "block" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
               width: drawerWidth,

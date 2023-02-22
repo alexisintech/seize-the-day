@@ -35,7 +35,7 @@ const CreateTaskButton = () => {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: { xs: "90%", sm: "500px" },
+    width: { xs: "90%", md: "500px" },
     bgcolor: `${colors.primary[400]}`,
     border:
       theme.palette.mode === "dark"
@@ -49,7 +49,7 @@ const CreateTaskButton = () => {
     <Box>
       <Button
         sx={{
-          position: { xs: "fixed", sm: "static" },
+          position: { xs: "fixed", md: "static" },
           bottom: "2.5%",
           right: "5%",
           color: "white",

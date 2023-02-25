@@ -29,7 +29,7 @@ const Tasks = ({ isCompleted }) => {
         display: "flex",
         flexDirection: "column",
         backgroundColor: colors.primary[400],
-        padding: "1.5rem",
+        padding: { xs: "0.8rem", sm: "1.5rem" },
         borderRadius: "10px",
         gap: 2,
         marginTop: 2,

@@ -58,7 +58,7 @@ const Profile = () => {
           <Box
             display="grid"
             gridTemplateColumns="repeat(12, 1fr)"
-            gridAutoRows="140px"
+            gridAutoRows="minmax(140px, auto)"
             gap="20px"
           >
             {/* ROW 1 */}
@@ -68,7 +68,10 @@ const Profile = () => {
               display="flex"
               alignItems="center"
               justifyContent="center"
-              gridRow={{ xs: "span 2", md: "span 1" }}
+              sx={{
+                p: { xs: 4, s: 5 },
+                px: { xs: 4, s: 5, md: 8 },
+              }}
             >
               <Typography
                 variant="h4"
@@ -76,10 +79,14 @@ const Profile = () => {
                   textAlign: "center",
                   fontWeight: 300,
                   fontStyle: "italic",
-                  px: { xs: 5, md: 10 },
+                  fontSize: { xs: "0.9rem", sm: "1rem" },
                 }}
               >
-                "{quote}"
+                {/* "{quote}" */}
+                "Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                Labore, ipsum magnam enim reprehenderit minus veritatis amet,
+                adipisci quae commodi impedit dolorum eaque! Neque quidem vero
+                mollitia laudantium. Aliquid, soluta iusto!"
               </Typography>
             </Box>
 

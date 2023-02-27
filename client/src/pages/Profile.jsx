@@ -82,11 +82,7 @@ const Profile = () => {
                   fontSize: { xs: "0.9rem", sm: "1rem" },
                 }}
               >
-                {/* "{quote}" */}
-                "Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Labore, ipsum magnam enim reprehenderit minus veritatis amet,
-                adipisci quae commodi impedit dolorum eaque! Neque quidem vero
-                mollitia laudantium. Aliquid, soluta iusto!"
+                "{quote}"
               </Typography>
             </Box>
 

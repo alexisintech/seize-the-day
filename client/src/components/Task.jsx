@@ -24,8 +24,6 @@ const Task = ({ task, isCompleted }) => {
     color: "white",
   };
 
-  console.log(task);
-
   return (
     <Box
       sx={{

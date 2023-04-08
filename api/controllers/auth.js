@@ -7,7 +7,6 @@ require("dotenv").config({ path: "./config/.env" });
 const SECRET = process.env.JWT_SECRET;
 
 const generateToken = (user) => {
-  console.log(user);
   return jwt.sign({ id: user._id, userName: user.userName }, SECRET, {
     expiresIn: 3600000,
   });
@@ -16,7 +15,6 @@ const generateToken = (user) => {
 const postLogin = (req, res, done) => {
   // get fields from form on frontend
   const { userName, password } = req.body;
-  console.log(req.body);
 
   // validate form
   const validationErrors = [];

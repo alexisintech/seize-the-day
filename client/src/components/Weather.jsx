@@ -34,8 +34,6 @@ const Weather = () => {
       .catch((err) => console.log("Error: ", err));
   };
 
-  console.log(weatherData);
-
   const handleClickOpen = () => {
     setNewLocation("");
     setOpen(true);

@@ -4,7 +4,6 @@ module.exports = {
   getTodos: async (req, res) => {
     try {
       const todos = await Todo.find({ user: req.user.id });
-      console.log("This is todos from the getTodos in the API", todos);
 
       res.json(todos);
     } catch (err) {
@@ -13,7 +12,6 @@ module.exports = {
   },
   createTodo: async (req, res) => {
     try {
-      console.log("CreateTodo request", req.body)
       const todo = await Todo.create({
         user: req.user.id,
         title: req.body.title,

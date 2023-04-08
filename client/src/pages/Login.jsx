@@ -38,8 +38,6 @@ const Login = () => {
       });
       const res = await req.json();
 
-      console.log(res, "This is the res from client side");
-
       if (res.message === "User logged in :)") {
         localStorage.setItem("auth", res.token);
 

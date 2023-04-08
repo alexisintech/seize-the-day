@@ -23,7 +23,6 @@ const CreateTaskButton = () => {
 
   const handleFormSubmit = (values) => {
     handleClose();
-    console.log(values);
     createTodo(values).then((res) => {
       dispatch({ type: "CREATE_TODO", payload: res });
     });

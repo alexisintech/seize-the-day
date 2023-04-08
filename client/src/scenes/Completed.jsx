@@ -1,15 +1,14 @@
-import { useState, useEffect, useContext } from "react";
-import { Box, Button, Toolbar, Typography, useTheme } from "@mui/material";
-import { tokens } from "../theme";
+import { useContext } from "react";
+import { Box } from "@mui/material";
 import ResponsiveDrawer from "../components/ResponsiveDrawer";
 import Header from "../components/Header";
-import CreateTaskButton from "../components/CreateTaskButton";
 import Tasks from "../components/Tasks";
 import { AppContext } from "../AppContext";
+import { UserContext } from "../UserContext";
 
-const Completed = ({ user }) => {
-  const [state, dispatch] = useContext(AppContext);
-  const theme = useTheme();
+const Completed = () => {
+  const [state] = useContext(AppContext);
+  const user = useContext(UserContext);
   let completedTasks = state.tasks.filter((task) => task.complete);
 
   return (

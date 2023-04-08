@@ -1,36 +1,15 @@
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import { Box, Typography, useTheme } from "@mui/material";
-import { tokens } from "../theme";
 import ResponsiveDrawer from "../components/ResponsiveDrawer";
 import Header from "../components/Header";
 import Tasks from "../components/Tasks";
 import { AppContext } from "../AppContext";
+import { UserContext } from "../UserContext";
 
 const All = () => {
-  const [state, dispatch] = useContext(AppContext);
-  const [user, setUser] = useState("");
+  const [state] = useContext(AppContext);
+  const user = useContext(UserContext);
   const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-
-  useEffect(() => {
-    getUser();
-  }, []);
-
-  const getUser = () => {
-    const token = localStorage.getItem("auth");
-    fetch(api_base + "/getUser", {
-      headers: { authorization: `bearer ${token}` },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (!data.message.userName) {
-          navigate("/login");
-        }
-
-        setUser(data.message.userName);
-      })
-      .catch((err) => console.error("Error: ", err));
-  };
 
   return (
     <Box
@@ -75,10 +54,5 @@ const All = () => {
     </Box>
   );
 };
-
-const api_base =
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:2222"
-    : "https://seize-the-day-api.up.railway.app";
 
 export default All;

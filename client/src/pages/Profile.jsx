@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Box, Typography, useTheme } from "@mui/material";
 import { tokens } from "../theme";
 import { quotes } from "../utils/quotes";
@@ -7,33 +7,35 @@ import ResponsiveDrawer from "../components/ResponsiveDrawer";
 import Weather from "../components/Weather";
 import Calendar from "../components/Calendar";
 import Clock from "../components/Clock";
+import { UserContext } from "../UserContext";
 
 const Profile = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [quote, setQuote] = useState("");
-  const [user, setUser] = useState("");
+  const user = useContext(UserContext)
+  // const [user, setUser] = useState("");
 
   useEffect(() => {
     setQuote(quotes[Math.floor(Math.random() * quotes.length)]);
-    getUser();
+    // getUser();
   }, []);
 
-  const getUser = () => {
-    const token = localStorage.getItem("auth");
-    fetch(api_base + "/getUser", {
-      headers: { authorization: `bearer ${token}` },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (!data.message.userName) {
-          navigate("/login");
-        }
+  // const getUser = () => {
+  //   const token = localStorage.getItem("auth");
+  //   fetch(api_base + "/getUser", {
+  //     headers: { authorization: `bearer ${token}` },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       if (!data.message.userName) {
+  //         navigate("/login");
+  //       }
 
-        setUser(data.message.userName);
-      })
-      .catch((err) => console.error("Error: ", err));
-  };
+  //       setUser(data.message.userName);
+  //     })
+  //     .catch((err) => console.error("Error: ", err));
+  // };
 
   return (
     <Box

@@ -52,7 +52,7 @@ const Index = () => {
             <Grid item xs={12} sx={{ marginBottom: 2 }}>
               <IconButton
                 onClick={colorMode.toggleColorMode}
-                sx={{ p: 0, mb: 1 }}
+                sx={{ p: 1, mb: 1, position:"relative", right:"10px" }}
               >
                 {theme.palette.mode === "dark" ? (
                   <DarkModeOutlinedIcon />
@@ -83,8 +83,8 @@ const Index = () => {
                       border: `1px solid ${colors.blueAccent[100]}`,
                       "&:hover": {
                         border: `1px solid ${colors.purpleAccent[500]}`,
-                        color: `${colors.purpleAccent[500]}`,
-                        backgroundColor: `${colors.primary[100]}`,
+                        color: `${theme.palette.mode === "dark" ? colors.purpleAccent[500] : "white"}`,
+                        backgroundColor: `${theme.palette.mode === "dark" ? "white" : "rgb(13, 23, 201, 0.7)"}`,
                       },
                     }}
                   >

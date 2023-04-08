@@ -1,15 +1,14 @@
-import { useState, useEffect, useContext } from "react";
-import { Box, Button, Toolbar, Typography, useTheme } from "@mui/material";
-import { tokens } from "../theme";
+import { useContext } from "react";
+import { Box } from "@mui/material";
 import ResponsiveDrawer from "../components/ResponsiveDrawer";
 import Header from "../components/Header";
-import CreateTaskButton from "../components/CreateTaskButton";
 import Tasks from "../components/Tasks";
 import { AppContext } from "../AppContext";
+import { UserContext } from "../UserContext";
 
 const InProgress = () => {
-  const [state, dispatch] = useContext(AppContext);
-  const theme = useTheme();
+  const [state] = useContext(AppContext);
+  const user = useContext(UserContext);
   let inProgressTasks = state.tasks.filter((task) => !task.complete);
 
   return (
@@ -26,7 +25,7 @@ const InProgress = () => {
         <Box className="content-container">
           <Header
             title="WHAT I WILL ACCOMPLISH"
-            subtitle={`(user) has ${inProgressTasks.length} tasks left to accomplish!`}
+            subtitle={`${user} has ${inProgressTasks.length} tasks left to accomplish!`}
             profile={false}
           />
           <Tasks isCompleted={false} />

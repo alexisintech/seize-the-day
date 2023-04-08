@@ -11,6 +11,7 @@ import InProgress from "./scenes/InProgress";
 import Lists from "./scenes/Lists";
 import Tags from "./scenes/Tags";
 import { AppProvider } from "./AppContext";
+import { UserProvider } from "./UserContext";
 
 const router = createBrowserRouter([
   { path: "/", element: <Index /> },
@@ -34,9 +35,11 @@ function App() {
         <CssBaseline />
         <div className="app">
           <main className="content">
-            <AppProvider>
-              <RouterProvider router={router} />
-            </AppProvider>
+            <UserProvider>
+              <AppProvider>
+                <RouterProvider router={router} />
+              </AppProvider>
+            </UserProvider>
           </main>
         </div>
       </ThemeProvider>

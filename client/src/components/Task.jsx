@@ -33,6 +33,7 @@ const Task = ({ task, isCompleted }) => {
         flexDirection: "column",
         backgroundColor:
           theme.palette.mode === "dark" ? colors.primary[500] : "white",
+        padding: "1rem 0.8rem",
       }}
     >
       <Box
@@ -41,7 +42,6 @@ const Task = ({ task, isCompleted }) => {
           alignItems: "center",
           width: "100%",
           justifyContent: "space-between",
-          padding: "1rem 0.8rem",
           borderRadius: "5px",
         }}
         key={task._id}
@@ -96,14 +96,14 @@ const Task = ({ task, isCompleted }) => {
         </Box>
       </Box>
       {/* Subtasks */}
-      <Box sx={{ pb: "0.8rem" }}>
-        {task.subTasks.length > 0 &&
-          task.subTasks.map((subTask, index) => (
+      {task.subTasks.length > 0 && (
+        <Box sx={{ paddingTop: "0.5rem" }}>
+          {task.subTasks.map((subTask, index) => (
             <Box
               sx={{
                 display: "flex",
                 alignItems: "center",
-                padding: "0 3.5rem 0.5rem 3.5rem",
+                padding: { xs: "0.4rem 1rem", sm: "0.4rem 3rem" },
               }}
               key={index}
             >
@@ -131,12 +131,20 @@ const Task = ({ task, isCompleted }) => {
               >
                 {subTask.completed && <CheckIcon />}
               </Box>
-              <Typography key={index} sx={{ ml: 2 }}>
+              <Typography
+                key={index}
+                sx={{
+                  ml: 2,
+                  width: { xs: "50%", md: "1000px" },
+                  overflow: "scroll",
+                }}
+              >
                 {subTask.title}
               </Typography>
             </Box>
           ))}
-      </Box>
+        </Box>
+      )}
     </Box>
   );
 };

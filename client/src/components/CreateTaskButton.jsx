@@ -174,8 +174,6 @@ const CreateTaskButton = () => {
                       Create New Task
                     </Button>
                   </Box>
-
-                  <pre>{JSON.stringify({ values, errors }, null, 4)}</pre>
                 </form>
               )}
             </Formik>

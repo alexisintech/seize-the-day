@@ -86,6 +86,7 @@ const Weather = () => {
               alignItems: "center",
               justifyContent: "center",
               order: { xs: 2, sm: 1 },
+              marginBottom: { xs: 2, md: 0 },
             }}
           >
             <Typography variant="h3" onClick={handleClickOpen}>

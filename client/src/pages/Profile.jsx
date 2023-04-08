@@ -13,7 +13,7 @@ const Profile = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [quote, setQuote] = useState("");
-  const user = useContext(UserContext)
+  const user = useContext(UserContext);
   // const [user, setUser] = useState("");
 
   useEffect(() => {
@@ -90,7 +90,7 @@ const Profile = () => {
 
             {/* ROW 2 */}
             <Box
-              gridColumn={{ xs: "span 12", md: "span 4" }}
+              gridColumn={{ xs: "span 12", sm: "span 6", lg: "span 4" }}
               gridRow="span 2"
               backgroundColor={colors.primary[400]}
               p="30px"
@@ -107,14 +107,14 @@ const Profile = () => {
               </Box>
             </Box>
             <Box
-              gridColumn={{ xs: "span 12", md: "span 4" }}
+              gridColumn={{ xs: "span 12", sm: "span 6", lg: "span 4" }}
               gridRow="span 2"
               backgroundColor={colors.primary[400]}
             >
               <Calendar />
             </Box>
             <Box
-              gridColumn={{ xs: "span 12", md: "span 4" }}
+              gridColumn={{ xs: "span 12", sm: "span 12", lg: "span 4" }}
               gridRow="span 2"
               backgroundColor={colors.primary[400]}
               padding="15px"

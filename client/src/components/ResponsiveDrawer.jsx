@@ -179,9 +179,7 @@ const ResponsiveDrawer = (props) => {
 
             <Box sx={{ flexGrow: 0, display: "flex" }}>
               <Tooltip title="Change mode">
-                <IconButton
-                  onClick={colorMode.toggleColorMode}
-                >
+                <IconButton onClick={colorMode.toggleColorMode}>
                   {theme.palette.mode === "dark" ? (
                     <DarkModeOutlinedIcon
                       sx={{
@@ -242,7 +240,7 @@ const ResponsiveDrawer = (props) => {
 
       <Box
         component="nav"
-        sx={{ width: { md: drawerWidth }, flexShrink: { md: 0 } }}
+        sx={{ width: { md: "275px", lg: drawerWidth }, flexShrink: { md: 0 } }}
       >
         <Drawer
           container={container}
@@ -269,7 +267,7 @@ const ResponsiveDrawer = (props) => {
             display: { xs: "none", md: "block" },
             "& .MuiDrawer-paper": {
               boxSizing: "border-box",
-              width: drawerWidth,
+              width: { md: "275px", lg: drawerWidth },
               backgroundColor: colors.primary[400],
               backgroundImage: "none",
             },

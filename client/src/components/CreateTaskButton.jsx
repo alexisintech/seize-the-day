@@ -8,7 +8,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { tokens } from "../theme";
-import { Formik } from "formik";
+import { Formik, Field, FieldArray } from "formik";
 import * as yup from "yup";
 import { AppContext } from "../AppContext";
 import { createTodo } from "../utils";
@@ -114,9 +114,8 @@ const CreateTaskButton = () => {
                       helperText={touched.title && errors.title}
                       sx={{ gridColumn: "span 4" }}
                     />
-                    <TextField
+                    {/* <TextField
                       fullWidth
-                      disabled
                       variant="filled"
                       type="text"
                       label="Sub Tasks (Coming soon)"
@@ -127,6 +126,31 @@ const CreateTaskButton = () => {
                       error={!!touched.subTasks && !!errors.subTasks}
                       helperText={touched.subTasks && errors.subTasks}
                       sx={{ gridColumn: "span 4" }}
+                    /> */}
+                    <FieldArray
+                      name="subTasks"
+                      render={(arrayHelpers) => (
+                        <div>
+                          {values.subTasks.map((subTask, index) => (
+                            <div key={index}>
+                              <Field name={`subTasks.${index}`} />
+                              <button
+                                type="button"
+                                onClick={() => arrayHelpers.remove(index)} // remove a subTask from the list
+                              >
+                                -
+                              </button>
+                            </div>
+                          ))}
+                          <button
+                            type="button"
+                            onClick={() => arrayHelpers.push("")}
+                          >
+                            {/* show this when user has removed all subTasks from the list */}
+                            Add a subTask
+                          </button>
+                        </div>
+                      )}
                     />
                     <TextField
                       fullWidth
@@ -148,6 +172,8 @@ const CreateTaskButton = () => {
                       Create New Task
                     </Button>
                   </Box>
+
+                  <pre>{JSON.stringify({ values, errors }, null, 4)}</pre>
                 </form>
               )}
             </Formik>

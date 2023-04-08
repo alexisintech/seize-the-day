@@ -24,8 +24,8 @@ export const createTodo = async ({ title, subTasks, tags }) => {
     },
     body: JSON.stringify({
       title,
-      // subTasks: subTasks,
-      // tags: tags,
+      subTasks,
+      // tags,
     }),
   });
 

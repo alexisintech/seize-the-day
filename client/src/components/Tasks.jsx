@@ -74,9 +74,4 @@ const Tasks = ({ isCompleted }) => {
   );
 };
 
-const api_base =
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:2222"
-    : "https://seize-the-day-api.up.railway.app";
-
 export default Tasks;

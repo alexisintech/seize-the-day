@@ -1,12 +1,10 @@
 import { useState } from "react";
-import { useContext } from "react";
-import { ColorModeContext, tokens } from "../theme";
-import { Box, Typography, useTheme } from "@mui/material";
+import { tokens } from "../theme";
+import { Box, useTheme } from "@mui/material";
 
 const Clock = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const colorMode = useContext(ColorModeContext);
   const [time, setTime] = useState({});
 
   var set_clock = setInterval(function clock() {

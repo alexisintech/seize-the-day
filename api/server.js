@@ -8,6 +8,7 @@ const authenticateToken = require("./middleware/auth");
 
 const mainRoutes = require("./routes/main");
 const profileRoutes = require("./routes/profile");
+const subTasksRoutes = require("./routes/subTasks");
 
 require("dotenv").config({ path: "./config/.env" });
 
@@ -21,6 +22,7 @@ app.use(methodOverride("_method"));
 
 app.use("/", mainRoutes);
 app.use("/profile", authenticateToken, profileRoutes);
+app.use("/profile", authenticateToken, subTasksRoutes);
 
 app.listen(process.env.PORT || "2222", () => {
   console.log("server is running 🤪💅💋👛👏🏻💄✨❤️‍🔥");

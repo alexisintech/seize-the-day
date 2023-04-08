@@ -133,7 +133,7 @@ const CreateTaskButton = () => {
                         <div>
                           {values.subTasks.map((subTask, index) => (
                             <div key={index}>
-                              <Field name={`subTasks.${index}`} />
+                              <Field name={`subTasks[${index}].title`} />
                               <button
                                 type="button"
                                 onClick={() => arrayHelpers.remove(index)} // remove a subTask from the list
@@ -144,7 +144,9 @@ const CreateTaskButton = () => {
                           ))}
                           <button
                             type="button"
-                            onClick={() => arrayHelpers.push("")}
+                            onClick={() =>
+                              arrayHelpers.push({ title: "", completed: false })
+                            }
                           >
                             {/* show this when user has removed all subTasks from the list */}
                             Add a subTask
@@ -187,13 +189,13 @@ const CreateTaskButton = () => {
 // defines validation logic for each field we use
 const checkoutSchema = yup.object().shape({
   title: yup.string().required("required"),
-  subTasks: yup.array().of(yup.string()),
+  // subTasks: yup.array().of(yup.string()),
   tags: yup.array().of(yup.string()),
 });
 
 const initialValues = {
   title: "",
-  subTasks: [], // array of strings
+  subTasks: [{ title: "", completed: false }], // array of strings
   tags: [], // array of strings
 };
 

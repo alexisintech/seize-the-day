@@ -7,6 +7,7 @@ const ACTIONS = {
   COMPLETE_TODO: "COMPLETE_TODO",
   DELETE_TODO: "DELETE_TODO",
   GET_TODOS: "GET_TODOS",
+  COMPLETE_SUBTASKS: "COMPLETE_SUBTASKS",
 };
 
 const appReducer = (state, { type, payload }) => {
@@ -24,6 +25,10 @@ const appReducer = (state, { type, payload }) => {
         tasks: [...payload],
       };
     case ACTIONS.COMPLETE_TODO:
+      return {
+        tasks: [...payload],
+      };
+    case ACTIONS.COMPLETE_SUBTASKS:
       return {
         tasks: [...payload],
       };

@@ -10,7 +10,10 @@ const TodoSchema = new mongoose.Schema({
     required: true,
   },
   subTasks: {
-    type: [String],
+    type: [{
+      title: String,
+      completed: Boolean
+    }],
   },
   complete: {
     type: Boolean,

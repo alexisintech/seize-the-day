@@ -9,6 +9,12 @@ const TodoSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  subTasks: {
+    type: [{
+      title: String,
+      completed: Boolean
+    }],
+  },
   complete: {
     type: Boolean,
     default: false,

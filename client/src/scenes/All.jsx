@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import ResponsiveDrawer from "../components/ResponsiveDrawer";
 import Header from "../components/Header";
 import Tasks from "../components/Tasks";
@@ -9,7 +9,6 @@ import { UserContext } from "../UserContext";
 const All = () => {
   const [state] = useContext(AppContext);
   const user = useContext(UserContext);
-  const theme = useTheme();
 
   return (
     <Box
@@ -33,7 +32,7 @@ const All = () => {
               display: "flex",
               flexDirection: { xs: "column", sm: "row" },
               width: "100%",
-              gap: { xs: 4, sm: 10 },
+              gap: { xs: 4, sm: 5 },
             }}
           >
             <Box className="tasks-container">

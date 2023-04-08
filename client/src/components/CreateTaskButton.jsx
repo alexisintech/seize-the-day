@@ -8,7 +8,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { tokens } from "../theme";
-import { Formik } from "formik";
+import { Formik, Field, FieldArray } from "formik";
 import * as yup from "yup";
 import { AppContext } from "../AppContext";
 import { createTodo } from "../utils";
@@ -114,9 +114,8 @@ const CreateTaskButton = () => {
                       helperText={touched.title && errors.title}
                       sx={{ gridColumn: "span 4" }}
                     />
-                    <TextField
+                    {/* <TextField
                       fullWidth
-                      disabled
                       variant="filled"
                       type="text"
                       label="Sub Tasks (Coming soon)"
@@ -127,6 +126,33 @@ const CreateTaskButton = () => {
                       error={!!touched.subTasks && !!errors.subTasks}
                       helperText={touched.subTasks && errors.subTasks}
                       sx={{ gridColumn: "span 4" }}
+                    /> */}
+                    <FieldArray
+                      name="subTasks"
+                      render={(arrayHelpers) => (
+                        <div>
+                          {values.subTasks.map((subTask, index) => (
+                            <div key={index}>
+                              <Field name={`subTasks[${index}].title`} />
+                              <button
+                                type="button"
+                                onClick={() => arrayHelpers.remove(index)} // remove a subTask from the list
+                              >
+                                -
+                              </button>
+                            </div>
+                          ))}
+                          <button
+                            type="button"
+                            onClick={() =>
+                              arrayHelpers.push({ title: "", completed: false })
+                            }
+                          >
+                            {/* show this when user has removed all subTasks from the list */}
+                            Add a subTask
+                          </button>
+                        </div>
+                      )}
                     />
                     <TextField
                       fullWidth
@@ -161,13 +187,13 @@ const CreateTaskButton = () => {
 // defines validation logic for each field we use
 const checkoutSchema = yup.object().shape({
   title: yup.string().required("required"),
-  subTasks: yup.array().of(yup.string()),
+  // subTasks: yup.array().of(yup.string()),
   tags: yup.array().of(yup.string()),
 });
 
 const initialValues = {
   title: "",
-  subTasks: [], // array of strings
+  subTasks: [{ title: "", completed: false }], // array of strings
   tags: [], // array of strings
 };
 

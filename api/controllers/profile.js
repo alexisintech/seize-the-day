@@ -13,11 +13,12 @@ module.exports = {
   },
   createTodo: async (req, res) => {
     try {
+      console.log("CreateTodo request", req.body)
       const todo = await Todo.create({
         user: req.user.id,
         title: req.body.title,
+        subTasks: req.body.subTasks,
       });
-      console.log("New todo was created!");
 
       todo.save();
 

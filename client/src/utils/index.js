@@ -24,8 +24,8 @@ export const createTodo = async ({ title, subTasks, tags }) => {
     },
     body: JSON.stringify({
       title,
-      // subTasks: subTasks,
-      // tags: tags,
+      subTasks,
+      // tags,
     }),
   });
 
@@ -52,6 +52,22 @@ export const completeTodo = async (id) => {
   // NOTE: Make sure to set the local storage key before trying to get it.
   const token = localStorage.getItem("auth");
   const req = await fetch(api_base + "/profile/complete/" + id, {
+    method: "PUT",
+    headers: {
+      "content-type": "application/json",
+      authorization: `bearer ${token}`,
+    },
+  });
+
+  const res = await req.json();
+
+  return res;
+};
+
+export const completeSubtask = async (id, title) => {
+  // NOTE: Make sure to set the local storage key before trying to get it.
+  const token = localStorage.getItem("auth");
+  const req = await fetch(api_base + `/profile/${id}/${title}`, {
     method: "PUT",
     headers: {
       "content-type": "application/json",

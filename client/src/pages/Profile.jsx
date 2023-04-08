@@ -14,28 +14,10 @@ const Profile = () => {
   const colors = tokens(theme.palette.mode);
   const [quote, setQuote] = useState("");
   const user = useContext(UserContext);
-  // const [user, setUser] = useState("");
 
   useEffect(() => {
     setQuote(quotes[Math.floor(Math.random() * quotes.length)]);
-    // getUser();
   }, []);
-
-  // const getUser = () => {
-  //   const token = localStorage.getItem("auth");
-  //   fetch(api_base + "/getUser", {
-  //     headers: { authorization: `bearer ${token}` },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       if (!data.message.userName) {
-  //         navigate("/login");
-  //       }
-
-  //       setUser(data.message.userName);
-  //     })
-  //     .catch((err) => console.error("Error: ", err));
-  // };
 
   return (
     <Box
@@ -127,10 +109,5 @@ const Profile = () => {
     </Box>
   );
 };
-
-const api_base =
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:2222"
-    : "https://seize-the-day-api.up.railway.app";
 
 export default Profile;

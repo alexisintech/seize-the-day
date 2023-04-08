@@ -160,7 +160,7 @@ const Signup = () => {
                 <Grid item>
                   <Link
                     to="/login"
-                    sx={{ cursor: "pointer", color: colors.grey[100] }}
+                    style={{ cursor: "pointer", color: colors.grey[100] }}
                   >
                     <Typography variant="h6">
                       Already have an account? Sign in

@@ -131,7 +131,7 @@ const Login = () => {
 
               <Link
                 to="/signup"
-                sx={{ cursor: "pointer", color: colors.grey[100] }}
+                style={{ cursor: "pointer", color: colors.grey[100] }}
               >
                 <Typography variant="h6">
                   Don't have an account? Sign Up

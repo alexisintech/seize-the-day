@@ -181,7 +181,6 @@ const ResponsiveDrawer = (props) => {
               <Tooltip title="Change mode">
                 <IconButton
                   onClick={colorMode.toggleColorMode}
-                  sx={{ px: { xs: 0, md: 2 } }}
                 >
                   {theme.palette.mode === "dark" ? (
                     <DarkModeOutlinedIcon

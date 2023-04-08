@@ -104,6 +104,7 @@ const Task = ({ task, isCompleted }) => {
                 display: "flex",
                 alignItems: "center",
                 padding: { xs: "0.4rem 1rem", sm: "0.4rem 3rem" },
+                width: "50%",
               }}
               key={index}
             >
@@ -135,8 +136,6 @@ const Task = ({ task, isCompleted }) => {
                 key={index}
                 sx={{
                   ml: 2,
-                  width: { xs: "50%", md: "1000px" },
-                  overflow: "scroll",
                 }}
               >
                 {subTask.title}

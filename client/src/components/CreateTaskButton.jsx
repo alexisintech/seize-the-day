@@ -28,7 +28,7 @@ const CreateTaskButton = () => {
     });
   };
 
-  const style = {
+  const modalStyle = {
     position: "absolute",
     top: "50%",
     left: "50%",
@@ -68,7 +68,7 @@ const CreateTaskButton = () => {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
       >
-        <Box sx={style}>
+        <Box sx={modalStyle}>
           <Typography
             id="modal-modal-title"
             variant="h4"
@@ -113,43 +113,56 @@ const CreateTaskButton = () => {
                       helperText={touched.title && errors.title}
                       sx={{ gridColumn: "span 4" }}
                     />
-                    {/* <TextField
-                      fullWidth
-                      variant="filled"
-                      type="text"
-                      label="Sub Tasks (Coming soon)"
-                      onBlur={handleBlur}
-                      onChange={handleChange}
-                      value={values.subTasks}
-                      name="subTasks"
-                      error={!!touched.subTasks && !!errors.subTasks}
-                      helperText={touched.subTasks && errors.subTasks}
-                      sx={{ gridColumn: "span 4" }}
-                    /> */}
                     <FieldArray
                       name="subTasks"
                       render={(arrayHelpers) => (
-                        <div>
+                        <div style={{ gridColumn: "span 4" }}>
                           {values.subTasks.map((subTask, index) => (
                             <div key={index}>
-                              <Field name={`subTasks[${index}].title`} />
-                              <button
-                                type="button"
-                                onClick={() => arrayHelpers.remove(index)} // remove a subTask from the list
+                              <TextField
+                                fullWidth
+                                variant="filled"
+                                type="text"
+                                value={values.subTasks[index].title}
+                                name={`subTasks[${index}].title`}
+                                label={`Subtask ${index + 1}`}
+                                sx={{ width: "100%", gridColumn: "span 4" }}
+                              />
+                              <Box
+                                display="flex"
+                                justifyContent="end"
+                                my="0.5em"
                               >
-                                -
-                              </button>
+                                <Button
+                                  type="button"
+                                  variant="contained"
+                                  sx={{
+                                    padding: "0.35em 0.8em",
+                                    minWidth: "32px",
+                                    fontSize: "0.8em",
+                                    backgroundColor: colors.purpleAccent[600],
+                                    "&:hover": {
+                                      backgroundColor: colors.purpleAccent[400],
+                                    },
+                                  }}
+                                  onClick={() => arrayHelpers.remove(index)} // remove a subTask from the list
+                                >
+                                  Delete
+                                </Button>
+                              </Box>
                             </div>
                           ))}
-                          <button
+                          <Button
                             type="button"
+                            color="secondary"
+                            variant="contained"
                             onClick={() =>
                               arrayHelpers.push({ title: "", completed: false })
                             }
                           >
                             {/* show this when user has removed all subTasks from the list */}
                             Add a subTask
-                          </button>
+                          </Button>
                         </div>
                       )}
                     />

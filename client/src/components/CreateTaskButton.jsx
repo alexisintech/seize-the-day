@@ -119,11 +119,11 @@ const CreateTaskButton = () => {
                         <div style={{ gridColumn: "span 4" }}>
                           {values.subTasks.map((subTask, index) => (
                             <div key={index}>
-                              <TextField
+                              <Field
+                                as={TextField}
                                 fullWidth
                                 variant="filled"
                                 type="text"
-                                value={values.subTasks[index].title}
                                 name={`subTasks[${index}].title`}
                                 label={`Subtask ${index + 1}`}
                                 sx={{ width: "100%", gridColumn: "span 4" }}

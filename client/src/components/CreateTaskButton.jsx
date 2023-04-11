@@ -161,8 +161,7 @@ const CreateTaskButton = () => {
                               arrayHelpers.push({ title: "", completed: false })
                             }
                           >
-                            {/* show this when user has removed all subTasks from the list */}
-                            Add a subTask
+                            Add a subtask
                           </Button>
                         </div>
                       )}
@@ -206,7 +205,7 @@ const checkoutSchema = yup.object().shape({
 
 const initialValues = {
   title: "",
-  subTasks: [{ title: "", completed: false }], // array of strings
+  subTasks: [{ title: "", completed: false }],
   tags: [], // array of strings
 };
 

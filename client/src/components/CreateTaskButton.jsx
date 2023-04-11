@@ -122,6 +122,7 @@ const CreateTaskButton = () => {
                               <Field
                                 as={TextField}
                                 fullWidth
+                                autoFocus={true}
                                 variant="filled"
                                 type="text"
                                 name={`subTasks[${index}].title`}

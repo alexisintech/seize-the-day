@@ -7,15 +7,43 @@ import {
   useTheme,
 } from "@mui/material";
 import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { ColorModeContext, tokens } from "../theme";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import { Link } from "react-router-dom";
 
 const Index = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
+  const navigate = useNavigate();
+
+  // demo button submit logic
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const req = await fetch(api_base + "/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userName: "test",
+          password: "test1234",
+        }),
+      });
+      const res = await req.json();
+
+      if (res.message === "User logged in :)") {
+        localStorage.setItem("auth", res.token);
+
+        navigate("/profile");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Box
@@ -52,7 +80,7 @@ const Index = () => {
             <Grid item xs={12} sx={{ marginBottom: 2 }}>
               <IconButton
                 onClick={colorMode.toggleColorMode}
-                sx={{ p: 1, mb: 1, position:"relative", right:"10px" }}
+                sx={{ p: 1, mb: 1, position: "relative", right: "10px" }}
               >
                 {theme.palette.mode === "dark" ? (
                   <DarkModeOutlinedIcon />
@@ -83,8 +111,16 @@ const Index = () => {
                       border: `1px solid ${colors.blueAccent[100]}`,
                       "&:hover": {
                         border: `1px solid ${colors.purpleAccent[500]}`,
-                        color: `${theme.palette.mode === "dark" ? colors.purpleAccent[500] : "white"}`,
-                        backgroundColor: `${theme.palette.mode === "dark" ? "white" : "rgb(13, 23, 201, 0.7)"}`,
+                        color: `${
+                          theme.palette.mode === "dark"
+                            ? colors.purpleAccent[500]
+                            : "white"
+                        }`,
+                        backgroundColor: `${
+                          theme.palette.mode === "dark"
+                            ? "white"
+                            : "rgb(13, 23, 201, 0.7)"
+                        }`,
                       },
                     }}
                   >
@@ -98,6 +134,23 @@ const Index = () => {
                     Signup
                   </Button>
                 </Link>
+              </Grid>
+              <Grid item>
+                <Box component="form" onSubmit={handleSubmit} noValidate>
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    color="primary"
+                    sx={{
+                      backgroundColor: colors.purpleAccent[600],
+                      "&:hover": {
+                        backgroundColor: colors.purpleAccent[700],
+                      },
+                    }}
+                  >
+                    Demo
+                  </Button>
+                </Box>
               </Grid>
             </Grid>
           </Grid>
@@ -115,5 +168,10 @@ const Index = () => {
     </Box>
   );
 };
+
+const api_base =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:2222"
+    : "https://seize-the-day-api.up.railway.app";
 
 export default Index;

@@ -29,8 +29,8 @@ const Index = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userName: "test",
-          password: "test1234",
+          userName: import.meta.env.VITE_DEMO_USER,
+          password: import.meta.env.VITE_DEMO_PW,
         }),
       });
       const res = await req.json();

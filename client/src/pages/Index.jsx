@@ -104,23 +104,13 @@ const Index = () => {
               <Grid item>
                 <Link to="/login" style={{ textDecoration: "none" }}>
                   <Button
-                    variant="outlined"
+                    variant="contained"
                     type="button"
+                    color="primary"
                     sx={{
-                      color: colors.blueAccent[100],
-                      border: `1px solid ${colors.blueAccent[100]}`,
+                      backgroundColor: colors.purpleAccent[600],
                       "&:hover": {
-                        border: `1px solid ${colors.purpleAccent[500]}`,
-                        color: `${
-                          theme.palette.mode === "dark"
-                            ? colors.purpleAccent[500]
-                            : "white"
-                        }`,
-                        backgroundColor: `${
-                          theme.palette.mode === "dark"
-                            ? "white"
-                            : "rgb(13, 23, 201, 0.7)"
-                        }`,
+                        backgroundColor: colors.purpleAccent[700],
                       },
                     }}
                   >
@@ -138,13 +128,23 @@ const Index = () => {
               <Grid item>
                 <Box component="form" onSubmit={handleSubmit} noValidate>
                   <Button
-                    variant="contained"
+                    variant="outlined"
                     type="submit"
-                    color="primary"
                     sx={{
-                      backgroundColor: colors.purpleAccent[600],
+                      color: colors.blueAccent[100],
+                      border: `1px solid ${colors.blueAccent[100]}`,
                       "&:hover": {
-                        backgroundColor: colors.purpleAccent[700],
+                        border: `1px solid ${colors.purpleAccent[500]}`,
+                        color: `${
+                          theme.palette.mode === "dark"
+                            ? colors.purpleAccent[500]
+                            : "white"
+                        }`,
+                        backgroundColor: `${
+                          theme.palette.mode === "dark"
+                            ? "white"
+                            : "rgb(13, 23, 201, 0.7)"
+                        }`,
                       },
                     }}
                   >

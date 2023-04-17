@@ -44,7 +44,7 @@ const postLogin = (req, res, done) => {
         const token = generateToken(existingUser);
 
         // after token is signed, we want to return the request with a success
-        return res.status(200).json({ message: "User logged in :)", token });
+        return res.status(200).json({ message: userName, token });
       } else {
         return res.status(400).json({ message: "Password was incorrect." });
       }

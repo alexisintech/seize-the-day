@@ -6,7 +6,7 @@ import { UserContext } from "../UserContext";
 import Tasks from "../components/Tasks";
 
 const Lists = () => {
-  const user = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   return (
     <Box

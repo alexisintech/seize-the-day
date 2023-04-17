@@ -8,7 +8,7 @@ import { UserContext } from "../UserContext";
 
 const All = () => {
   const [state] = useContext(AppContext);
-  const user = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   return (
     <Box

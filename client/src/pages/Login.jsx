@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Avatar,
@@ -14,12 +14,14 @@ import { tokens } from "../theme";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Copyright from "../components/Copyright";
 import GuestAppbar from "../components/GuestAppbar";
+import { UserContext } from "../UserContext";
 
 const Login = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const navigate = useNavigate();
   const [error, setError] = useState("");
+  const { user, setUser } = useContext(UserContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -38,8 +40,10 @@ const Login = () => {
       });
       const res = await req.json();
 
-      if (res.message === "User logged in :)") {
+      if (res.token) {
         localStorage.setItem("auth", res.token);
+
+        setUser(res.message);
 
         navigate("/profile");
       } else {

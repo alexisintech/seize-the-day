@@ -11,12 +11,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { ColorModeContext, tokens } from "../theme";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+import { UserContext } from "../UserContext";
 
 const Index = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
   const navigate = useNavigate();
+  const { user, setUser } = useContext(UserContext);
 
   // demo button submit logic
   const handleSubmit = async (event) => {
@@ -35,8 +37,10 @@ const Index = () => {
       });
       const res = await req.json();
 
-      if (res.message === "User logged in :)") {
+      if (res.token) {
         localStorage.setItem("auth", res.token);
+
+        setUser(res.message);
 
         navigate("/profile");
       }

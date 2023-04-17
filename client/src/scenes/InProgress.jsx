@@ -8,7 +8,7 @@ import { UserContext } from "../UserContext";
 
 const InProgress = () => {
   const [state] = useContext(AppContext);
-  const user = useContext(UserContext);
+  const { user } = useContext(UserContext);
   let inProgressTasks = state.tasks.filter((task) => !task.complete);
 
   return (

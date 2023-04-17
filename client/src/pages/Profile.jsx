@@ -13,7 +13,7 @@ const Profile = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [quote, setQuote] = useState("");
-  const user = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     setQuote(quotes[Math.floor(Math.random() * quotes.length)]);

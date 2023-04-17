@@ -8,7 +8,7 @@ import { UserContext } from "../UserContext";
 
 const Completed = () => {
   const [state] = useContext(AppContext);
-  const user = useContext(UserContext);
+  const { user } = useContext(UserContext);
   let completedTasks = state.tasks.filter((task) => task.complete);
 
   return (

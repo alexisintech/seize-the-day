@@ -2,10 +2,10 @@
 
 > One of the ways I manage anxiety and organize scattered thoughts is by creating lists and tracking my tasks. I built this full stack app so that users can bring organization into their day, but with a bit of flair.
 
-### Old version
+### > Old version
 <img src="https://github.com/alexisintech/seize-the-day/blob/main/client/public/imgs/old-seize-the-day.gif" width="100%" />
 
-### New version (As of 02/11/2023)
+### > New version (As of 02/11/2023)
 <img src="https://github.com/alexisintech/seize-the-day/blob/main/client/public/imgs/new-seize-the-day.gif" width="100%" />
 
 <!-- FEATURES -->

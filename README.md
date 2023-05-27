@@ -1,6 +1,6 @@
 # 🪐 [Seize The Day](https://seize-the-day.netlify.app/)
 
-> Bring organization into your day by tracking your goals and accomplishments.
+> One of the ways I manage anxiety and organize scattered thoughts is by creating lists and tracking my tasks. I built this full stack app so that users can bring organization into their day, but with a bit of flair.
 
 ### Old version
 <img src="https://github.com/alexisintech/seize-the-day/blob/main/client/public/imgs/old-seize-the-day.gif" width="100%" />

@@ -1,6 +1,6 @@
 # 🪐 [Seize The Day](https://seize-the-day.netlify.app/)
 
-> One of the ways I manage anxiety and organize scattered thoughts is by creating lists and tracking my tasks. I built this full stack app with mindful language bring used throughout, and affirmations to greet users on the main page, so that users can organize their day, in a mindful way.
+> One of the ways I manage anxiety and organize scattered thoughts is by creating lists and tracking my tasks. I built this full stack app with mindful language being used throughout, and affirmations to greet users on the main page, so that users can organize their day, in a mindful way.
 
 ### > Old version
 <img src="https://github.com/alexisintech/seize-the-day/blob/main/client/public/imgs/old-seize-the-day.gif" width="100%" />
